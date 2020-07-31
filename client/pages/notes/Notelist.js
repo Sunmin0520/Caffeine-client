@@ -63,13 +63,8 @@ const Notelist = ({ navigation }) => {
           <TouchableOpacity
             onPress={() => {
               navigation.navigate("Noteinfo", {
+                note_id: listup.id,
                 user_id: listup.user_id,
-                name: listup.name,
-                origin: listup.origin,
-                mall: listup.mall,
-                price: listup.price,
-                feature: listup.feature,
-                rating: listup.rating,
               });
             }}
           >
@@ -82,7 +77,11 @@ const Notelist = ({ navigation }) => {
       ))}
       <Button
         title="새 노트 추가하기"
-        onPress={() => navigation.navigate("Addnote")}
+        onPress={() =>
+          navigation.navigate("Addnote", {
+            user_id: id,
+          })
+        }
       />
     </View>
   );
