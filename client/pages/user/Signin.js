@@ -7,6 +7,7 @@ import {
   TextInput,
   Image,
   AsyncStorage,
+  TouchableOpacity,
 } from "react-native";
 import axios from "axios";
 export default function Signin({ navigation, route }) {
@@ -76,11 +77,12 @@ export default function Signin({ navigation, route }) {
         onChangeText={(password) => setPassword(password)}
         autoCapitalize="none"
       />
-      <Button
+      <TouchableOpacity
         style={styles.appButtonContainer}
-        title={"Login"}
         onPress={postLoginData}
-      />
+      >
+        <Text>Login</Text>
+      </TouchableOpacity>
     </View>
   );
 }
@@ -96,8 +98,8 @@ const styles = StyleSheet.create({
     width: 300,
     height: 44,
     marginBottom: 10,
-    backgroundColor: "#EAEAEA",
-    borderRadius: 10,
+    borderBottomColor: "black",
+    borderBottomWidth: 1,
   },
   signup: {
     marginTop: 20,
@@ -108,4 +110,5 @@ const styles = StyleSheet.create({
     marginTop: -50,
     marginBottom: 20,
   },
+  appButtonContainer: {},
 });

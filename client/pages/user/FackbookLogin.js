@@ -1,6 +1,13 @@
 import * as Facebook from "expo-facebook";
 import React from "react";
-import { Text, View, StyleSheet, Button, AsyncStorage } from "react-native";
+import {
+  Text,
+  View,
+  StyleSheet,
+  Button,
+  AsyncStorage,
+  TouchableOpacity,
+} from "react-native";
 import { useNavigation } from "@react-navigation/native";
 
 const FACEBOOK_APP_KEY = "2580711968908550";
@@ -44,9 +51,21 @@ function FacebookLogin() {
 
   return (
     <View>
-      <Button title="Login with Facebook" onPress={logIn} />
+      <TouchableOpacity onPress={logIn}>
+        <Text style={styles.facebookStyle}>Sign in with Facebook</Text>
+      </TouchableOpacity>
     </View>
   );
 }
 
 export default FacebookLogin;
+
+const styles = StyleSheet.create({
+  facebookStyle: {
+    backgroundColor: "cornflowerblue",
+    width: 350,
+    height: 30,
+    marginBottom: 20,
+    textAlign: "center",
+  },
+});

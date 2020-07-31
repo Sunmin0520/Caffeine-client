@@ -1,5 +1,12 @@
 import React from "react";
-import { Text, View, StyleSheet, Button, AsyncStorage } from "react-native";
+import {
+  Text,
+  View,
+  StyleSheet,
+  Button,
+  AsyncStorage,
+  TouchableOpacity,
+} from "react-native";
 import * as Google from "expo-google-app-auth";
 import { useNavigation } from "@react-navigation/native";
 
@@ -38,9 +45,21 @@ function GoogleLogin() {
 
   return (
     <View>
-      <Button title="Login with Google" onPress={signInWithGoogleAsync} />
+      <TouchableOpacity onPress={signInWithGoogleAsync}>
+        <Text style={styles.googleStyle}>Sign in with Google</Text>
+      </TouchableOpacity>
     </View>
   );
 }
 
 export default GoogleLogin;
+
+const styles = StyleSheet.create({
+  googleStyle: {
+    backgroundColor: "red",
+    width: 350,
+    height: 30,
+    marginBottom: 20,
+    textAlign: "center",
+  },
+});

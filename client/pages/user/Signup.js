@@ -1,6 +1,13 @@
 //test
 import React, { useState } from "react";
-import { Text, Button, View, StyleSheet, TextInput } from "react-native";
+import {
+  Text,
+  Button,
+  View,
+  StyleSheet,
+  TextInput,
+  TouchableOpacity,
+} from "react-native";
 import axios from "axios";
 
 export default function Signup({ navigation }) {
@@ -83,8 +90,7 @@ export default function Signup({ navigation }) {
         autoCapitalize="none"
       />
       <View>{renderFeedbackMessage()}</View>
-      <Button
-        title="회원가입"
+      <TouchableOpacity
         onPress={postSignupData}
         disabled={
           email === "" ||
@@ -94,7 +100,9 @@ export default function Signup({ navigation }) {
             ? true
             : false
         }
-      />
+      >
+        <Text style={styles.signupStyle}>Sign up</Text>
+      </TouchableOpacity>
     </View>
   );
 }
@@ -107,16 +115,23 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
   input: {
-    width: 350,
-    height: 40,
+    width: 300,
+    height: 44,
     marginBottom: 10,
-    backgroundColor: "#EAEAEA",
-    borderRadius: 10,
+    borderBottomColor: "black",
+    borderBottomWidth: 1,
   },
   inputext: {
     width: 200,
     textAlign: "center",
     fontWeight: "bold",
     marginBottom: 10,
+  },
+  signupStyle: {
+    backgroundColor: "red",
+    width: 305,
+    height: 30,
+    marginBottom: 20,
+    textAlign: "center",
   },
 });
