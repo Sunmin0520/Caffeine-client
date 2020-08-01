@@ -51,7 +51,11 @@ export default function Signup({ navigation }) {
   const renderFeedbackMessage = () => {
     if (passwordCheck) {
       if (!doesPasswordMatch()) {
-        return <Text>패스워드가 일치하지 않습니다!!</Text>;
+        return (
+          <Text style={styles.passwordCheck}>
+            패스워드가 일치하지 않습니다!!
+          </Text>
+        );
       }
     }
   };
@@ -101,7 +105,9 @@ export default function Signup({ navigation }) {
             : false
         }
       >
-        <Text style={styles.signupStyle}>Sign up</Text>
+        <Text style={styles.signupStyle}>
+          {passwordCheck === password ? "Sign In" : "Check Password!"}
+        </Text>
       </TouchableOpacity>
     </View>
   );
@@ -128,10 +134,19 @@ const styles = StyleSheet.create({
     marginBottom: 10,
   },
   signupStyle: {
-    backgroundColor: "red",
-    width: 305,
-    height: 30,
+    backgroundColor: "aliceblue",
+    width: 303,
+    // height: 20,1
     marginBottom: 20,
     textAlign: "center",
+    borderColor: "lightsteelblue",
+    borderWidth: 1,
+    borderRadius: 5,
+    fontWeight: "bold",
+    marginTop: 20,
+  },
+  passwordCheck: {
+    color: "red",
+    fontWeight: "bold",
   },
 });

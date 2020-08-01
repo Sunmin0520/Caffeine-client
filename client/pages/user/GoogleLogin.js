@@ -3,12 +3,13 @@ import {
   Text,
   View,
   StyleSheet,
-  Button,
+  Image,
   AsyncStorage,
   TouchableOpacity,
 } from "react-native";
 import * as Google from "expo-google-app-auth";
 import { useNavigation } from "@react-navigation/native";
+import { LinearGradient } from "expo-linear-gradient";
 
 const ANDROID_CLIENT_ID =
   "348379217678-iep3tgg5rfud3s2be2psvql59d74g10u.apps.googleusercontent.com";
@@ -23,7 +24,6 @@ function GoogleLogin() {
       });
 
       if (result.type === "success") {
-        // console.log("LoginGoogle: ", result);
         const _storeData = async () => {
           try {
             await AsyncStorage.setItem("userToken", result.accessToken);
@@ -46,20 +46,31 @@ function GoogleLogin() {
   return (
     <View>
       <TouchableOpacity onPress={signInWithGoogleAsync}>
-        <Text style={styles.googleStyle}>Sign in with Google</Text>
+        <LinearGradient
+          colors={["#e73827", "#f85032", "#FF6B6B"]}
+          style={{
+            padding: 10,
+            alignItems: "center",
+            borderRadius: 10,
+            marginBottom: 20,
+            width: 300,
+          }}
+        >
+          <Image source={require("./google.png")} />
+          <Text
+            style={{
+              backgroundColor: "transparent",
+              fontSize: 15,
+              color: "#fff",
+              fontWeight: "bold",
+            }}
+          >
+            Sign in with Google
+          </Text>
+        </LinearGradient>
       </TouchableOpacity>
     </View>
   );
 }
 
 export default GoogleLogin;
-
-const styles = StyleSheet.create({
-  googleStyle: {
-    backgroundColor: "red",
-    width: 350,
-    height: 30,
-    marginBottom: 20,
-    textAlign: "center",
-  },
-});

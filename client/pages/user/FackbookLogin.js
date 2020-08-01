@@ -4,11 +4,12 @@ import {
   Text,
   View,
   StyleSheet,
-  Button,
+  Image,
   AsyncStorage,
   TouchableOpacity,
 } from "react-native";
 import { useNavigation } from "@react-navigation/native";
+import { LinearGradient } from "expo-linear-gradient";
 
 const FACEBOOK_APP_KEY = "2580711968908550";
 
@@ -52,20 +53,25 @@ function FacebookLogin() {
   return (
     <View>
       <TouchableOpacity onPress={logIn}>
-        <Text style={styles.facebookStyle}>Sign in with Facebook</Text>
+        <LinearGradient
+          colors={["#4c669f", "#3b5998", "#192f6a"]}
+          style={{ padding: 10, alignItems: "center", borderRadius: 10 }}
+        >
+          <Image source={require("./facebook.png")} />
+          <Text
+            style={{
+              backgroundColor: "transparent",
+              fontSize: 15,
+              color: "#fff",
+              fontWeight: "bold",
+            }}
+          >
+            Sign in with Facebook
+          </Text>
+        </LinearGradient>
       </TouchableOpacity>
     </View>
   );
 }
 
 export default FacebookLogin;
-
-const styles = StyleSheet.create({
-  facebookStyle: {
-    backgroundColor: "cornflowerblue",
-    width: 350,
-    height: 30,
-    marginBottom: 20,
-    textAlign: "center",
-  },
-});
