@@ -2,7 +2,7 @@ import React, { useEffect, useLayoutEffect } from "react";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import Main from "../pages/user/Main";
 import Notelist from "../pages/notes/Notelist";
-import Cafeinfo from "../pages/cafe/Cafeinfo";
+import Regionlist from "../pages/cafe/Regionlist";
 import Logout from "../pages/user/Logout";
 
 const Tabs = createBottomTabNavigator();
@@ -25,7 +25,7 @@ export default ({ navigation, route }) => {
     //component를 지정하면 자동으로 import된다.
     <Tabs.Navigator>
       <Tabs.Screen name="Main" component={Main} />
-      <Tabs.Screen name="Cafeinfo" component={Cafeinfo} />
+      <Tabs.Screen name="Regionlist" component={Regionlist} />
       <Tabs.Screen name="Notelist" component={Notelist} />
       <Tabs.Screen name="Logout" component={Logout} />
     </Tabs.Navigator>

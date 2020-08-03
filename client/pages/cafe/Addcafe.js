@@ -8,7 +8,6 @@ import {
   AsyncStorage,
 } from "react-native";
 import axios from "axios";
-import RNPickerSelect from "react-native-picker-select";
 
 const Addcafe = ({ route, navigation }) => {
   //새로운 카페를 등록할 수 있습니다.
@@ -69,7 +68,7 @@ const Addcafe = ({ route, navigation }) => {
           headers: {
             Authorization: `Bearer ${value}`,
           },
-        }
+        },
       ) // Serverside진행후 수정예정입니다.
       .then((res) => {
         //status 200 ok
