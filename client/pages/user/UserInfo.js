@@ -1,52 +1,62 @@
 import React from "react";
-import { Text, View, StyleSheet, TouchableOpacity, Image } from "react-native";
+import {
+  Text,
+  View,
+  StyleSheet,
+  TouchableOpacity,
+  Image,
+  TextInput,
+} from "react-native";
 import GoogleLogin from "./GoogleLogin";
 import FacebookLogin from "./FackbookLogin";
-import { LinearGradient } from "expo-linear-gradient";
+import Signin from "./Signin";
 
 export default function UserInfo({ navigation }) {
   return (
     <View style={styles.container}>
       <Image
         style={styles.locationLogo}
-        source={require("./LogoMakr_9PLclM.png")}
+        source={require("./UserInfoLogo.png")}
       />
-      <View>
+      {/* <Text style={styles.locationLogo}>Caffeine</Text> */}
+      <Signin />
+      <Text
+        style={{
+          marginBottom: 30,
+          marginTop: 30,
+          color: "#FDA118",
+          fontWeight: "bold",
+          fontSize: 16,
+        }}
+      >
+        ㅡ or Login with ㅡ
+      </Text>
+      <View style={{ flexDirection: "row", flexWrap: "wrap" }}>
         <GoogleLogin />
         <FacebookLogin />
       </View>
-      <TouchableOpacity
-        onPress={() => {
-          navigation.navigate("Signin");
-        }}
-      >
-        <LinearGradient
-          colors={["#FFEFBA", "#FBD786", "#f8b500"]}
-          style={{
-            padding: 10,
-            alignItems: "center",
-            borderRadius: 10,
-            marginBottom: 20,
-            width: 300,
-          }}
-        >
-          <Image source={require("./location.png")} />
+      <TouchableOpacity onPress={() => navigation.navigate("Signup")}>
+        <View style={{ flexDirection: "row", flexWrap: "wrap" }}>
           <Text
             style={{
-              backgroundColor: "transparent",
-              fontSize: 15,
-              color: "#fff",
-              fontWeight: "bold",
+              marginTop: 50,
+              textAlign: "center",
+              color: "#D8D8D8",
             }}
           >
-            Sign in with Caffeine
+            Dont have an account?
           </Text>
-        </LinearGradient>
-      </TouchableOpacity>
-      <TouchableOpacity onPress={() => navigation.navigate("Signup")}>
-        <Text style={{ fontWeight: "bold", marginTop: 10 }}>
-          회원이 아니신가요? 회원가입
-        </Text>
+          <Text
+            style={{
+              marginTop: 50,
+              marginLeft: 10,
+              fontWeight: "bold",
+              color: "#FDA118",
+            }}
+          >
+            Sign Up
+          </Text>
+        </View>
       </TouchableOpacity>
     </View>
   );
@@ -54,15 +64,15 @@ export default function UserInfo({ navigation }) {
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: "white",
     flex: 1,
     alignItems: "center",
     justifyContent: "center",
+    backgroundColor: "#FFF",
   },
   locationLogo: {
-    width: 109,
-    height: 150,
-    marginTop: -50,
-    marginBottom: 50,
+    marginTop: -90,
+    marginBottom: 70,
+    width: 250,
+    height: 78,
   },
 });

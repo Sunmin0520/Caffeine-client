@@ -47,25 +47,29 @@ function GoogleLogin() {
     <View>
       <TouchableOpacity onPress={signInWithGoogleAsync}>
         <LinearGradient
-          colors={["#e73827", "#f85032", "#FF6B6B"]}
+          colors={["#fff", "#fff", "#fff"]}
           style={{
             padding: 10,
             alignItems: "center",
             borderRadius: 10,
-            marginBottom: 20,
-            width: 300,
+            width: 140,
+            flexDirection: "row",
+            flexWrap: "wrap",
+            borderColor: "#DDDDDD",
+            borderWidth: 1,
+            marginRight: 20,
+            marginLeft: 20,
           }}
         >
-          <Image source={require("./google.png")} />
+          <Image style={{ marginLeft: 10 }} source={require("./google.png")} />
           <Text
             style={{
-              backgroundColor: "transparent",
               fontSize: 15,
-              color: "#fff",
-              fontWeight: "bold",
+              marginLeft: 10,
+              color: "#EA3B3B",
             }}
           >
-            Sign in with Google
+            Google
           </Text>
         </LinearGradient>
       </TouchableOpacity>

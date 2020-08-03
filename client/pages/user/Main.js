@@ -29,7 +29,7 @@ export default function Signin({ navigation }) {
         }}
       >
         <LinearGradient
-          colors={["#EB5757", "#cc5333"]}
+          colors={["#FBD786", "#FBD786"]}
           style={{
             padding: 10,
             alignItems: "center",
@@ -57,7 +57,7 @@ export default function Signin({ navigation }) {
         }}
       >
         <LinearGradient
-          colors={["#EB5757", "#cc5333"]}
+          colors={["#FBD786", "#FBD786"]}
           style={{
             padding: 10,
             alignItems: "center",

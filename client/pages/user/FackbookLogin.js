@@ -54,24 +54,31 @@ function FacebookLogin() {
     <View>
       <TouchableOpacity onPress={logIn}>
         <LinearGradient
-          colors={["#4c669f", "#3b5998", "#192f6a"]}
+          colors={["#fff", "#fff", "#fff"]}
           style={{
             padding: 10,
             alignItems: "center",
             borderRadius: 10,
-            marginBottom: 20,
+            width: 140,
+            flexDirection: "row",
+            flexWrap: "wrap",
+            borderColor: "#DDDDDD",
+            borderWidth: 1,
+            marginRight: 20,
           }}
         >
-          <Image source={require("./facebook.png")} />
+          <Image
+            style={{ marginLeft: 10 }}
+            source={require("./facebook.png")}
+          />
           <Text
             style={{
-              backgroundColor: "transparent",
               fontSize: 15,
-              color: "#fff",
-              fontWeight: "bold",
+              color: "#4667BE",
+              marginLeft: 10,
             }}
           >
-            Sign in with Facebook
+            Facebook
           </Text>
         </LinearGradient>
       </TouchableOpacity>
