@@ -1,5 +1,11 @@
 import React, { useState, useEffect } from "react";
-import { StyleSheet, Text, View, Button, AsyncStorage } from "react-native";
+import {
+  StyleSheet,
+  Text,
+  View,
+  TouchableOpacity,
+  AsyncStorage,
+} from "react-native";
 import axios from "axios";
 
 function Regionlist({ route, navigation }) {
@@ -18,16 +24,17 @@ function Regionlist({ route, navigation }) {
         Setcity(
           res.data.map((result) => {
             return (
-              <Button
+              <TouchableOpacity
                 key={result.name}
-                title={result.name}
                 onPress={() => {
                   navigation.navigate("Region", {
                     region_id: result.id,
                     city: result.name,
                   });
                 }}
-              />
+              >
+                <Text style={styles.textstyle}>{result.name}</Text>
+              </TouchableOpacity>
             );
           })
         );
@@ -58,6 +65,7 @@ const styles = StyleSheet.create({
   },
   textstyle: {
     justifyContent: "center",
+    fontSize: 18,
     margin: 10,
   },
 });
