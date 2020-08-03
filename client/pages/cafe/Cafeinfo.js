@@ -1,5 +1,11 @@
 import React, { useState, useEffect } from "react";
-import { StyleSheet, Text, View, Button, AsyncStorage } from "react-native";
+import {
+  StyleSheet,
+  Text,
+  View,
+  TouchableOpacity,
+  AsyncStorage,
+} from "react-native";
 import axios from "axios";
 import * as Linking from "expo-linking";
 import StarRating from "react-native-star-rating";
@@ -17,7 +23,7 @@ const Cafeinfo = ({ route, navigation }) => {
   const [instagram_account, Setinstagram_account] = useState(null);
   const [rating_average, Setrating_average] = useState(null);
   const [test, Settest] = useState(null);
-  const [review, Setreview] = useState(null);
+  const [reviews, Setreviews] = useState(null);
 
   const getCafeinfoCall = async () => {
     const value = await AsyncStorage.getItem("userToken");
@@ -28,46 +34,77 @@ const Cafeinfo = ({ route, navigation }) => {
         },
       })
       .then((res) => {
-        console.log("data", res.data.review);
         return (
           Settest(res.data),
           Setname(res.data.name),
           Setaddress(res.data.address),
           Setsell_beans(res.data.Setsell_beans),
-          Setinstagram_account(res.data.instagram_account),
-          Setrating_average(res.data.rating_average),
-          Setreview(
-            res.data.review.map((result) => {
-              return (
-                <View key={result.text}>
-                  <Text>{result.text}</Text>
-                  <StarRating
-                    disabled={true}
-                    maxStars={5}
-                    rating={result.rating}
-                    fullStarColor={"#FEBF34"}
-                  />
-                </View>
-              );
-            })
-          )
+          Setinstagram_account(res.data.instagram_account)
         );
       })
       .catch(function (error) {
         console.log(error); //401{result:"token expired"} 수정예정
       });
   };
+
+  const getCafeReviewCall = async () => {
+    const value = await AsyncStorage.getItem("userToken");
+    axios
+      .get(`http://13.125.247.226:3001/cafes/${cafe_id}`, {
+        headers: {
+          Authorization: `Bearer ${value}`,
+        },
+      })
+      .then((res) => {
+        return Setreviews(
+          res.data.review.map((result) => {
+            return (
+              <View key={result.updatedAt}>
+                <Text style={styles.textstyle}>{result.text}</Text>
+                <StarRating
+                  disabled={true}
+                  maxStars={5}
+                  rating={result.rating}
+                  fullStarColor={"#FEBF34"}
+                />
+              </View>
+            );
+          })
+        );
+      })
+      .catch(function (error) {
+        console.log(error); //401{result:"token expired"} 수정예정
+      });
+  };
+  const getRatingCall = async () => {
+    const value = await AsyncStorage.getItem("userToken");
+    axios
+      .get(`http://13.125.247.226:3001/cafes/rating/${cafe_id}`, {
+        headers: {
+          Authorization: `Bearer ${value}`,
+        },
+      })
+      .then((res) => {
+        Setrating_average(res.data);
+      })
+      .catch(function (error) {
+        console.log(error); //401{result:"token expired"} 수정예정
+      });
+  };
+
   useEffect(() => {
     getCafeinfoCall();
-  }, []);
+    getCafeReviewCall();
+    getRatingCall();
+  }, [reviews, rating_average]);
 
   return (
     <View style={styles.container}>
-      <Text>{city}</Text>
-      <Text>{name}</Text>
-      <Text>{address}</Text>
-      <Text>{sell_beans}</Text>
+      <Text style={styles.textstyle}>{city}</Text>
+      <Text style={styles.textstyle}>{name}</Text>
+      <Text style={styles.textstyle}>{address}</Text>
       <Text
+        style={styles.textstyle}
         onPress={() => {
           Linking.openURL(`https://www.instagram.com/${instagram_account}`);
         }}
@@ -80,17 +117,18 @@ const Cafeinfo = ({ route, navigation }) => {
         rating={rating_average}
         fullStarColor={"#FEBF34"}
       />
-      {review}
+      {reviews}
 
-      <Button
-        title="리뷰남기기"
+      <TouchableOpacity
         onPress={() => {
           navigation.navigate("Addreview", {
             cafe_id: cafe_id,
             user_id: user_id,
           });
         }}
-      />
+      >
+        <Text style={styles.textstyle}>리뷰남기기</Text>
+      </TouchableOpacity>
     </View>
   );
 };
@@ -104,6 +142,7 @@ const styles = StyleSheet.create({
   },
   textstyle: {
     justifyContent: "center",
+    fontSize: 18,
     margin: 10,
   },
 });

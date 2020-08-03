@@ -1,5 +1,11 @@
 import React, { useState, useEffect } from "react";
-import { StyleSheet, Text, View, Button, AsyncStorage } from "react-native";
+import {
+  StyleSheet,
+  Text,
+  View,
+  TouchableOpacity,
+  AsyncStorage,
+} from "react-native";
 import axios from "axios";
 import StarRating from "react-native-star-rating";
 
@@ -20,48 +26,41 @@ const Region = ({ route, navigation }) => {
         },
       })
       .then((res) => {
-        // console.log (res.data);
+        // console.log(res.data[0].id);
         Setcafelist(
           res.data.map((result) => {
             return (
-              <View key={result.id}>
-                <Button
-                  title={result.name}
+              <View key={result.updatedAt}>
+                <TouchableOpacity
                   onPress={() => {
                     navigation.navigate("Cafeinfo", { cafe_id: result.id });
                   }}
-                />
-                <Text>{result.address}</Text>
-                <StarRating
-                  disabled={true}
-                  maxStars={5}
-                  rating={result.rating_average}
-                  fullStarColor={"#FEBF34"}
-                />
+                >
+                  <Text style={styles.textstyle}>{result.name}</Text>
+                  <Text style={styles.textstyle}>{result.address}</Text>
+                </TouchableOpacity>
               </View>
             );
           })
         );
-      })
-      .catch(function (error) {
-        console.log(error); //401{result:"token expired"} 수정예정
       });
   };
 
   useEffect(() => {
     getCafelistCall();
-  }, []);
+  });
 
   return (
     <View style={styles.container}>
-      <Text>{city}</Text>
+      <Text style={styles.textstyle}>{city}</Text>
       {/**선택한지역명 */}
-      <Button
-        title="새로운 카페 추가"
+      <TouchableOpacity
         onPress={() => {
           navigation.navigate("Addcafe");
         }}
-      />
+      >
+        <Text style={styles.textstyle}>새로운 카페 추가</Text>
+      </TouchableOpacity>
       {cafelist}
     </View>
   );
@@ -76,7 +75,8 @@ const styles = StyleSheet.create({
   },
   textstyle: {
     justifyContent: "center",
-    margin: 10,
+    fontSize: 18,
+    margin: 7,
   },
 });
 

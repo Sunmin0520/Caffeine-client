@@ -1,9 +1,9 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   StyleSheet,
   Text,
   View,
-  Button,
+  TouchableOpacity,
   TextInput,
   AsyncStorage,
 } from "react-native";
@@ -15,36 +15,39 @@ const Addreview = ({ route, navigation }) => {
   const cafe_id = route.params.cafe_id; //Cafeinfo에서 선택한 카페의 ID입니다.
   const user_id = route.params.user_id;
 
-  const [review, onChangereview] = useState("");
-  const [rating, onChangeRating] = useState(route.params.rating);
+  const [review, onChangereview] = useState(null);
+  const [rating, onChangeRating] = useState(0);
   const postReviewCall = async () => {
     const value = await AsyncStorage.getItem("userToken");
     axios
-      .post(`http://13.125.247.226:3001/cafes/${cafe_id}`, {
-        data: {
-          text: review,
-          rating: rating,
+      .post(
+        `http://13.125.247.226:3001/cafes/${cafe_id}`,
+        { text: review, rating: rating },
+        {
+          withCredentials: true,
           headers: {
             Authorization: `Bearer ${value}`,
           },
-        },
-      }) // Serverside진행후 수정예정입니다.
+        }
+      )
       .then((res) => {
         //status 200 ok
-        console.log(res);
+        console.log(rating);
+        alert(JSON.stringify(res)); // 수정예정
       })
       .catch(function (error) {
         console.log(error); //401{result:"token expired"} 수정예정
       });
   };
+
   return (
     <View style={styles.container}>
-      <Text>이 카페에서의 경험을 공유해주세요</Text>
+      <Text style={styles.textstyle}>이 카페에서의 경험을 공유해주세요</Text>
       <StarRating
         disabled={false}
         maxStars={5}
-        rating={rating}
         selectedStar={(rating) => onChangeRating(rating)}
+        rating={rating}
         fullStarColor={"#FEBF34"}
       />
       <TextInput
@@ -53,13 +56,14 @@ const Addreview = ({ route, navigation }) => {
         onChangeText={(text) => onChangereview(text)}
         value={review}
       />
-      <Button
-        title={"등록하기"}
+      <TouchableOpacity
         onPress={() => {
-          navigation.navigate("Cafeinfo");
           postReviewCall();
+          navigation.navigate("Cafeinfo");
         }}
-      />
+      >
+        <Text style={styles.textstyle}>등록하기</Text>
+      </TouchableOpacity>
     </View>
   );
 };
@@ -73,6 +77,7 @@ const styles = StyleSheet.create({
   },
   textstyle: {
     justifyContent: "center",
+    fontSize: 18,
     margin: 10,
   },
 });
