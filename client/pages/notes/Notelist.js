@@ -23,7 +23,7 @@ const Notelist = ({ navigation }) => {
         },
       })
       .then((res) => {
-        console.log(res.data);
+        //console.log(res.data);
 
         setNoteListUp(
           res.data.map((result) => {
@@ -65,6 +65,13 @@ const Notelist = ({ navigation }) => {
               navigation.navigate("Noteinfo", {
                 note_id: listup.id,
                 user_id: listup.user_id,
+                // name: listup.name,
+                // origin: listup.origin,
+                // flavor: listup.flavor,
+                // mall: listup.mall,
+                // price: listup.price,
+                // feature: listup.feature,
+                // rating: listup.rating,
               });
             }}
           >
@@ -77,11 +84,7 @@ const Notelist = ({ navigation }) => {
       ))}
       <Button
         title="새 노트 추가하기"
-        onPress={() =>
-          navigation.navigate("Addnote", {
-            user_id: id,
-          })
-        }
+        onPress={() => navigation.navigate("Addnote")}
       />
     </View>
   );
