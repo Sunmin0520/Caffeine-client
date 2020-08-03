@@ -136,7 +136,6 @@ const styles = StyleSheet.create({
   signupStyle: {
     backgroundColor: "aliceblue",
     width: 303,
-    // height: 20,1
     marginBottom: 20,
     textAlign: "center",
     borderColor: "lightsteelblue",

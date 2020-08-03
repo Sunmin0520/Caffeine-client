@@ -77,8 +77,8 @@ export default function Signin({ navigation, route }) {
         onChangeText={(password) => setPassword(password)}
         autoCapitalize="none"
       />
-      <TouchableOpacity style={styles.loginBt} onPress={postLoginData}>
-        <Text style={styles.loginText}>LOGIN</Text>
+      <TouchableOpacity onPress={postLoginData}>
+        <Text style={styles.appButtonContainer}>Login</Text>
       </TouchableOpacity>
     </View>
   );
@@ -98,25 +98,20 @@ const styles = StyleSheet.create({
     borderBottomColor: "black",
     borderBottomWidth: 1,
   },
+  appButtonContainer: {
+    backgroundColor: "#eacda3",
+    width: 303,
+    textAlign: "center",
+    borderColor: "lightsteelblue",
+    borderWidth: 1,
+    borderRadius: 5,
+    fontWeight: "bold",
+    marginTop: 10,
+  },
   tinyLogo: {
     width: 220,
     height: 220,
     marginTop: -50,
     marginBottom: 20,
-  },
-  loginBt: {
-    backgroundColor: "sienna",
-    width: 310,
-    height: 40,
-    marginBottom: 20,
-    borderColor: "lightsteelblue",
-    borderWidth: 1,
-    borderRadius: 20,
-  },
-  loginText: {
-    color: "white",
-    textAlign: "center",
-    marginTop: 5,
-    fontSize: 18,
   },
 });

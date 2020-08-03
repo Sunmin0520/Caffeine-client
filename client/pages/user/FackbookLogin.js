@@ -55,7 +55,12 @@ function FacebookLogin() {
       <TouchableOpacity onPress={logIn}>
         <LinearGradient
           colors={["#4c669f", "#3b5998", "#192f6a"]}
-          style={{ padding: 10, alignItems: "center", borderRadius: 10 }}
+          style={{
+            padding: 10,
+            alignItems: "center",
+            borderRadius: 10,
+            marginBottom: 20,
+          }}
         >
           <Image source={require("./facebook.png")} />
           <Text
