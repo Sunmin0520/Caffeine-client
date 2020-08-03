@@ -10,7 +10,7 @@ import StarRating from "react-native-star-rating";
 import axios from "axios";
 
 const Noteinfo = ({ navigation, route }) => {
-  const user_id = route.params.user_id;
+  //const user_id = route.params.user_id;
   const note_id = route.params.note_id;
   //const rating = route.params.rating;
 
@@ -21,32 +21,7 @@ const Noteinfo = ({ navigation, route }) => {
   const [feature, setFeature] = useState(null);
   const [flavor, setFlavor] = useState([]);
   const [rating, setRating] = useState(route.params.rating);
-
-  // const getflavorinfo = async ({ noteflavor }) => {
-  //   const value = await AsyncStorage.getItem("userToken");
-  //   axios
-  //     .get(`http://13.125.247.226:3001/notes/flavor/all`, {
-  //       headers: {
-  //         Authorization: `Bearer ${value}`,
-  //       },
-  //     })
-  //     .then((res) => {
-  //       console.log(res.data);
-  //       let store = [];
-  //       res.data.map((result) => {
-  //         for (let i = 0; i < noteflavor.length; i++) {
-  //           if (noteflavor[i] === result.id) {
-  //             store.push(result.name);
-  //           }
-  //         }
-  //       });
-  //       console.log(store);
-  //       return store;
-  //     })
-  //     .catch((err) => {
-  //       console.log(err);
-  //     });
-  // };
+  const [arrayflavor, setarrayflavor] = useState([]);
 
   const getNoteInfo = async () => {
     const value = await AsyncStorage.getItem("userToken");
@@ -58,26 +33,44 @@ const Noteinfo = ({ navigation, route }) => {
         },
       })
       .then((res) => {
-        console.log(res.data);
-        setName(res.data.name),
+        return (
+          setName(res.data.name),
           setOrigin(res.data.origin),
           setMall(res.data.mall),
           setPrice(res.data.price),
           setFeature(res.data.feature),
-          //setFlavor(res.data.flavor);
-          setRating(res.data.rating);
-        // setNoteListUp(
-        //   res.data.map((result) => {
-        //     return result;
-        //   }),
-        // );
+          setFlavor(res.data.flavor),
+          setRating(res.data.rating)
+        );
+        //console.log(res.data.flavor);
+      })
+
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
+  const getflavorinfo = async () => {
+    const value = await AsyncStorage.getItem("userToken");
+    axios
+      .get(`http://13.125.247.226:3001/notes/flavor/all`, {
+        headers: {
+          Authorization: `Bearer ${value}`,
+        },
+      })
+      .then((res) => {
+        //console.log(res.data);
+
+        setarrayflavor(res.data);
       })
       .catch((err) => {
         console.log(err);
       });
   };
+
   useEffect(() => {
     getNoteInfo();
+    getflavorinfo();
   }, []);
 
   return (
@@ -88,6 +81,31 @@ const Noteinfo = ({ navigation, route }) => {
       <Text>{price}</Text>
       <Text>{feature}</Text>
       <Text>{flavor}</Text>
+      {/* {console.log(arrayflavor)} */}
+      <View style={styles.container}>
+        {arrayflavor
+          .filter((data) => {
+            for (let i = 0; i < flavor.length; i++) {
+              if (flavor[i] === data.id) {
+                return data.name;
+              }
+            }
+          })
+          .map((result) => (
+            <TouchableOpacity
+              key={result.id}
+              style={{
+                alignItems: "center",
+                borderWidth: 1,
+                width: 80,
+                padding: 2,
+              }}
+            >
+              <Text>{result.name}</Text>
+            </TouchableOpacity>
+          ))}
+      </View>
+
       <StarRating
         disabled={true}
         maxStars={5}
@@ -99,6 +117,7 @@ const Noteinfo = ({ navigation, route }) => {
         style={styles.button}
         onPress={() =>
           navigation.navigate("Modifynote", {
+            note_id: note_id,
             name: name,
             origin: origin,
             mall: mall,
@@ -114,6 +133,7 @@ const Noteinfo = ({ navigation, route }) => {
         style={styles.button}
         onPress={() =>
           navigation.navigate("Modifynote", {
+            note_id: note_id,
             name: name,
             origin: origin,
             mall: mall,
@@ -130,6 +150,10 @@ const Noteinfo = ({ navigation, route }) => {
 };
 
 const styles = StyleSheet.create({
+  container: {
+    flexDirection: "row",
+    flexWrap: "wrap",
+  },
   button: {
     alignItems: "center",
     backgroundColor: "#DDDDDD",
