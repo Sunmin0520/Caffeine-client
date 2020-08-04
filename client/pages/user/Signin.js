@@ -69,11 +69,11 @@ export default function Signin() {
         style={{
           flexDirection: "row",
           alignItems: "center",
-          backgroundColor: "#fff",
+          // backgroundColor: "#fff",
           height: 40,
           width: 300,
           marginBottom: 10,
-          backgroundColor: "#F2F2F2",
+          backgroundColor: "#fff",
           borderRadius: 20,
         }}
       >
@@ -94,11 +94,11 @@ export default function Signin() {
         style={{
           flexDirection: "row",
           alignItems: "center",
-          backgroundColor: "#fff",
+          // backgroundColor: "#fff",
           height: 40,
           width: 300,
           marginBottom: 10,
-          backgroundColor: "#F2F2F2",
+          backgroundColor: "#fff",
           borderRadius: 20,
         }}
       >
@@ -120,7 +120,7 @@ export default function Signin() {
         <TouchableOpacity onPress={postLoginData}>
           <View
             style={{
-              backgroundColor: "#FDA118",
+              backgroundColor: "#7BE3D1",
               borderRadius: 20,
               marginTop: 10,
             }}
