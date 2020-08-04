@@ -9,6 +9,7 @@ import {
   TouchableOpacity,
 } from "react-native";
 import axios from "axios";
+import { LinearGradient } from "expo-linear-gradient";
 
 export default function Signup({ navigation }) {
   const [email, setEmail] = useState(""); // 이메일 인풋값 핸들링
@@ -61,7 +62,7 @@ export default function Signup({ navigation }) {
   };
 
   return (
-    <View style={styles.container}>
+    <LinearGradient style={styles.container} colors={["#FFD6D3", "#A9FFFA"]}>
       <Text style={styles.inputext}>회원가입 페이지</Text>
       <TextInput
         label="Email"
@@ -117,7 +118,7 @@ export default function Signup({ navigation }) {
           </Text>
         </TouchableOpacity>
       </View>
-    </View>
+    </LinearGradient>
   );
 }
 
