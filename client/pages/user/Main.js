@@ -1,5 +1,14 @@
 import React, { useEffect } from "react";
-import { Text, Button, View, StyleSheet, AsyncStorage } from "react-native";
+import {
+  Text,
+  Button,
+  View,
+  StyleSheet,
+  AsyncStorage,
+  TouchableOpacity,
+  Image,
+} from "react-native";
+import { LinearGradient } from "expo-linear-gradient";
 
 export default function Signin({ navigation }) {
   useEffect(() => {
@@ -14,20 +23,62 @@ export default function Signin({ navigation }) {
   return (
     <View style={styles.container}>
       <Text style={styles.inputext}>Main</Text>
-      <Button
-        title="카페 찾기"
-        style={styles.input}
+      <TouchableOpacity
         onPress={() => {
           navigation.navigate("Regionlist");
         }}
-      />
-      <Button
-        title="커피콩콩콩"
-        style={styles.input}
+      >
+        <LinearGradient
+          colors={["#FBD786", "#FBD786"]}
+          style={{
+            padding: 10,
+            alignItems: "center",
+            borderRadius: 10,
+            marginBottom: 20,
+            width: 300,
+          }}
+        >
+          <Image source={require("./signboard.png")} />
+          <Text
+            style={{
+              backgroundColor: "transparent",
+              fontSize: 15,
+              color: "#fff",
+              fontWeight: "bold",
+            }}
+          >
+            카페 찾기
+          </Text>
+        </LinearGradient>
+      </TouchableOpacity>
+      <TouchableOpacity
         onPress={() => {
           navigation.navigate("Notelist");
         }}
-      />
+      >
+        <LinearGradient
+          colors={["#FBD786", "#FBD786"]}
+          style={{
+            padding: 10,
+            alignItems: "center",
+            borderRadius: 10,
+            marginBottom: 20,
+            width: 300,
+          }}
+        >
+          <Image source={require("./coffee-shop.png")} />
+          <Text
+            style={{
+              backgroundColor: "transparent",
+              fontSize: 15,
+              color: "#fff",
+              fontWeight: "bold",
+            }}
+          >
+            원두 기록
+          </Text>
+        </LinearGradient>
+      </TouchableOpacity>
     </View>
   );
 }
@@ -36,6 +87,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: "center",
+    alignItems: "center",
   },
   input: {
     width: 200,

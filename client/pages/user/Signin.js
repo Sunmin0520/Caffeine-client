@@ -7,12 +7,17 @@ import {
   TextInput,
   Image,
   AsyncStorage,
+  TouchableOpacity,
 } from "react-native";
 import axios from "axios";
-export default function Signin({ navigation, route }) {
+import { useNavigation } from "@react-navigation/native";
+
+export default function Signin() {
   const [isLogin, setIsLogin] = useState(false); // 로그인 핸들링
   const [email, setEmail] = useState(""); // 이메일 인풋값 핸들링
   const [password, setPassword] = useState(""); // 패스워드 인풋값 핸들링
+
+  const navigation = useNavigation();
 
   // axios 요청
   const postLoginData = () => {
@@ -60,52 +65,82 @@ export default function Signin({ navigation, route }) {
 
   return (
     <View style={styles.container}>
-      <Image style={styles.tinyLogo} source={require("./logo.png")} />
-      <TextInput
-        label="Email"
-        placeholder="   Email"
-        style={styles.input}
-        onChangeText={(email) => setEmail(email)}
-        autoCapitalize="none"
-      />
-      <TextInput
-        label="Password"
-        placeholder="   Password"
-        secureTextEntry={true}
-        style={styles.input}
-        onChangeText={(password) => setPassword(password)}
-        autoCapitalize="none"
-      />
-      <Button
-        style={styles.appButtonContainer}
-        title={"Login"}
-        onPress={postLoginData}
-      />
+      <View
+        style={{
+          flexDirection: "row",
+          alignItems: "center",
+          backgroundColor: "#fff",
+          height: 40,
+          width: 300,
+          marginBottom: 10,
+          backgroundColor: "#F2F2F2",
+          borderRadius: 10,
+        }}
+      >
+        <Image
+          style={{
+            margin: 5,
+          }}
+          source={require("./user.png")}
+        />
+        <TextInput
+          label="Email"
+          placeholder="  Email"
+          onChangeText={(email) => setEmail(email)}
+          autoCapitalize="none"
+        ></TextInput>
+      </View>
+      <View
+        style={{
+          flexDirection: "row",
+          alignItems: "center",
+          backgroundColor: "#fff",
+          height: 40,
+          width: 300,
+          marginBottom: 10,
+          backgroundColor: "#F2F2F2",
+          borderRadius: 10,
+        }}
+      >
+        <Image
+          style={{
+            margin: 5,
+          }}
+          source={require("./lock.png")}
+        />
+        <TextInput
+          label="Password"
+          placeholder="  Password"
+          secureTextEntry={true}
+          onChangeText={(password) => setPassword(password)}
+          autoCapitalize="none"
+        ></TextInput>
+      </View>
+      <View>
+        <TouchableOpacity onPress={postLoginData}>
+          <View
+            style={{
+              backgroundColor: "#FDA118",
+              borderRadius: 10,
+              marginTop: 10,
+            }}
+          >
+            <Text style={styles.appButtonContainer}>Login</Text>
+          </View>
+        </TouchableOpacity>
+      </View>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#fff",
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  input: {
-    width: 300,
-    height: 44,
-    marginBottom: 10,
-    backgroundColor: "#EAEAEA",
-    borderRadius: 10,
-  },
-  signup: {
-    marginTop: 20,
-  },
-  tinyLogo: {
-    width: 220,
-    height: 220,
-    marginTop: -50,
-    marginBottom: 20,
+  container: {},
+  appButtonContainer: {
+    fontWeight: "bold",
+    marginTop: 10,
+    textAlign: "center",
+    fontSize: 15,
+    color: "#fff",
+    height: 30,
   },
 });

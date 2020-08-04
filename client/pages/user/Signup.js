@@ -1,6 +1,13 @@
 //test
 import React, { useState } from "react";
-import { Text, Button, View, StyleSheet, TextInput } from "react-native";
+import {
+  Text,
+  Button,
+  View,
+  StyleSheet,
+  TextInput,
+  TouchableOpacity,
+} from "react-native";
 import axios from "axios";
 
 export default function Signup({ navigation }) {
@@ -44,7 +51,11 @@ export default function Signup({ navigation }) {
   const renderFeedbackMessage = () => {
     if (passwordCheck) {
       if (!doesPasswordMatch()) {
-        return <Text>패스워드가 일치하지 않습니다!!</Text>;
+        return (
+          <Text style={styles.passwordCheck}>
+            패스워드가 일치하지 않습니다!!
+          </Text>
+        );
       }
     }
   };
@@ -83,8 +94,7 @@ export default function Signup({ navigation }) {
         autoCapitalize="none"
       />
       <View>{renderFeedbackMessage()}</View>
-      <Button
-        title="회원가입"
+      <TouchableOpacity
         onPress={postSignupData}
         disabled={
           email === "" ||
@@ -94,7 +104,11 @@ export default function Signup({ navigation }) {
             ? true
             : false
         }
-      />
+      >
+        <Text style={styles.signupStyle}>
+          {passwordCheck === password ? "Sign In" : "Check Password!"}
+        </Text>
+      </TouchableOpacity>
     </View>
   );
 }
@@ -107,16 +121,31 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
   input: {
-    width: 350,
-    height: 40,
+    width: 300,
+    height: 44,
     marginBottom: 10,
-    backgroundColor: "#EAEAEA",
-    borderRadius: 10,
+    borderBottomColor: "black",
+    borderBottomWidth: 1,
   },
   inputext: {
     width: 200,
     textAlign: "center",
     fontWeight: "bold",
     marginBottom: 10,
+  },
+  signupStyle: {
+    backgroundColor: "aliceblue",
+    width: 303,
+    marginBottom: 20,
+    textAlign: "center",
+    borderColor: "lightsteelblue",
+    borderWidth: 1,
+    borderRadius: 5,
+    fontWeight: "bold",
+    marginTop: 20,
+  },
+  passwordCheck: {
+    color: "red",
+    fontWeight: "bold",
   },
 });
