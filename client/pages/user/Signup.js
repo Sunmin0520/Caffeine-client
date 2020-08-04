@@ -9,12 +9,15 @@ import {
 } from "react-native";
 import axios from "axios";
 import { LinearGradient } from "expo-linear-gradient";
+import { useNavigation } from "@react-navigation/native";
 
-export default function Signup({ navigation }) {
+export default function Signup() {
   const [email, setEmail] = useState(""); // 이메일 인풋값 핸들링
   const [username, setNickname] = useState(""); // 닉네임 인풋값 핸들링
   const [password, setPassword] = useState(""); // 패스워드 인풋값 핸들링
   const [passwordCheck, setPasswordCheck] = useState(""); // 패스워드체크 인풋값 핸들링
+
+  const navigation = useNavigation();
 
   const postSignupData = () => {
     console.log(`이메일: ${email} 패스워드: ${password} 닉네임: ${username}`);
@@ -37,7 +40,7 @@ export default function Signup({ navigation }) {
       .then((response) => {
         console.log(response.data);
         alert(`${email}님 회원가입 하셨습니다. 로그인 페이지로 이동합니다.`);
-        navigation.navigate("Signin");
+        navigation.navigate("UserInfo");
       })
       .catch((error) => {
         console.log(`${error} 에러 ${data}를 보내지 못했습니다.`);

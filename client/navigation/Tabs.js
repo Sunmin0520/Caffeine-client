@@ -1,5 +1,6 @@
 import React, { useEffect, useLayoutEffect } from "react";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import { MaterialCommunityIcons } from "@expo/vector-icons";
 import Main from "../pages/user/Main";
 import Notelist from "../pages/notes/Notelist";
 import Regionlist from "../pages/cafe/Regionlist";
@@ -24,10 +25,46 @@ export default ({ navigation, route }) => {
   return (
     //component를 지정하면 자동으로 import된다.
     <Tabs.Navigator>
-      <Tabs.Screen name="Main" component={Main} />
-      <Tabs.Screen name="Regionlist" component={Regionlist} />
-      <Tabs.Screen name="Notelist" component={Notelist} />
-      <Tabs.Screen name="Logout" component={Logout} />
+      <Tabs.Screen
+        options={{
+          tabBarLabel: "Main",
+          tabBarIcon: ({ color, size }) => (
+            <MaterialCommunityIcons name="home" color={color} size={size} />
+          ),
+        }}
+        name="Main"
+        component={Main}
+      />
+      <Tabs.Screen
+        options={{
+          tabBarLabel: "Regionlist",
+          tabBarIcon: ({ color, size }) => (
+            <MaterialCommunityIcons name="tag" color={color} size={size} />
+          ),
+        }}
+        name="Regionlist"
+        component={Regionlist}
+      />
+      <Tabs.Screen
+        options={{
+          tabBarLabel: "Notelist",
+          tabBarIcon: ({ color, size }) => (
+            <MaterialCommunityIcons name="notebook" color={color} size={size} />
+          ),
+        }}
+        name="Notelist"
+        component={Notelist}
+      />
+      <Tabs.Screen
+        options={{
+          tabBarLabel: "Logout",
+          tabBarIcon: ({ color, size }) => (
+            <MaterialCommunityIcons name="export" color={color} size={size} />
+          ),
+        }}
+        name="Logout"
+        component={Logout}
+      />
     </Tabs.Navigator>
   );
 };
