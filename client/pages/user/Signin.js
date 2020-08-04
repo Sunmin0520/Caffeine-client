@@ -123,6 +123,8 @@ export default function Signin() {
               backgroundColor: "#7BE3D1",
               borderRadius: 20,
               marginTop: 10,
+              borderColor: "#fff",
+              borderWidth: 1.5,
             }}
           >
             <Text style={styles.appButtonContainer}>Login</Text>

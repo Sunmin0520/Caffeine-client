@@ -2,7 +2,7 @@
 import React, { useState } from "react";
 import {
   Text,
-  Button,
+  Image,
   View,
   StyleSheet,
   TextInput,
@@ -63,7 +63,7 @@ export default function Signup({ navigation }) {
 
   return (
     <LinearGradient style={styles.container} colors={["#FFD6D3", "#A9FFFA"]}>
-      <Text style={styles.inputext}>회원가입 페이지</Text>
+      <Image style={styles.locationLogo} source={require("./logo-white.png")} />
       <TextInput
         label="Email"
         placeholder="   Email"
@@ -97,9 +97,11 @@ export default function Signup({ navigation }) {
       <View>{renderFeedbackMessage()}</View>
       <View
         style={{
-          backgroundColor: "#fff",
+          backgroundColor: "#F09783",
           borderRadius: 20,
           marginTop: 10,
+          borderColor: "#fff",
+          borderWidth: 1.5,
         }}
       >
         <TouchableOpacity
@@ -133,7 +135,7 @@ const styles = StyleSheet.create({
     width: 300,
     height: 44,
     marginBottom: 10,
-    borderBottomColor: "#fff",
+    borderBottomColor: "#F09783",
     borderBottomWidth: 1,
   },
   inputext: {
@@ -148,12 +150,18 @@ const styles = StyleSheet.create({
     marginTop: 10,
     textAlign: "center",
     fontSize: 15,
-    color: "#FDA118",
+    color: "#fff",
     height: 30,
     width: 305,
   },
   passwordCheck: {
     color: "red",
     fontWeight: "bold",
+  },
+  locationLogo: {
+    marginTop: -180,
+    marginBottom: 70,
+    width: 250,
+    height: 110,
   },
 });
