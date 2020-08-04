@@ -6,6 +6,7 @@ import {
   TouchableOpacity,
   TextInput,
   AsyncStorage,
+  ScrollView,
 } from "react-native";
 import axios from "axios";
 import StarRating from "react-native-star-rating";

@@ -5,9 +5,9 @@ import {
   View,
   TouchableOpacity,
   AsyncStorage,
+  ScrollView,
 } from "react-native";
 import axios from "axios";
-import StarRating from "react-native-star-rating";
 
 const Region = ({ route, navigation }) => {
   //Regionlist에서 선택한 지역의 카페 목록을 가져옵니다.
@@ -61,7 +61,7 @@ const Region = ({ route, navigation }) => {
       >
         <Text style={styles.textstyle}>새로운 카페 추가</Text>
       </TouchableOpacity>
-      {cafelist}
+      <ScrollView>{cafelist}</ScrollView>
     </View>
   );
 };
