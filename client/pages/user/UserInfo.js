@@ -18,7 +18,6 @@ export default function UserInfo({ navigation }) {
         style={styles.locationLogo}
         source={require("./UserInfoLogo.png")}
       />
-      {/* <Text style={styles.locationLogo}>Caffeine</Text> */}
       <Signin />
       <Text
         style={{

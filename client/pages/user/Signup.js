@@ -94,21 +94,29 @@ export default function Signup({ navigation }) {
         autoCapitalize="none"
       />
       <View>{renderFeedbackMessage()}</View>
-      <TouchableOpacity
-        onPress={postSignupData}
-        disabled={
-          email === "" ||
-          username === "" ||
-          password === "" ||
-          passwordCheck === ""
-            ? true
-            : false
-        }
+      <View
+        style={{
+          backgroundColor: "#fff",
+          borderRadius: 20,
+          marginTop: 10,
+        }}
       >
-        <Text style={styles.signupStyle}>
-          {passwordCheck === password ? "Sign In" : "Check Password!"}
-        </Text>
-      </TouchableOpacity>
+        <TouchableOpacity
+          onPress={postSignupData}
+          disabled={
+            email === "" ||
+            username === "" ||
+            password === "" ||
+            passwordCheck === ""
+              ? true
+              : false
+          }
+        >
+          <Text style={styles.signupStyle}>
+            {passwordCheck === password ? "Sign Up" : "Check Password!"}
+          </Text>
+        </TouchableOpacity>
+      </View>
     </View>
   );
 }
@@ -116,7 +124,7 @@ export default function Signup({ navigation }) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#fff",
+    backgroundColor: "#FDA118",
     alignItems: "center",
     justifyContent: "center",
   },
@@ -124,7 +132,7 @@ const styles = StyleSheet.create({
     width: 300,
     height: 44,
     marginBottom: 10,
-    borderBottomColor: "black",
+    borderBottomColor: "#fff",
     borderBottomWidth: 1,
   },
   inputext: {
@@ -132,17 +140,16 @@ const styles = StyleSheet.create({
     textAlign: "center",
     fontWeight: "bold",
     marginBottom: 10,
+    color: "#fff",
   },
   signupStyle: {
-    backgroundColor: "aliceblue",
-    width: 303,
-    marginBottom: 20,
-    textAlign: "center",
-    borderColor: "lightsteelblue",
-    borderWidth: 1,
-    borderRadius: 5,
     fontWeight: "bold",
-    marginTop: 20,
+    marginTop: 10,
+    textAlign: "center",
+    fontSize: 15,
+    color: "#FDA118",
+    height: 30,
+    width: 305,
   },
   passwordCheck: {
     color: "red",

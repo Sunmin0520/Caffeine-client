@@ -74,7 +74,7 @@ export default function Signin() {
           width: 300,
           marginBottom: 10,
           backgroundColor: "#F2F2F2",
-          borderRadius: 10,
+          borderRadius: 20,
         }}
       >
         <Image
@@ -99,7 +99,7 @@ export default function Signin() {
           width: 300,
           marginBottom: 10,
           backgroundColor: "#F2F2F2",
-          borderRadius: 10,
+          borderRadius: 20,
         }}
       >
         <Image
@@ -121,7 +121,7 @@ export default function Signin() {
           <View
             style={{
               backgroundColor: "#FDA118",
-              borderRadius: 10,
+              borderRadius: 20,
               marginTop: 10,
             }}
           >
