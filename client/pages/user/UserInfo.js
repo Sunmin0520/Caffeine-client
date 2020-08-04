@@ -67,8 +67,8 @@ const styles = StyleSheet.create({
     backgroundColor: "blue",
   },
   locationLogo: {
-    marginTop: -90,
-    marginBottom: 60,
+    marginTop: 20,
+    marginBottom: 90,
     width: 100,
     height: 100,
   },
