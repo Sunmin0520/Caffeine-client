@@ -8,10 +8,40 @@ import {
   AsyncStorage,
 } from "react-native";
 import axios from "axios";
+import Postcode from "react-native-daum-postcode";
+import { createStackNavigator } from "@react-navigation/stack";
+const MainStack = createStackNavigator();
+
+// const [address, setAddress] = useState("");
+// const pushAddress = () => {
+//   console.log("강준혁");
+//   //console.log(address);
+//   //alert(JSON.stringify(address));
+//   navigation.navigate("Addcafe");
+// };
+// useEffect(() => {
+//   if (address !== "") {
+//     console.log(`우리꺼${address}`);
+//     handleAddress();
+//   }
+// }, [address]);
+
+const ApiScreen = ({ route }) => {
+  return (
+    <View style={{ flex: 1, alignItems: "center", marginTop: 50 }}>
+      <Postcode
+        style={{ width: 400 }}
+        jsOptions={{ animated: true }}
+        onSelected={(data) => {
+          route.params.handleAddress(data);
+        }}
+      />
+    </View>
+  );
+};
 
 const Addcafe = ({ route, navigation }) => {
   //새로운 카페를 등록할 수 있습니다.
-
   const [name, Setname] = useState(null);
   const [address, Setaddress] = useState(null);
   const [sell_beans, Setsell_beans] = useState(true);
@@ -91,6 +121,15 @@ const Addcafe = ({ route, navigation }) => {
     SetNo("#ffa9a3");
     Setsell_beans(false);
   };
+
+  const getapiaddress = (data) => {
+    console.log(data);
+    //const searchAddress = `${data.address} ${data.buildingName}`;
+    setAddress(`${data.address} ${data.buildingName}`);
+    // 필요한 값만 가져옴
+    navigation.navigate("Addcafe");
+  };
+
   useEffect(() => {
     postCafeCall();
   }, []);
@@ -105,12 +144,31 @@ const Addcafe = ({ route, navigation }) => {
         onChangeText={(text) => Setname(text)}
         value={name}
       />
-      <Text style={styles.textstyle}>지역선택</Text>
+      <View
+        style={{
+          flex: 1,
+          justifyContent: "center",
+          alignItems: "center",
+          marginTop: 20,
+        }}
+      >
+        <TouchableOpacity
+          onPress={() => {
+            navigation.navigate("ApiScreen", {
+              handleAddress: (data) => getapiaddress(data),
+            });
+            // getapiaddress();
+          }}
+        >
+          <Text>주소</Text>
+        </TouchableOpacity>
+      </View>
+      <Text style={styles.textstyle}>{address}</Text>
       {RNPickerSelects}
       {/* 주소 입력  */}
       <TextInput
         style={styles.textstyle}
-        placeholder={"주소 테스트"}
+        //placeholder={"주소 테스트"}
         onChangeText={(text) => Setaddress(text)}
         value={address}
       />
@@ -150,6 +208,15 @@ const Addcafe = ({ route, navigation }) => {
   );
 };
 
+function addcafeScreen() {
+  return (
+    <MainStack.Navigator screenOptions={{ headerShown: false }}>
+      <MainStack.Screen name="Addcafe" component={Addcafe} />
+      <MainStack.Screen name="ApiScreen" component={ApiScreen} />
+    </MainStack.Navigator>
+  );
+}
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -164,4 +231,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Addcafe;
+export default addcafeScreen;
