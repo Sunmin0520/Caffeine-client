@@ -98,7 +98,7 @@ const Addcafe = ({ route, navigation }) => {
           headers: {
             Authorization: `Bearer ${value}`,
           },
-        },
+        }
       ) // Serverside진행후 수정예정입니다.
       .then((res) => {
         //status 200 ok
@@ -125,7 +125,7 @@ const Addcafe = ({ route, navigation }) => {
   const getapiaddress = (data) => {
     console.log(data);
     //const searchAddress = `${data.address} ${data.buildingName}`;
-    setAddress(`${data.address} ${data.buildingName}`);
+    Setaddress(`${data.address} ${data.buildingName}`);
     // 필요한 값만 가져옴
     navigation.navigate("Addcafe");
   };
