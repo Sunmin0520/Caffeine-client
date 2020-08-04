@@ -14,19 +14,19 @@ import Signin from "./Signin";
 
 export default function UserInfo({ navigation }) {
   return (
-    <LinearGradient style={styles.container} colors={["#A9FFFA", "#FFD6D3"]}>
-      <Image style={styles.locationLogo} source={require("./logo-white.png")} />
+    <LinearGradient style={styles.container} colors={["#fff", "#fff"]}>
+      <Image style={styles.locationLogo} source={require("./logo2.png")} />
       <Signin />
       <Text
         style={{
           marginBottom: 30,
           marginTop: 30,
-          color: "#00DAA6",
+          color: "black",
           fontWeight: "bold",
           fontSize: 16,
         }}
       >
-        ㅡ or Login with ㅡ
+        ㅡ OR ㅡ
       </Text>
       <View style={{ flexDirection: "row", flexWrap: "wrap" }}>
         <GoogleLogin />
@@ -48,7 +48,7 @@ export default function UserInfo({ navigation }) {
               marginTop: 50,
               marginLeft: 10,
               fontWeight: "bold",
-              color: "#00DAA6",
+              color: "black",
             }}
           >
             Sign Up
@@ -67,9 +67,9 @@ const styles = StyleSheet.create({
     backgroundColor: "blue",
   },
   locationLogo: {
-    marginTop: -110,
-    marginBottom: 50,
-    width: 250,
-    height: 110,
+    marginTop: -90,
+    marginBottom: 60,
+    width: 100,
+    height: 100,
   },
 });
