@@ -27,11 +27,10 @@ const Bookmark = ({ route, navigation }) => {
         },
       })
       .then((res) => {
-        Setbookmarks(
-          res.data.map((el) => {
-            getCafeinfoCall(el);
-          })
-        );
+        let dataArr = Object.entries(res.data);
+        for (let i = 0; i < dataArr[1][1].length; i++) {
+          getCafeinfoCall(dataArr[1][1][i]);
+        }
       });
   };
 
@@ -44,22 +43,26 @@ const Bookmark = ({ route, navigation }) => {
         },
       })
       .then((res) => {
-        console.log("hello", res.data.name);
+        console.log("name", res.data["name"]);
+      })
+      .catch(function (error) {
+        console.log(error); //401{result:"token expired"} 수정예정
+      });
+  };
 
-        res.data.map((result) => {
-          return (
-            <View key={result.updatedAt}>
-              <TouchableOpacity
-                onPress={() => {
-                  navigation.navigate("Cafeinfo", { cafe_id: result.id });
-                }}
-              >
-                <Text style={styles.textstyle}>{result.name}</Text>
-                <Text style={styles.textstyle}>{result.address}</Text>
-              </TouchableOpacity>
-            </View>
-          );
-        });
+  const handleDeleteBookmark = async (bookmark_id) => {
+    const value = await AsyncStorage.getItem("userToken");
+    axios
+      .post(`http://13.125.247.226:3001/cafes/bookmark/${bookmark_id}`, {
+        withCredentials: true,
+        headers: {
+          Authorization: `Bearer ${value}`,
+        },
+      })
+      .then((res) => {
+        //status 200 ok
+        console.log(rating);
+        alert(JSON.stringify(res)); // 수정예정
       })
       .catch(function (error) {
         console.log(error); //401{result:"token expired"} 수정예정
@@ -69,12 +72,12 @@ const Bookmark = ({ route, navigation }) => {
   useEffect(() => {
     getBookmarkcall();
     getCafeinfoCall();
-  }, []);
+  });
 
   return (
     <View style={styles.container}>
       <Text style={styles.textstyle}>북마크 입니다</Text>
-      {bookmarks}
+      {name}
     </View>
   );
 };

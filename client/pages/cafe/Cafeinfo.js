@@ -5,6 +5,7 @@ import {
   View,
   TouchableOpacity,
   AsyncStorage,
+  ScrollView,
 } from "react-native";
 import axios from "axios";
 import * as Linking from "expo-linking";
@@ -47,6 +48,26 @@ const Cafeinfo = ({ route, navigation }) => {
       });
   };
 
+  const postBookmarkCall = async () => {
+    const value = await AsyncStorage.getItem("userToken");
+    axios
+      .post(
+        `http://13.125.247.226:3001/cafes/bookmark/${cafe_id}`,
+        {
+          cafe_id: cafe_id,
+        },
+        {
+          withCredentials: true,
+          headers: {
+            Authorization: `Bearer ${value}`,
+          },
+        }
+      )
+      .catch(function (error) {
+        console.log(error); //401{result:"token expired"} 수정예정
+      });
+  };
+
   const getCafeReviewCall = async () => {
     const value = await AsyncStorage.getItem("userToken");
     axios
@@ -59,7 +80,7 @@ const Cafeinfo = ({ route, navigation }) => {
         return Setreviews(
           res.data.review.map((result) => {
             return (
-              <View key={result.updatedAt}>
+              <View key={result.id}>
                 <Text style={styles.textstyle}>{result.text}</Text>
                 <StarRating
                   disabled={true}
@@ -91,12 +112,13 @@ const Cafeinfo = ({ route, navigation }) => {
         console.log(error); //401{result:"token expired"} 수정예정
       });
   };
-
+  //reviews, rating_average
   useEffect(() => {
     getCafeinfoCall();
     getCafeReviewCall();
     getRatingCall();
-  }, [reviews, rating_average]);
+    postBookmarkCall();
+  }, []);
 
   return (
     <View style={styles.container}>
@@ -117,7 +139,14 @@ const Cafeinfo = ({ route, navigation }) => {
         rating={rating_average}
         fullStarColor={"#FEBF34"}
       />
-      {reviews}
+      <TouchableOpacity
+        onPress={() => {
+          postBookmarkCall();
+        }}
+      >
+        <Text style={styles.textstyle}>북마크 테스트 용 입니다</Text>
+      </TouchableOpacity>
+      <ScrollView>{reviews}</ScrollView>
 
       <TouchableOpacity
         onPress={() => {

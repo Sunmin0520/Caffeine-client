@@ -52,6 +52,13 @@ function Regionlist({ route, navigation }) {
     <View style={styles.container}>
       <Text style={styles.textstyle}>어떤 지역의 카페정보가 궁금하신가요?</Text>
       {city}
+      <TouchableOpacity
+        onPress={() => {
+          navigation.navigate("Bookmark");
+        }}
+      >
+        <Text style={styles.textstyle}>북마크 바로가기</Text>
+      </TouchableOpacity>
     </View>
   );
 }
