@@ -108,7 +108,15 @@ export default function Signin() {
       </View>
       <View>
         <TouchableOpacity onPress={postLoginData}>
-          <Text style={styles.appButtonContainer}>Login</Text>
+          <View
+            style={{
+              backgroundColor: "#FDA118",
+              borderRadius: 10,
+              marginTop: 10,
+            }}
+          >
+            <Text style={styles.appButtonContainer}>Login</Text>
+          </View>
         </TouchableOpacity>
       </View>
     </View>
@@ -118,13 +126,11 @@ export default function Signin() {
 const styles = StyleSheet.create({
   container: {},
   appButtonContainer: {
-    backgroundColor: "#FDA118",
-    borderRadius: 10,
     fontWeight: "bold",
     marginTop: 10,
     textAlign: "center",
-    fontSize: 20,
+    fontSize: 15,
     color: "#fff",
-    height: 32,
+    height: 30,
   },
 });
