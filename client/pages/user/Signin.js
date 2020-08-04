@@ -69,20 +69,14 @@ export default function Signin() {
         style={{
           flexDirection: "row",
           alignItems: "center",
-          // backgroundColor: "#fff",
           height: 40,
           width: 300,
           marginBottom: 10,
           backgroundColor: "#fff",
-          borderRadius: 20,
+          borderColor: "black",
+          borderBottomWidth: 1,
         }}
       >
-        <Image
-          style={{
-            margin: 5,
-          }}
-          source={require("./user.png")}
-        />
         <TextInput
           label="Email"
           placeholder="  Email"
@@ -94,20 +88,14 @@ export default function Signin() {
         style={{
           flexDirection: "row",
           alignItems: "center",
-          // backgroundColor: "#fff",
           height: 40,
           width: 300,
           marginBottom: 10,
           backgroundColor: "#fff",
-          borderRadius: 20,
+          borderColor: "black",
+          borderBottomWidth: 1,
         }}
       >
-        <Image
-          style={{
-            margin: 5,
-          }}
-          source={require("./lock.png")}
-        />
         <TextInput
           label="Password"
           placeholder="  Password"
@@ -120,11 +108,9 @@ export default function Signin() {
         <TouchableOpacity onPress={postLoginData}>
           <View
             style={{
-              backgroundColor: "#7BE3D1",
-              borderRadius: 20,
+              backgroundColor: "#E0DDDC",
+              borderRadius: 10,
               marginTop: 10,
-              borderColor: "#fff",
-              borderWidth: 1.5,
             }}
           >
             <Text style={styles.appButtonContainer}>Login</Text>
@@ -142,7 +128,7 @@ const styles = StyleSheet.create({
     marginTop: 10,
     textAlign: "center",
     fontSize: 15,
-    color: "#fff",
+    color: "black",
     height: 30,
   },
 });

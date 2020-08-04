@@ -1,4 +1,3 @@
-//test
 import React, { useState } from "react";
 import {
   Text,
@@ -62,8 +61,8 @@ export default function Signup({ navigation }) {
   };
 
   return (
-    <LinearGradient style={styles.container} colors={["#FFD6D3", "#A9FFFA"]}>
-      <Image style={styles.locationLogo} source={require("./logo-white.png")} />
+    <LinearGradient style={styles.container} colors={["#fff", "#fff"]}>
+      <Image style={styles.locationLogo} source={require("./logo2.png")} />
       <TextInput
         label="Email"
         placeholder="   Email"
@@ -97,8 +96,8 @@ export default function Signup({ navigation }) {
       <View>{renderFeedbackMessage()}</View>
       <View
         style={{
-          backgroundColor: "#F09783",
-          borderRadius: 20,
+          backgroundColor: "#E0DDDC",
+          borderRadius: 10,
           marginTop: 10,
           borderColor: "#fff",
           borderWidth: 1.5,
@@ -135,7 +134,7 @@ const styles = StyleSheet.create({
     width: 300,
     height: 44,
     marginBottom: 10,
-    borderBottomColor: "#F09783",
+    borderBottomColor: "black",
     borderBottomWidth: 1,
   },
   inputext: {
@@ -150,7 +149,7 @@ const styles = StyleSheet.create({
     marginTop: 10,
     textAlign: "center",
     fontSize: 15,
-    color: "#fff",
+    color: "black",
     height: 30,
     width: 305,
   },
@@ -159,9 +158,9 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
   },
   locationLogo: {
-    marginTop: -180,
-    marginBottom: 70,
-    width: 250,
-    height: 110,
+    marginTop: -90,
+    marginBottom: 60,
+    width: 100,
+    height: 100,
   },
 });
