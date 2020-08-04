@@ -43,11 +43,20 @@ const Bookmark = ({ route, navigation }) => {
         },
       })
       .then((res) => {
-        console.log("name", res.data["name"]);
+        console.log(res.data);
       })
       .catch(function (error) {
         console.log(error); //401{result:"token expired"} 수정예정
       });
+  };
+
+  const makeList = ({ name, address }) => {
+    return (
+      <View>
+        <Text>{name}</Text>
+        <Text>{address}</Text>
+      </View>
+    );
   };
 
   const handleDeleteBookmark = async (bookmark_id) => {
@@ -72,12 +81,12 @@ const Bookmark = ({ route, navigation }) => {
   useEffect(() => {
     getBookmarkcall();
     getCafeinfoCall();
-  });
+  }, []);
 
   return (
     <View style={styles.container}>
       <Text style={styles.textstyle}>북마크 입니다</Text>
-      {name}
+      {makeList}
     </View>
   );
 };
