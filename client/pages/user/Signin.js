@@ -68,42 +68,52 @@ export default function Signin() {
       <View
         style={{
           flexDirection: "row",
-          flexWrap: "wrap",
+          alignItems: "center",
+          backgroundColor: "#fff",
+          height: 40,
+          width: 300,
+          marginBottom: 10,
+          backgroundColor: "#F2F2F2",
+          borderRadius: 10,
         }}
       >
+        <Image
+          style={{
+            margin: 5,
+          }}
+          source={require("./user.png")}
+        />
         <TextInput
           label="Email"
           placeholder="  Email"
           onChangeText={(email) => setEmail(email)}
           autoCapitalize="none"
-          style={{
-            width: 300,
-            height: 44,
-            marginBottom: 10,
-            backgroundColor: "#F2F2F2",
-            borderRadius: 10,
-          }}
         ></TextInput>
       </View>
       <View
         style={{
           flexDirection: "row",
-          flexWrap: "wrap",
+          alignItems: "center",
+          backgroundColor: "#fff",
+          height: 40,
+          width: 300,
+          marginBottom: 10,
+          backgroundColor: "#F2F2F2",
+          borderRadius: 10,
         }}
       >
+        <Image
+          style={{
+            margin: 5,
+          }}
+          source={require("./lock.png")}
+        />
         <TextInput
           label="Password"
           placeholder="  Password"
           secureTextEntry={true}
           onChangeText={(password) => setPassword(password)}
           autoCapitalize="none"
-          style={{
-            width: 300,
-            height: 44,
-            marginBottom: 10,
-            backgroundColor: "#F2F2F2",
-            borderRadius: 10,
-          }}
         ></TextInput>
       </View>
       <View>
