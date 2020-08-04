@@ -22,29 +22,35 @@ export default function Signin({ navigation }) {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.inputext}>Main</Text>
+      {/* <Text style={styles.inputext}>Main</Text> */}
       <TouchableOpacity
         onPress={() => {
           navigation.navigate("Regionlist");
         }}
       >
         <LinearGradient
-          colors={["#FBD786", "#FBD786"]}
+          colors={["#FAFFC6", "#FAFFC6"]}
           style={{
             padding: 10,
             alignItems: "center",
             borderRadius: 10,
             marginBottom: 20,
             width: 300,
+            flexDirection: "row",
+            flexWrap: "wrap",
           }}
         >
-          <Image source={require("./signboard.png")} />
+          <Image
+            style={{ marginLeft: 50 }}
+            source={require("./signboard.png")}
+          />
           <Text
             style={{
               backgroundColor: "transparent",
-              fontSize: 15,
-              color: "#fff",
+              fontSize: 20,
+              color: "#4B2000",
               fontWeight: "bold",
+              marginLeft: 25,
             }}
           >
             카페 찾기
@@ -57,22 +63,28 @@ export default function Signin({ navigation }) {
         }}
       >
         <LinearGradient
-          colors={["#FBD786", "#FBD786"]}
+          colors={["#984000", "#984000"]}
           style={{
             padding: 10,
             alignItems: "center",
             borderRadius: 10,
             marginBottom: 20,
             width: 300,
+            flexDirection: "row",
+            flexWrap: "wrap",
           }}
         >
-          <Image source={require("./coffee-shop.png")} />
+          <Image
+            style={{ marginLeft: 50 }}
+            source={require("./coffee-shop.png")}
+          />
           <Text
             style={{
               backgroundColor: "transparent",
-              fontSize: 15,
+              fontSize: 20,
               color: "#fff",
               fontWeight: "bold",
+              marginLeft: 25,
             }}
           >
             원두 기록
