@@ -7,24 +7,21 @@ import {
   Image,
   TextInput,
 } from "react-native";
+import { LinearGradient } from "expo-linear-gradient";
 import GoogleLogin from "./GoogleLogin";
 import FacebookLogin from "./FackbookLogin";
 import Signin from "./Signin";
 
 export default function UserInfo({ navigation }) {
   return (
-    <View style={styles.container}>
-      <Image
-        style={styles.locationLogo}
-        source={require("./UserInfoLogo.png")}
-      />
-      {/* <Text style={styles.locationLogo}>Caffeine</Text> */}
+    <LinearGradient style={styles.container} colors={["#A9FFFA", "#FFD6D3"]}>
+      <Image style={styles.locationLogo} source={require("./logo-white.png")} />
       <Signin />
       <Text
         style={{
           marginBottom: 30,
           marginTop: 30,
-          color: "#FDA118",
+          color: "#00DAA6",
           fontWeight: "bold",
           fontSize: 16,
         }}
@@ -41,7 +38,7 @@ export default function UserInfo({ navigation }) {
             style={{
               marginTop: 50,
               textAlign: "center",
-              color: "#D8D8D8",
+              color: "#A4A4A4",
             }}
           >
             Dont have an account?
@@ -51,14 +48,14 @@ export default function UserInfo({ navigation }) {
               marginTop: 50,
               marginLeft: 10,
               fontWeight: "bold",
-              color: "#FDA118",
+              color: "#00DAA6",
             }}
           >
             Sign Up
           </Text>
         </View>
       </TouchableOpacity>
-    </View>
+    </LinearGradient>
   );
 }
 
@@ -67,12 +64,12 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: "center",
     justifyContent: "center",
-    backgroundColor: "#FFF",
+    backgroundColor: "blue",
   },
   locationLogo: {
-    marginTop: -90,
-    marginBottom: 70,
+    marginTop: -110,
+    marginBottom: 50,
     width: 250,
-    height: 78,
+    height: 110,
   },
 });

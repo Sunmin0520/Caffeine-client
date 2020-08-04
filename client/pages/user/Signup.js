@@ -2,13 +2,14 @@
 import React, { useState } from "react";
 import {
   Text,
-  Button,
+  Image,
   View,
   StyleSheet,
   TextInput,
   TouchableOpacity,
 } from "react-native";
 import axios from "axios";
+import { LinearGradient } from "expo-linear-gradient";
 
 export default function Signup({ navigation }) {
   const [email, setEmail] = useState(""); // 이메일 인풋값 핸들링
@@ -61,8 +62,8 @@ export default function Signup({ navigation }) {
   };
 
   return (
-    <View style={styles.container}>
-      <Text style={styles.inputext}>회원가입 페이지</Text>
+    <LinearGradient style={styles.container} colors={["#FFD6D3", "#A9FFFA"]}>
+      <Image style={styles.locationLogo} source={require("./logo-white.png")} />
       <TextInput
         label="Email"
         placeholder="   Email"
@@ -94,29 +95,39 @@ export default function Signup({ navigation }) {
         autoCapitalize="none"
       />
       <View>{renderFeedbackMessage()}</View>
-      <TouchableOpacity
-        onPress={postSignupData}
-        disabled={
-          email === "" ||
-          username === "" ||
-          password === "" ||
-          passwordCheck === ""
-            ? true
-            : false
-        }
+      <View
+        style={{
+          backgroundColor: "#F09783",
+          borderRadius: 20,
+          marginTop: 10,
+          borderColor: "#fff",
+          borderWidth: 1.5,
+        }}
       >
-        <Text style={styles.signupStyle}>
-          {passwordCheck === password ? "Sign In" : "Check Password!"}
-        </Text>
-      </TouchableOpacity>
-    </View>
+        <TouchableOpacity
+          onPress={postSignupData}
+          disabled={
+            email === "" ||
+            username === "" ||
+            password === "" ||
+            passwordCheck === ""
+              ? true
+              : false
+          }
+        >
+          <Text style={styles.signupStyle}>
+            {passwordCheck === password ? "Sign Up" : "Check Password!"}
+          </Text>
+        </TouchableOpacity>
+      </View>
+    </LinearGradient>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#fff",
+    backgroundColor: "#FDA118",
     alignItems: "center",
     justifyContent: "center",
   },
@@ -124,7 +135,7 @@ const styles = StyleSheet.create({
     width: 300,
     height: 44,
     marginBottom: 10,
-    borderBottomColor: "black",
+    borderBottomColor: "#F09783",
     borderBottomWidth: 1,
   },
   inputext: {
@@ -132,20 +143,25 @@ const styles = StyleSheet.create({
     textAlign: "center",
     fontWeight: "bold",
     marginBottom: 10,
+    color: "#fff",
   },
   signupStyle: {
-    backgroundColor: "aliceblue",
-    width: 303,
-    marginBottom: 20,
-    textAlign: "center",
-    borderColor: "lightsteelblue",
-    borderWidth: 1,
-    borderRadius: 5,
     fontWeight: "bold",
-    marginTop: 20,
+    marginTop: 10,
+    textAlign: "center",
+    fontSize: 15,
+    color: "#fff",
+    height: 30,
+    width: 305,
   },
   passwordCheck: {
     color: "red",
     fontWeight: "bold",
+  },
+  locationLogo: {
+    marginTop: -180,
+    marginBottom: 70,
+    width: 250,
+    height: 110,
   },
 });
