@@ -80,7 +80,7 @@ const Noteinfo = ({ navigation, route }) => {
       <Text>{mall}</Text>
       <Text>{price}</Text>
       <Text>{feature}</Text>
-      <Text>{flavor}</Text>
+      {/* <Text>{flavor}</Text> */}
       {/* {console.log(arrayflavor)} */}
       <View style={styles.container}>
         {arrayflavor
@@ -116,7 +116,7 @@ const Noteinfo = ({ navigation, route }) => {
       <TouchableOpacity
         style={styles.button}
         onPress={() =>
-          navigation.navigate("Modifynote", {
+          navigation.replace("Modifynote", {
             note_id: note_id,
             name: name,
             origin: origin,
@@ -124,6 +124,7 @@ const Noteinfo = ({ navigation, route }) => {
             price: price,
             feature: feature,
             rating: rating,
+            flavor: flavor,
           })
         }
       >
