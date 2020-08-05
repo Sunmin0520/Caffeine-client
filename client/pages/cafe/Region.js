@@ -48,7 +48,7 @@ const Region = ({ route, navigation }) => {
 
   useEffect(() => {
     getCafelistCall();
-  }, []);
+  });
 
   return (
     <View style={styles.container}>
