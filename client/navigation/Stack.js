@@ -27,12 +27,8 @@ export default () => (
   //screenOptions는 모든 screen에 대한 style을 정할 수있다.
   <Stack.Navigator
     screenOptions={{
-      headerStyle: {
-        backgroundColor: "#F8F8F5",
-        borderBottomColor: "#F8F8F5",
-        shadowColor: "#F8F8F5",
-      },
-      headerTintColor: "black",
+      headerStyle: {},
+      headerTintColor: "#fff",
       headerBackTitleVisible: false,
     }}
   >

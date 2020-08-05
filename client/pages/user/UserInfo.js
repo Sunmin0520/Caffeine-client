@@ -15,18 +15,18 @@ import Signin from "./Signin";
 export default function UserInfo({ navigation }) {
   return (
     <LinearGradient style={styles.container} colors={["#fff", "#fff"]}>
-      <Image style={styles.locationLogo} source={require("./logo2.png")} />
+      <Image style={styles.locationLogo} source={require("./D.png")} />
       <Signin />
       <Text
         style={{
-          marginBottom: 30,
-          marginTop: 30,
+          marginBottom: 25,
+          marginTop: 25,
           color: "black",
           fontWeight: "bold",
-          fontSize: 16,
+          fontSize: 15,
         }}
       >
-        ㅡ OR ㅡ
+        간편 로그인
       </Text>
       <View style={{ flexDirection: "row", flexWrap: "wrap" }}>
         <GoogleLogin />
@@ -41,7 +41,7 @@ export default function UserInfo({ navigation }) {
               color: "#A4A4A4",
             }}
           >
-            Dont have an account?
+            아직 회원이 아니신가요?
           </Text>
           <Text
             style={{
@@ -51,7 +51,7 @@ export default function UserInfo({ navigation }) {
               color: "black",
             }}
           >
-            Sign Up
+            회원가입
           </Text>
         </View>
       </TouchableOpacity>
@@ -67,9 +67,7 @@ const styles = StyleSheet.create({
     backgroundColor: "blue",
   },
   locationLogo: {
-    marginTop: 20,
+    marginTop: -100,
     marginBottom: 90,
-    width: 100,
-    height: 100,
   },
 });

@@ -51,10 +51,8 @@ function GoogleLogin() {
           style={{
             padding: 10,
             alignItems: "center",
-            borderRadius: 10,
             width: 140,
             flexDirection: "row",
-            flexWrap: "wrap",
             borderColor: "#DDDDDD",
             borderWidth: 1,
             marginRight: 20,
@@ -66,7 +64,8 @@ function GoogleLogin() {
             style={{
               fontSize: 15,
               marginLeft: 10,
-              color: "#EA3B3B",
+              color: "#FE3333",
+              fontWeight: "bold",
             }}
           >
             Google

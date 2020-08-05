@@ -29,7 +29,6 @@ function FacebookLogin() {
         permissions: ["public_profile"],
       });
       if (type === "success") {
-        // Get the user's name using Facebook's Graph API
         const _storeData = async () => {
           try {
             await AsyncStorage.setItem("userToken", token);
@@ -43,7 +42,6 @@ function FacebookLogin() {
           `https://graph.facebook.com/me?access_token=${token}`
         );
       } else {
-        // type === 'cancel'
       }
     } catch ({ message }) {
       alert(`Facebook Login Error: ${message}`);
@@ -58,10 +56,8 @@ function FacebookLogin() {
           style={{
             padding: 10,
             alignItems: "center",
-            borderRadius: 10,
             width: 140,
             flexDirection: "row",
-            flexWrap: "wrap",
             borderColor: "#DDDDDD",
             borderWidth: 1,
             marginRight: 20,
@@ -76,6 +72,7 @@ function FacebookLogin() {
               fontSize: 15,
               color: "#4667BE",
               marginLeft: 10,
+              fontWeight: "bold",
             }}
           >
             Facebook
