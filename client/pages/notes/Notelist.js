@@ -38,6 +38,9 @@ const Notelist = ({ navigation }) => {
 
   useEffect(() => {
     getNoteList();
+    navigation.addListener("focus", () => {
+      getNoteList();
+    });
   }, []);
 
   return (
