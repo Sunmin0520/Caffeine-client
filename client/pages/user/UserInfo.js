@@ -1,31 +1,75 @@
-import React, { useState } from "react";
-import { Text, Button, View, StyleSheet, TextInput } from "react-native";
+import React from "react";
+import {
+  Text,
+  View,
+  StyleSheet,
+  TouchableOpacity,
+  Image,
+  TextInput,
+} from "react-native";
+import { LinearGradient } from "expo-linear-gradient";
 import GoogleLogin from "./GoogleLogin";
 import FacebookLogin from "./FackbookLogin";
+import Signin from "./Signin";
 
 export default function UserInfo({ navigation }) {
   return (
-    <View style={styles.container}>
-      <GoogleLogin />
-      <FacebookLogin />
-      <Button
-        title="등록된 이메일로 로그인"
-        onPress={() => {
-          navigation.navigate("Signin");
+    <LinearGradient style={styles.container} colors={["#fff", "#fff"]}>
+      <Image style={styles.locationLogo} source={require("./logo2.png")} />
+      <Signin />
+      <Text
+        style={{
+          marginBottom: 30,
+          marginTop: 30,
+          color: "black",
+          fontWeight: "bold",
+          fontSize: 16,
         }}
-      ></Button>
-      <Text onPress={() => navigation.navigate("Signup")}>
-        아직 회원이 아니신가요? 회원가입
+      >
+        ㅡ OR ㅡ
       </Text>
-    </View>
+      <View style={{ flexDirection: "row", flexWrap: "wrap" }}>
+        <GoogleLogin />
+        <FacebookLogin />
+      </View>
+      <TouchableOpacity onPress={() => navigation.navigate("Signup")}>
+        <View style={{ flexDirection: "row", flexWrap: "wrap" }}>
+          <Text
+            style={{
+              marginTop: 50,
+              textAlign: "center",
+              color: "#A4A4A4",
+            }}
+          >
+            Dont have an account?
+          </Text>
+          <Text
+            style={{
+              marginTop: 50,
+              marginLeft: 10,
+              fontWeight: "bold",
+              color: "black",
+            }}
+          >
+            Sign Up
+          </Text>
+        </View>
+      </TouchableOpacity>
+    </LinearGradient>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#fff",
     alignItems: "center",
     justifyContent: "center",
+    backgroundColor: "blue",
+  },
+  locationLogo: {
+    marginTop: 20,
+    marginBottom: 90,
+    width: 100,
+    height: 100,
   },
 });

@@ -19,8 +19,10 @@
     "expo-google-app-auth": "^8.1.2",
     "expo-status-bar": "^1.0.2",
     "react": "~16.11.0",
+    "react-daum-postcode": "^1.9.0",
     "react-dom": "~16.11.0",
     "react-native": "https://github.com/expo/react-native/archive/sdk-38.0.2.tar.gz",
+    "react-native-daum-postcode": "^1.0.9",
     "react-native-gesture-handler": "~1.6.0",
     "react-native-navigation": "^6.9.1",
     "react-native-picker-select": "^7.0.0",
@@ -29,8 +31,10 @@
     "react-native-screens": "~2.9.0",
     "react-native-star-rating": "^1.1.0",
     "react-native-web": "~0.11.7",
+    "react-native-webview": "^10.3.3",
     "react-navigation": "^4.4.0",
-    "redux": "^4.0.5"
+    "redux": "^4.0.5",
+    "expo-linear-gradient": "~8.2.1"
   },
   "devDependencies": {
     "@babel/core": "^7.8.6",

@@ -6,7 +6,6 @@ import {
   TouchableOpacity,
   TextInput,
   AsyncStorage,
-  ScrollView,
 } from "react-native";
 import axios from "axios";
 import StarRating from "react-native-star-rating";
@@ -32,12 +31,16 @@ const Addreview = ({ route, navigation }) => {
         }
       )
       .then((res) => {
-        //status 200 ok
-        console.log(rating);
-        alert(JSON.stringify(res)); // 수정예정
+        alert("리뷰 등록되었습니다!"); // 수정예정
       })
       .catch(function (error) {
-        console.log(error); //401{result:"token expired"} 수정예정
+        if (error.response.status === 404) {
+          return alert("리뷰를 등록할 수 없습니다. 재시도 해주세요.");
+        } else if (error.response.status === 401) {
+          return alert(
+            "정상적인 접근이 아닙니다. 로그아웃 후 다시 로그인 해주세요"
+          );
+        }
       });
   };
 

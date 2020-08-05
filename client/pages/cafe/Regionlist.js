@@ -40,7 +40,13 @@ function Regionlist({ route, navigation }) {
         );
       })
       .catch(function (error) {
-        console.log(error); //401{result:"token expired"} 수정예정
+        if (error.response.status === 404) {
+          return alert("지역 목록을 불러올 수 없습니다");
+        } else if (error.response.status === 401) {
+          return alert(
+            "정상적인 접근이 아닙니다. 로그아웃 후 다시 로그인 해주세요"
+          );
+        }
       });
   };
 
@@ -57,7 +63,7 @@ function Regionlist({ route, navigation }) {
           navigation.navigate("Bookmark");
         }}
       >
-        <Text style={styles.textstyle}>북마크 바로가기</Text>
+        <Text style={styles.textstyle}>북마크 바로가기(공사중)</Text>
       </TouchableOpacity>
     </View>
   );

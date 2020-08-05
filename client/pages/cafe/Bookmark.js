@@ -5,7 +5,7 @@ import {
   View,
   TouchableOpacity,
   AsyncStorage,
-  ScrollView,
+  Button,
 } from "react-native";
 import axios from "axios";
 
@@ -13,7 +13,7 @@ const Bookmark = ({ route, navigation }) => {
   //Regionlist에서 선택한 지역의 카페 목록을 가져옵니다.
 
   const [cafe_id, Setcafe_id] = useState(null);
-  const [bookmarks, Setbookmarks] = useState(null);
+  const [bookmarks, Setbookmarks] = useState([]);
   const [name, Setname] = useState(null);
   const [address, Setaddress] = useState(null);
 
@@ -21,9 +21,10 @@ const Bookmark = ({ route, navigation }) => {
     //get cafes table
     const value = await AsyncStorage.getItem("userToken");
     axios
-      .get(`http://13.125.247.226:3001/cafes/bookmark/all`, {
+      .get("http://13.125.247.226:3001/cafes/bookmark/all", {
         headers: {
           Authorization: `Bearer ${value}`,
+          Bookmark,
         },
       })
       .then((res) => {
@@ -31,6 +32,9 @@ const Bookmark = ({ route, navigation }) => {
         for (let i = 0; i < dataArr[1][1].length; i++) {
           getCafeinfoCall(dataArr[1][1][i]);
         }
+      })
+      .catch(function (error) {
+        console.log(error); //401{result:"token expired"} 수정예정
       });
   };
 
@@ -43,35 +47,24 @@ const Bookmark = ({ route, navigation }) => {
         },
       })
       .then((res) => {
-        console.log(res.data);
+        // console.log(res.data);
+        // for (let key in res.data) {
+        //   console.log(res.data[key]);
+        // }
       })
       .catch(function (error) {
         console.log(error); //401{result:"token expired"} 수정예정
       });
   };
 
-  const makeList = ({ name, address }) => {
-    return (
-      <View>
-        <Text>{name}</Text>
-        <Text>{address}</Text>
-      </View>
-    );
-  };
-
   const handleDeleteBookmark = async (bookmark_id) => {
     const value = await AsyncStorage.getItem("userToken");
     axios
-      .post(`http://13.125.247.226:3001/cafes/bookmark/${bookmark_id}`, {
+      .delete(`http://13.125.247.226:3001/cafes/bookmark/${bookmark_id}`, {
         withCredentials: true,
         headers: {
           Authorization: `Bearer ${value}`,
         },
-      })
-      .then((res) => {
-        //status 200 ok
-        console.log(rating);
-        alert(JSON.stringify(res)); // 수정예정
       })
       .catch(function (error) {
         console.log(error); //401{result:"token expired"} 수정예정
@@ -86,7 +79,6 @@ const Bookmark = ({ route, navigation }) => {
   return (
     <View style={styles.container}>
       <Text style={styles.textstyle}>북마크 입니다</Text>
-      {makeList}
     </View>
   );
 };

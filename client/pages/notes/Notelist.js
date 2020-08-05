@@ -23,12 +23,12 @@ const Notelist = ({ navigation }) => {
         },
       })
       .then((res) => {
-        console.log(res.data);
+        //console.log(res.data);
 
         setNoteListUp(
           res.data.map((result) => {
             return result;
-          }),
+          })
         );
       })
       .catch((err) => {
@@ -63,13 +63,15 @@ const Notelist = ({ navigation }) => {
           <TouchableOpacity
             onPress={() => {
               navigation.navigate("Noteinfo", {
+                note_id: listup.id,
                 user_id: listup.user_id,
-                name: listup.name,
-                origin: listup.origin,
-                mall: listup.mall,
-                price: listup.price,
-                feature: listup.feature,
-                rating: listup.rating,
+                // name: listup.name,
+                // origin: listup.origin,
+                // flavor: listup.flavor,
+                // mall: listup.mall,
+                // price: listup.price,
+                // feature: listup.feature,
+                // rating: listup.rating,
               });
             }}
           >
