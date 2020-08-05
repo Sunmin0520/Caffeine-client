@@ -22,75 +22,74 @@ export default function Signin({ navigation }) {
 
   return (
     <View style={styles.container}>
-      {/* <Text style={styles.inputext}>Main</Text> */}
+      <Text
+        style={{
+          borderBottomColor: "black",
+          borderBottomWidth: 1,
+          marginBottom: 10,
+          fontWeight: "bold",
+          fontSize: 20,
+        }}
+      >
+        카페 찾기
+      </Text>
       <TouchableOpacity
         onPress={() => {
           navigation.navigate("Regionlist");
         }}
       >
         <LinearGradient
-          colors={["#FAFFC6", "#FAFFC6"]}
+          colors={["#622300", "#622300"]}
           style={{
-            padding: 10,
             alignItems: "center",
-            borderRadius: 10,
-            marginBottom: 20,
-            width: 300,
-            flexDirection: "row",
-            flexWrap: "wrap",
+            borderRadius: 100,
+            marginBottom: 10,
+            padding: 5,
           }}
         >
           <Image
-            style={{ marginLeft: 50 }}
-            source={require("./signboard.png")}
+            style={{ width: 100, height: 100 }}
+            source={require("./cafe.png")}
           />
-          <Text
-            style={{
-              backgroundColor: "transparent",
-              fontSize: 20,
-              color: "#4B2000",
-              fontWeight: "bold",
-              marginLeft: 25,
-            }}
-          >
-            카페 찾기
-          </Text>
         </LinearGradient>
       </TouchableOpacity>
+      <Text
+        style={{ marginBottom: 50, fontWeight: "bold" }}
+      >{`나만 알고싶은 카페
+      찜꽁빵꽁`}</Text>
+      <Text
+        style={{
+          borderBottomColor: "black",
+          borderBottomWidth: 1,
+          marginBottom: 10,
+          fontWeight: "bold",
+          fontSize: 20,
+        }}
+      >
+        원두 기록
+      </Text>
       <TouchableOpacity
         onPress={() => {
           navigation.navigate("Notelist");
         }}
       >
         <LinearGradient
-          colors={["#984000", "#984000"]}
+          colors={["#622300", "#622300"]}
           style={{
-            padding: 10,
             alignItems: "center",
-            borderRadius: 10,
-            marginBottom: 20,
-            width: 300,
-            flexDirection: "row",
-            flexWrap: "wrap",
+            borderRadius: 100,
+            marginBottom: 10,
+            padding: 5,
           }}
         >
           <Image
-            style={{ marginLeft: 50 }}
-            source={require("./coffee-shop.png")}
+            style={{ width: 100, height: 100 }}
+            source={require("./beans.png")}
           />
-          <Text
-            style={{
-              backgroundColor: "transparent",
-              fontSize: 20,
-              color: "#fff",
-              fontWeight: "bold",
-              marginLeft: 25,
-            }}
-          >
-            원두 기록
-          </Text>
         </LinearGradient>
       </TouchableOpacity>
+      <Text style={{ fontWeight: "bold" }}>{`나만의 커피 콩콩콩을
+      확인하세요!`}</Text>
     </View>
   );
 }

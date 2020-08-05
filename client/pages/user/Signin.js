@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import {
   Text,
-  Button,
+  CheckBox,
   View,
   StyleSheet,
   TextInput,
@@ -16,6 +16,7 @@ export default function Signin() {
   const [isLogin, setIsLogin] = useState(false); // 로그인 핸들링
   const [email, setEmail] = useState(""); // 이메일 인풋값 핸들링
   const [password, setPassword] = useState(""); // 패스워드 인풋값 핸들링
+  const [isSelected, setSelection] = useState(true); // 주의! 펄스로 바꿔줘야함
 
   const navigation = useNavigation();
 
@@ -73,13 +74,13 @@ export default function Signin() {
           width: 300,
           marginBottom: 10,
           backgroundColor: "#fff",
-          borderColor: "black",
+          borderColor: "#A0A0A0",
           borderBottomWidth: 1,
         }}
       >
         <TextInput
           label="Email"
-          placeholder="  Email"
+          placeholder="  아이디"
           onChangeText={(email) => setEmail(email)}
           autoCapitalize="none"
         ></TextInput>
@@ -92,28 +93,33 @@ export default function Signin() {
           width: 300,
           marginBottom: 10,
           backgroundColor: "#fff",
-          borderColor: "black",
+          borderColor: "#A0A0A0",
           borderBottomWidth: 1,
         }}
       >
         <TextInput
           label="Password"
-          placeholder="  Password"
+          placeholder="  비밀번호"
           secureTextEntry={true}
           onChangeText={(password) => setPassword(password)}
           autoCapitalize="none"
         ></TextInput>
       </View>
+      {/* 주의! 주석 풀어야함*/}
+      {/* <View style={{ flexDirection: "row" }}>
+        <CheckBox value={isSelected} onValueChange={setSelection} />
+        <Text style={{ marginTop: 5, fontWeight: "bold" }}>자동 로그인</Text>
+      </View> */}
       <View>
-        <TouchableOpacity onPress={postLoginData}>
-          <View
-            style={{
-              backgroundColor: "#E0DDDC",
-              borderRadius: 10,
-              marginTop: 10,
-            }}
-          >
-            <Text style={styles.appButtonContainer}>Login</Text>
+        <TouchableOpacity
+          // 주의! 주석 풀어야함
+          // disabled={isSelected ? false : true}
+          onPress={postLoginData}
+        >
+          <View style={isSelected ? styles.loginBtTrun : styles.loginBtFalse}>
+            <Text style={styles.appButtonContainer}>
+              {isSelected ? "로그인" : "자동 로그인을 체크하세요"}
+            </Text>
           </View>
         </TouchableOpacity>
       </View>
@@ -128,7 +134,15 @@ const styles = StyleSheet.create({
     marginTop: 10,
     textAlign: "center",
     fontSize: 15,
-    color: "black",
+    color: "#fff",
     height: 30,
+  },
+  loginBtTrun: {
+    backgroundColor: "#939393",
+    marginTop: 10,
+  },
+  loginBtFalse: {
+    backgroundColor: "#C8C8C8",
+    marginTop: 10,
   },
 });
