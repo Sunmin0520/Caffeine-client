@@ -11,38 +11,24 @@ import {
 import StarRating from "react-native-star-rating";
 import axios from "axios";
 
-// const getflavor = () => {
-//   axios
-//     .get("http://localhost:3001/flavors")
-//     .then((res) => {
-//       console.log(res);
-//     })
-//     .catch((err) => {
-//       console.log(err);
-//     });
-// };
-
 const Addnote = ({ navigation, route }) => {
-  //const user_id = route.params.user_id;
-
-  const [lemonColor, onchangelemonColor] = useState("#F8F8F5");
-  const [grapeColor, onchangegrapeColor] = useState("#F8F8F5");
-  const [appleColor, onchangeappleColor] = useState("#F8F8F5");
-  const [pressed, onchangepressed] = useState(false);
-  const [grapepressed, onchangegrapepressed] = useState(false);
-  const [applepressed, onchangeapplepressed] = useState(false);
   const [name, onChangeName] = useState("");
   const [origin, onChangeOrigin] = useState("");
   const [mall, onChangeMall] = useState("");
-  const [price, onChangePrice] = useState(0);
+  const [price, onChangePrice] = useState("");
   const [feature, onChangeFeature] = useState("");
   const [rating, onChangeRating] = useState(0);
-  //const [flavor, onChangeFlavor] = useState([]);
   const [flavor, onChangeFlavor] = useState([]);
+  const [arrayflavor, setarrayflavor] = useState([]);
 
-  //const id = route.params.user_id;
-
-  const myNoteFlavor = [];
+  const handleFlavorColor = (data) => {
+    //data는 flavor의 id값
+    if (flavor.includes(data)) {
+      return true;
+    } else {
+      return false;
+    }
+  };
 
   function onCheckboxBtnClick(selectedNum) {
     const index = flavor.indexOf(selectedNum);
@@ -53,35 +39,6 @@ const Addnote = ({ navigation, route }) => {
     }
     onChangeFlavor([...flavor]);
   }
-  const changeLemonColor = () => {
-    if (!pressed) {
-      onchangelemonColor("yellow");
-      onchangepressed(true);
-    } else {
-      onchangelemonColor("#F8F8F5");
-      onchangepressed(false);
-    }
-  };
-
-  const changeAppleColor = () => {
-    if (!applepressed) {
-      onchangeappleColor("red");
-      onchangeapplepressed(true);
-    } else {
-      onchangeappleColor("#F8F8F5");
-      onchangeapplepressed(false);
-    }
-  };
-
-  const changeGrapeColor = () => {
-    if (!grapepressed) {
-      onchangegrapeColor("#806B98");
-      onchangegrapepressed(true);
-    } else {
-      onchangegrapeColor("#F8F8F5");
-      onchangegrapepressed(false);
-    }
-  };
 
   const postAddnote = async () => {
     const value = await AsyncStorage.getItem("userToken");
@@ -115,9 +72,27 @@ const Addnote = ({ navigation, route }) => {
       });
   };
 
-  // useEffect(() => {
-  //   getflavor();
-  // });
+  const getflavorinfo = async () => {
+    const value = await AsyncStorage.getItem("userToken");
+    axios
+      .get(`http://13.125.247.226:3001/notes/flavor/all`, {
+        headers: {
+          Authorization: `Bearer ${value}`,
+        },
+      })
+      .then((res) => {
+        //console.log(res.data);
+
+        setarrayflavor(res.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
+  useEffect(() => {
+    getflavorinfo();
+  }, []);
 
   return (
     <View style={{ flex: 1, backgroundColor: "#F8F8F5" }}>
@@ -133,63 +108,22 @@ const Addnote = ({ navigation, route }) => {
       />
       <Text>flavor</Text>
       <View style={styles.container}>
-        <TouchableOpacity
-          style={{
-            backgroundColor: lemonColor,
-            flex: 1,
-            alignItems: "center",
-            borderWidth: 1,
-            padding: 2,
-          }}
-          onPress={() => {
-            onCheckboxBtnClick(1);
-            changeLemonColor();
-          }}
-          flavor={(num) => onChangeFlavor(num)}
-        >
-          <Text>레몬</Text>
-        </TouchableOpacity>
-        <TouchableOpacity
-          style={{
-            backgroundColor: appleColor,
-            flex: 1,
-            alignItems: "center",
-            borderWidth: 1,
-            padding: 2,
-          }}
-          onPress={() => {
-            onCheckboxBtnClick(2);
-            changeAppleColor();
-          }}
-          flavor={(num) => onChangeFlavor(num)}
-        >
-          <Text>사과</Text>
-        </TouchableOpacity>
-
-        <TouchableOpacity
-          style={{
-            backgroundColor: grapeColor,
-            flex: 1,
-            alignItems: "center",
-            borderWidth: 1,
-            padding: 2,
-          }}
-          onPress={() => {
-            onCheckboxBtnClick(3);
-            changeGrapeColor();
-          }}
-          flavor={(num) => onChangeFlavor(num)}
-        >
-          <Text>포도</Text>
-        </TouchableOpacity>
-        <TouchableOpacity
-          style={styles.flavorbutton}
-          onPress={() => {
-            console.log(flavor);
-          }}
-        >
-          <Text>콘솔테스트</Text>
-        </TouchableOpacity>
+        {arrayflavor.map((result) => (
+          <TouchableOpacity
+            key={result.id}
+            style={
+              handleFlavorColor(result.id)
+                ? styles.flavorbuttonPress
+                : styles.flavorbutton
+            }
+            onPress={() => {
+              onCheckboxBtnClick(result.id);
+            }}
+            flavor={(num) => onChangeFlavor(num)}
+          >
+            <Text>{result.name}</Text>
+          </TouchableOpacity>
+        ))}
       </View>
 
       <Text>구매처</Text>
@@ -219,7 +153,7 @@ const Addnote = ({ navigation, route }) => {
         fullStarColor={"#FEBF34"}
       />
 
-      <TouchableOpacity style={styles.postbutton} onPress={postAddnote}>
+      <TouchableOpacity style={styles.button} onPress={postAddnote}>
         <Text>등록하기</Text>
       </TouchableOpacity>
     </View>
@@ -231,16 +165,24 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     flexWrap: "wrap",
   },
-  flavorbutton: {
-    flex: 1,
-    alignItems: "center",
-    borderWidth: 1,
-    padding: 2,
-  },
-  postbutton: {
+  button: {
     alignItems: "center",
     backgroundColor: "#DDDDDD",
     padding: 10,
+  },
+  flavorbutton: {
+    backgroundColor: "#F8F8F5",
+    alignItems: "center",
+    borderWidth: 1,
+    width: 80,
+    padding: 2,
+  },
+  flavorbuttonPress: {
+    backgroundColor: "yellow",
+    alignItems: "center",
+    borderWidth: 1,
+    width: 80,
+    padding: 2,
   },
 });
 
