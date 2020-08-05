@@ -13,6 +13,7 @@ import axios from "axios";
 const Modifynote = ({ navigation, route }) => {
   const user_id = route.params.user_id;
   const note_id = route.params.note_id;
+  // const flavor = route.params.flavor;
 
   const [name, onChangeName] = useState(route.params.name);
   const [origin, onChangeOrigin] = useState(route.params.origin);
@@ -20,8 +21,22 @@ const Modifynote = ({ navigation, route }) => {
   const [price, onChangePrice] = useState(route.params.price);
   const [feature, onChangeFeature] = useState(route.params.feature);
   const [rating, onChangeRating] = useState(route.params.rating);
-  const [flavor, onChangeFlavor] = useState([]);
+  const [flavor, onChangeFlavor] = useState(route.params.flavor);
   const [arrayflavor, setarrayflavor] = useState([]);
+  const [flavorColor, onchangeflavorColor] = useState("#F8F8F5");
+  const [selectFlavor, onchangeSelectFlavor] = useState(false);
+  //색을 지정해주는 함수를 작성 (모든 flavor에 적용되도록함)
+  //if문을 사용하여 flavor 배열 안에 들어있는 flavor들만 갈색으로 바뀌도록 해준다.
+  //else 는 그냥 원본색을 놔둔다.
+  const handleFlavorColor = (data) => {
+    //data는 flavor의 id값
+    console.log(flavor);
+    if (flavor.includes(data)) {
+      return true;
+    } else {
+      return false;
+    }
+  };
 
   function onCheckboxBtnClick(selectedNum) {
     const index = flavor.indexOf(selectedNum);
@@ -59,7 +74,7 @@ const Modifynote = ({ navigation, route }) => {
       .then((result) => {
         console.log(result);
         //name 빈칸이 안되도록하기
-        navigation.navigate("Notelist");
+        navigation.goBack();
       })
       .catch((err) => {
         console.log(err);
@@ -107,51 +122,20 @@ const Modifynote = ({ navigation, route }) => {
         {arrayflavor.map((result) => (
           <TouchableOpacity
             key={result.id}
-            style={{
-              alignItems: "center",
-              borderWidth: 1,
-              width: 80,
-              padding: 2,
+            style={
+              handleFlavorColor(result.id)
+                ? styles.flavorbuttonPress
+                : styles.flavorbutton
+            }
+            onPress={() => {
+              onCheckboxBtnClick(result.id);
             }}
-            onPress={() => onCheckboxBtnClick(result.id)}
             flavor={(num) => onChangeFlavor(num)}
           >
             <Text>{result.name}</Text>
           </TouchableOpacity>
         ))}
       </View>
-      {/* <View style={styles.container}>
-        <TouchableOpacity
-          style={styles.flavorbutton}
-          onPress={() => onCheckboxBtnClick(1)}
-          flavor={(num) => onChangeFlavor(num)}
-        >
-          <Text>레몬</Text>
-        </TouchableOpacity>
-        <TouchableOpacity
-          style={styles.flavorbutton}
-          onPress={() => onCheckboxBtnClick(2)}
-          flavor={(num) => onChangeFlavor(num)}
-        >
-          <Text>사과</Text>
-        </TouchableOpacity>
-
-        <TouchableOpacity
-          style={styles.flavorbutton}
-          onPress={() => onCheckboxBtnClick(3)}
-          flavor={(num) => onChangeFlavor(num)}
-        >
-          <Text>포도</Text>
-        </TouchableOpacity>
-        <TouchableOpacity
-          style={styles.flavorbutton}
-          onPress={() => {
-            console.log(flavor);
-          }}
-        >
-          <Text>콘솔테스트</Text>
-        </TouchableOpacity>
-      </View> */}
 
       <Text>구매처</Text>
       <TextInput
@@ -199,6 +183,20 @@ const styles = StyleSheet.create({
     alignItems: "center",
     backgroundColor: "#DDDDDD",
     padding: 10,
+  },
+  flavorbutton: {
+    backgroundColor: "#F8F8F5",
+    alignItems: "center",
+    borderWidth: 1,
+    width: 80,
+    padding: 2,
+  },
+  flavorbuttonPress: {
+    backgroundColor: "yellow",
+    alignItems: "center",
+    borderWidth: 1,
+    width: 80,
+    padding: 2,
   },
 });
 
