@@ -2,8 +2,8 @@ import React, { useEffect, useLayoutEffect } from "react";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import Main from "../pages/user/Main";
-import Notelist from "../pages/notes/Notelist";
-import Regionlist from "../pages/cafe/Regionlist";
+import Notes from "../pages/notes/";
+import Cafes from "../pages/cafe/";
 import Logout from "../pages/user/Logout";
 
 const Tabs = createBottomTabNavigator();
@@ -37,23 +37,24 @@ export default ({ navigation, route }) => {
       />
       <Tabs.Screen
         options={{
-          tabBarLabel: "Regionlist",
+          tabBarLabel: "Cafelist",
           tabBarIcon: ({ color, size }) => (
             <MaterialCommunityIcons name="tag" color={color} size={size} />
           ),
         }}
         name="Regionlist"
-        component={Regionlist}
+        component={Cafes}
       />
       <Tabs.Screen
         options={{
           tabBarLabel: "Notelist",
+          title: "원두 리스트",
           tabBarIcon: ({ color, size }) => (
             <MaterialCommunityIcons name="notebook" color={color} size={size} />
           ),
         }}
         name="Notelist"
-        component={Notelist}
+        component={Notes}
       />
       <Tabs.Screen
         options={{
