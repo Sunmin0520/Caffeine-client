@@ -5,19 +5,17 @@ import {
   View,
   TouchableOpacity,
   AsyncStorage,
+  ScrollView,
 } from "react-native";
 import axios from "axios";
-import StarRating from "react-native-star-rating";
 
 const Region = ({ route, navigation }) => {
-  //Regionlist에서 선택한 지역의 카페 목록을 가져옵니다.
-  const city = route.params.city; //Regionlist에서 route로 받은 도시이름을 가져옵니다.
+  const city = route.params.city;
   const region_id = route.params.region_id;
 
   const [cafelist, Setcafelist] = useState(null);
 
   const getCafelistCall = async () => {
-    //get cafes table
     const value = await AsyncStorage.getItem("userToken");
     axios
       .get(`http://13.125.247.226:3001/cafes/region/${region_id}`, {
@@ -26,23 +24,30 @@ const Region = ({ route, navigation }) => {
         },
       })
       .then((res) => {
-        // console.log(res.data[0].id);
         Setcafelist(
           res.data.map((result) => {
             return (
-              <View key={result.updatedAt}>
-                <TouchableOpacity
-                  onPress={() => {
-                    navigation.navigate("Cafeinfo", { cafe_id: result.id });
-                  }}
-                >
-                  <Text style={styles.textstyle}>{result.name}</Text>
-                  <Text style={styles.textstyle}>{result.address}</Text>
-                </TouchableOpacity>
-              </View>
+              <TouchableOpacity
+                key={result.id}
+                onPress={() => {
+                  navigation.navigate("Cafeinfo", { cafe_id: result.id });
+                }}
+              >
+                <Text style={styles.textstyle}>{result.name}</Text>
+                <Text style={styles.textstyle}>{result.address}</Text>
+              </TouchableOpacity>
             );
           })
         );
+      })
+      .catch(function (error) {
+        if (error.response.status === 404) {
+          return alert("카페 목록을 불러올 수 없습니다");
+        } else if (error.response.status === 401) {
+          return alert(
+            "정상적인 접근이 아닙니다. 로그아웃 후 다시 로그인 해주세요"
+          );
+        }
       });
   };
 
@@ -53,7 +58,6 @@ const Region = ({ route, navigation }) => {
   return (
     <View style={styles.container}>
       <Text style={styles.textstyle}>{city}</Text>
-      {/**선택한지역명 */}
       <TouchableOpacity
         onPress={() => {
           navigation.navigate("Addcafe");
@@ -61,7 +65,7 @@ const Region = ({ route, navigation }) => {
       >
         <Text style={styles.textstyle}>새로운 카페 추가</Text>
       </TouchableOpacity>
-      {cafelist}
+      <ScrollView>{cafelist}</ScrollView>
     </View>
   );
 };

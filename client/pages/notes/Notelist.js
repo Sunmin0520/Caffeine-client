@@ -28,7 +28,7 @@ const Notelist = ({ navigation }) => {
         setNoteListUp(
           res.data.map((result) => {
             return result;
-          }),
+          })
         );
       })
       .catch((err) => {

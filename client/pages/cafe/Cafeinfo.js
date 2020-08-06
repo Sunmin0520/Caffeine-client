@@ -5,6 +5,7 @@ import {
   View,
   TouchableOpacity,
   AsyncStorage,
+  ScrollView,
 } from "react-native";
 import axios from "axios";
 import * as Linking from "expo-linking";
@@ -19,10 +20,9 @@ const Cafeinfo = ({ route, navigation }) => {
 
   const [name, Setname] = useState(null);
   const [address, Setaddress] = useState(null);
-  const [sell_beans, Setsell_beans] = useState(null);
+  const [sell_beans, Setsell_beans] = useState("원두 미판매");
   const [instagram_account, Setinstagram_account] = useState(null);
   const [rating_average, Setrating_average] = useState(null);
-  const [test, Settest] = useState(null);
   const [reviews, Setreviews] = useState(null);
 
   const getCafeinfoCall = async () => {
@@ -34,16 +34,43 @@ const Cafeinfo = ({ route, navigation }) => {
         },
       })
       .then((res) => {
-        return (
-          Settest(res.data),
-          Setname(res.data.name),
+        Setname(res.data.name),
           Setaddress(res.data.address),
-          Setsell_beans(res.data.Setsell_beans),
-          Setinstagram_account(res.data.instagram_account)
-        );
+          Setinstagram_account(res.data.instagram_account);
+        if (res.data.sell_beans === true) {
+          return Setsell_beans("원두 판매");
+        } else {
+          Setsell_beans("원두 미판매");
+        }
       })
       .catch(function (error) {
-        console.log(error); //401{result:"token expired"} 수정예정
+        if (error.response.status === 404) {
+          return alert("카페 정보를 불러 올 수 없습니다");
+        } else if (error.response.status === 401) {
+          return alert(
+            "정상적인 접근이 아닙니다. 로그아웃 후 다시 로그인 해주세요"
+          );
+        }
+      });
+  };
+
+  const postBookmarkCall = async () => {
+    const value = await AsyncStorage.getItem("userToken");
+    axios
+      .post(
+        `http://13.125.247.226:3001/cafes/bookmark/${cafe_id}`,
+        {
+          cafe_id: cafe_id,
+        },
+        {
+          withCredentials: true,
+          headers: {
+            Authorization: `Bearer ${value}`,
+          },
+        }
+      )
+      .catch(function (error) {
+        console.log(error);
       });
   };
 
@@ -56,24 +83,38 @@ const Cafeinfo = ({ route, navigation }) => {
         },
       })
       .then((res) => {
-        return Setreviews(
-          res.data.review.map((result) => {
-            return (
-              <View key={result.updatedAt}>
-                <Text style={styles.textstyle}>{result.text}</Text>
-                <StarRating
-                  disabled={true}
-                  maxStars={5}
-                  rating={result.rating}
-                  fullStarColor={"#FEBF34"}
-                />
-              </View>
-            );
-          })
-        );
+        if (res.data.review.length === 0) {
+          Setreviews(
+            <Text style={styles.textstyle}>
+              리뷰가 없습니다. 리뷰를 작성해주세요.
+            </Text>
+          );
+        } else {
+          Setreviews(
+            res.data.review.map((result) => {
+              return (
+                <View key={result.id}>
+                  <Text style={styles.textstyle}>{result.text}</Text>
+                  <StarRating
+                    disabled={true}
+                    maxStars={5}
+                    rating={result.rating}
+                    fullStarColor={"#FEBF34"}
+                  />
+                </View>
+              );
+            })
+          );
+        }
       })
       .catch(function (error) {
-        console.log(error); //401{result:"token expired"} 수정예정
+        if (error.response.status === 404) {
+          return alert("리뷰를 불러 올 수 없습니다");
+        } else if (error.response.status === 401) {
+          return alert(
+            "정상적인 접근이 아닙니다. 로그아웃 후 다시 로그인 해주세요"
+          );
+        }
       });
   };
   const getRatingCall = async () => {
@@ -88,15 +129,21 @@ const Cafeinfo = ({ route, navigation }) => {
         Setrating_average(res.data);
       })
       .catch(function (error) {
-        console.log(error); //401{result:"token expired"} 수정예정
+        if (error.response.status === 404) {
+          return alert("평가를 확인할 수 없습니다");
+        } else if (error.response.status === 401) {
+          return alert(
+            "정상적인 접근이 아닙니다. 로그아웃 후 다시 로그인 해주세요"
+          );
+        }
       });
   };
-
+  //reviews, rating_average
   useEffect(() => {
     getCafeinfoCall();
     getCafeReviewCall();
     getRatingCall();
-  }, [reviews, rating_average]);
+  });
 
   return (
     <View style={styles.container}>
@@ -111,13 +158,21 @@ const Cafeinfo = ({ route, navigation }) => {
       >
         @{instagram_account}
       </Text>
+      <Text style={styles.textstyle}>{sell_beans}</Text>
       <StarRating
         disabled={true}
         maxStars={5}
         rating={rating_average}
         fullStarColor={"#FEBF34"}
       />
-      {reviews}
+      <TouchableOpacity
+        onPress={() => {
+          postBookmarkCall();
+        }}
+      >
+        <Text style={styles.textstyle}>북마크 테스트 용 입니다</Text>
+      </TouchableOpacity>
+      <ScrollView>{reviews}</ScrollView>
 
       <TouchableOpacity
         onPress={() => {

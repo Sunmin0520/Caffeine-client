@@ -15,6 +15,7 @@ import Cafeinfo from "../pages/cafe/Cafeinfo";
 import Addreview from "../pages/cafe/Addreview";
 import addcafeScreen from "../pages/cafe/Addcafe";
 import Addcafe from "../pages/cafe/Addcafe";
+import Bookmark from "../pages/cafe/Bookmark";
 
 const Stack = createStackNavigator();
 
@@ -47,5 +48,6 @@ export default () => (
     <Stack.Screen name="Addreview" component={Addreview} />
     <Stack.Screen name="addcafeScreen" component={addcafeScreen} />
     <Stack.Screen name="Addcafe" component={Addcafe} />
+    <Stack.Screen name="Bookmark" component={Bookmark} />
   </Stack.Navigator>
 );
