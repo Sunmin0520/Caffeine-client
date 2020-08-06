@@ -37,7 +37,7 @@ export default ({ navigation, route }) => {
       />
       <Tabs.Screen
         options={{
-          tabBarLabel: "Regionlist",
+          tabBarLabel: "Cafelist",
           tabBarIcon: ({ color, size }) => (
             <MaterialCommunityIcons name="tag" color={color} size={size} />
           ),
