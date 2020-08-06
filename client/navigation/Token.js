@@ -25,20 +25,17 @@ export default () => (
   //screenOptions는 모든 screen에 대한 style을 정할 수있다.
   <Stack.Navigator
     screenOptions={{
-      headerStyle: {
-        backgroundColor: "#F8F8F5",
-        borderBottomColor: "#F8F8F5",
-        shadowColor: "#F8F8F5",
-      },
-      headerTintColor: "black",
+      headerStyle: {},
+      headerTintColor: "#fff",
       headerBackTitleVisible: false,
     }}
   >
     {/* <Stack.Screen name="Main" component={Main} /> */}
     <Stack.Screen name="Tab" component={Tabs} />
     <Stack.Screen name="UserInfo" component={UserInfo} />
+    {/* 
     <Stack.Screen name="Notelist" component={Notelist} />
-    <Stack.Screen name="Noteinfo" component={Noteinfo} />
+    <Stack.Screen name="Noteinfo" component={No teinfo} />
     <Stack.Screen name="Modifynote" component={Modifynote} />
     <Stack.Screen name="Addnote" component={Addnote} />
     <Stack.Screen name="Regionlist" component={Regionlist} />
@@ -46,6 +43,6 @@ export default () => (
     <Stack.Screen name="Cafeinfo" component={Cafeinfo} />
     <Stack.Screen name="Addreview" component={Addreview} />
     <Stack.Screen name="Addcafe" component={Addcafe} />
-    <Stack.Screen name="Bookmark" component={Bookmark} />
+    <Stack.Screen name="Bookmark" component={Bookmark} /> */}
   </Stack.Navigator>
 );
