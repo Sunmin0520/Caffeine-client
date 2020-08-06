@@ -65,7 +65,7 @@ const Addnote = ({ navigation, route }) => {
       .then((result) => {
         console.log(result);
         //name 빈칸이 안되도록하기
-        navigation.navigate("Notelist");
+        navigation.goBack();
       })
       .catch((err) => {
         console.log(err);
