@@ -5,9 +5,13 @@ import {
   View,
   Text,
   AsyncStorage,
+  Alert,
+  Modal,
+  TouchableHighlight,
 } from "react-native";
 import StarRating from "react-native-star-rating";
 import axios from "axios";
+//import Modal from "react-native-modal";
 
 const Noteinfo = ({ navigation, route }) => {
   //const user_id = route.params.user_id;
@@ -22,6 +26,7 @@ const Noteinfo = ({ navigation, route }) => {
   const [flavor, setFlavor] = useState([]);
   const [rating, setRating] = useState(route.params.rating);
   const [arrayflavor, setarrayflavor] = useState([]);
+  const [modalVisible, setModalVisible] = useState(false);
 
   const getNoteInfo = async () => {
     const value = await AsyncStorage.getItem("userToken");
@@ -33,6 +38,7 @@ const Noteinfo = ({ navigation, route }) => {
         },
       })
       .then((res) => {
+        console.log(res.data);
         return (
           setName(res.data.name),
           setOrigin(res.data.origin),
@@ -44,7 +50,6 @@ const Noteinfo = ({ navigation, route }) => {
         );
         //console.log(res.data.flavor);
       })
-
       .catch((err) => {
         console.log(err);
       });
@@ -67,10 +72,39 @@ const Noteinfo = ({ navigation, route }) => {
         console.log(err);
       });
   };
+  const deleteNoteInfo = async () => {
+    const value = await AsyncStorage.getItem("userToken");
+    axios
+      .delete(
+        `http://13.125.247.226:3001/notes/${note_id}`,
+        // {
+        //   note_id: note_id, //params 적으면안되는것 같습니다.
+        // },
+        {
+          withCredentials: true,
+          headers: {
+            Authorization: `Bearer ${value}`,
+          },
+        },
+      )
+      .then((res) => {
+        //console.log(res.data.flavor);
+        //console.log();
+        navigation.goBack();
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
+  // const filteringFlavor = (data) => {
+  //   console.log(data);
+  // };
 
   useEffect(() => {
     getNoteInfo();
     getflavorinfo();
+    //deleteNoteInfo();
   }, []);
 
   return (
@@ -99,7 +133,11 @@ const Noteinfo = ({ navigation, route }) => {
                 borderWidth: 1,
                 width: 80,
                 padding: 2,
+                //flavor onpress를 눌러서 flavor 함수실행 함수는 notes의 모든 노트를 불러온다.
               }}
+              // onPress={() => {
+              //   filteringFlavor(result.id);
+              // }}
             >
               <Text>{result.name}</Text>
             </TouchableOpacity>
@@ -130,22 +168,47 @@ const Noteinfo = ({ navigation, route }) => {
       >
         <Text>수정하기</Text>
       </TouchableOpacity>
-      <TouchableOpacity
-        style={styles.button}
-        onPress={() =>
-          navigation.navigate("Modifynote", {
-            note_id: note_id,
-            name: name,
-            origin: origin,
-            mall: mall,
-            price: price,
-            feature: feature,
-            rating: rating,
-          })
-        }
+      <Modal
+        animationType="slide"
+        transparent={true}
+        visible={modalVisible}
+        onRequestClose={() => {
+          Alert.alert("Modal has been closed.");
+        }}
       >
-        <Text>삭제하기</Text>
-      </TouchableOpacity>
+        <View style={styles.centeredView}>
+          <View style={styles.modalView}>
+            <Text style={styles.modalText}>정말 삭제하시겠습니까?</Text>
+
+            <TouchableHighlight
+              style={{ ...styles.openButton, backgroundColor: "#2196F3" }}
+              onPress={() => {
+                deleteNoteInfo();
+                setModalVisible(!modalVisible);
+              }}
+            >
+              <Text>YES</Text>
+            </TouchableHighlight>
+            <TouchableHighlight
+              style={{ ...styles.openButton, backgroundColor: "#2196F3" }}
+              onPress={() => {
+                setModalVisible(!modalVisible);
+              }}
+            >
+              <Text>NO</Text>
+            </TouchableHighlight>
+          </View>
+        </View>
+      </Modal>
+
+      <TouchableHighlight
+        style={styles.button}
+        onPress={() => {
+          setModalVisible(true);
+        }}
+      >
+        <Text style={styles.textStyle}>삭제하기</Text>
+      </TouchableHighlight>
     </View>
   );
 };
@@ -159,6 +222,38 @@ const styles = StyleSheet.create({
     alignItems: "center",
     backgroundColor: "#DDDDDD",
     padding: 10,
+    marginBottom: 5,
+  },
+  centeredView: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    marginTop: 22,
+  },
+  modalView: {
+    margin: 20,
+    backgroundColor: "white",
+    borderRadius: 20,
+    padding: 60,
+    alignItems: "center",
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84,
+    elevation: 5,
+  },
+  openButton: {
+    backgroundColor: "#F194FF",
+    borderRadius: 15,
+    padding: 10,
+    elevation: 2,
+  },
+  modalText: {
+    marginBottom: 15,
+    textAlign: "center",
   },
 });
 
