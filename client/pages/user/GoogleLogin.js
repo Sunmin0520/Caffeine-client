@@ -59,7 +59,10 @@ function GoogleLogin() {
             marginLeft: 20,
           }}
         >
-          <Image style={{ marginLeft: 10 }} source={require("./google.png")} />
+          <Image
+            style={{ marginLeft: 10 }}
+            source={require("./Images/google.png")}
+          />
           <Text
             style={{
               fontSize: 15,

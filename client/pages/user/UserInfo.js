@@ -15,7 +15,7 @@ import Signin from "./Signin";
 export default function UserInfo({ navigation }) {
   return (
     <LinearGradient style={styles.container} colors={["#fff", "#fff"]}>
-      <Image style={styles.locationLogo} source={require("./D.png")} />
+      <Image style={styles.locationLogo} source={require("./Images/D.png")} />
       <Signin />
       <Text
         style={{
@@ -25,9 +25,7 @@ export default function UserInfo({ navigation }) {
           fontWeight: "bold",
           fontSize: 15,
         }}
-      >
-        간편 로그인
-      </Text>
+      ></Text>
       <View style={{ flexDirection: "row", flexWrap: "wrap" }}>
         <GoogleLogin />
         <FacebookLogin />

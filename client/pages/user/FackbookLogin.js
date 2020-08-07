@@ -65,7 +65,7 @@ function FacebookLogin() {
         >
           <Image
             style={{ marginLeft: 10 }}
-            source={require("./facebook.png")}
+            source={require("./Images/facebook.png")}
           />
           <Text
             style={{

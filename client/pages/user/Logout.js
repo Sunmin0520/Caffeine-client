@@ -8,7 +8,6 @@ const Logout = ({ navigation }) => {
   });
   const testFn = async () => {
     const value = await AsyncStorage.getItem("userToken");
-    console.log("로그아웃시 해당 토큰값을 삭제합니다: ", value);
   };
 
   const removeToken = async () => {
