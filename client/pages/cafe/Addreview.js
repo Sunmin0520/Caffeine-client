@@ -31,7 +31,9 @@ const Addreview = ({ route, navigation }) => {
         }
       )
       .then((res) => {
-        alert("리뷰 등록되었습니다!"); // 수정예정
+        if (res.status === 201) {
+          alert("리뷰가 등록되었습니다");
+        }
       })
       .catch(function (error) {
         if (error.response.status === 404) {

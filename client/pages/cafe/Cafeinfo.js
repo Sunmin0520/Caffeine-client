@@ -14,13 +14,12 @@ import StarRating from "react-native-star-rating";
 const Cafeinfo = ({ route, navigation }) => {
   //Region에서 선택한 카페의 상세 내용을 출력합니다.
   const cafe_id = route.params.cafe_id; //Region에서 선택한 하나의 카페의 ID입니다.
-  const region_id = route.params.region_id;
   const city = route.params.city;
   const user_id = route.params.user_id;
 
   const [name, Setname] = useState(null);
   const [address, Setaddress] = useState(null);
-  const [sell_beans, Setsell_beans] = useState("원두 미판매");
+  const [sell_beans, Setsell_beans] = useState(null);
   const [instagram_account, Setinstagram_account] = useState(null);
   const [rating_average, Setrating_average] = useState(null);
   const [reviews, Setreviews] = useState(null);
@@ -37,10 +36,13 @@ const Cafeinfo = ({ route, navigation }) => {
         Setname(res.data.name),
           Setaddress(res.data.address),
           Setinstagram_account(res.data.instagram_account);
+
         if (res.data.sell_beans === true) {
-          return Setsell_beans("원두 판매");
+          return Setsell_beans("판매");
+        } else if (res.data.sell_beans === false) {
+          return Setsell_beans("미판매");
         } else {
-          Setsell_beans("원두 미판매");
+          return Setsell_beans("미확인");
         }
       })
       .catch(function (error) {
@@ -94,13 +96,16 @@ const Cafeinfo = ({ route, navigation }) => {
             res.data.review.map((result) => {
               return (
                 <View key={result.id}>
+                  <View style={styles.starstyle}>
+                    <StarRating
+                      disabled={true}
+                      maxStars={5}
+                      rating={result.rating}
+                      fullStarColor={"#FEBF34"}
+                      starSize={30}
+                    />
+                  </View>
                   <Text style={styles.textstyle}>{result.text}</Text>
-                  <StarRating
-                    disabled={true}
-                    maxStars={5}
-                    rating={result.rating}
-                    fullStarColor={"#FEBF34"}
-                  />
                 </View>
               );
             })
@@ -143,35 +148,57 @@ const Cafeinfo = ({ route, navigation }) => {
     getCafeinfoCall();
     getCafeReviewCall();
     getRatingCall();
-  });
+  }, [reviews, rating_average]);
 
   return (
     <View style={styles.container}>
-      <Text style={styles.textstyle}>{city}</Text>
-      <Text style={styles.textstyle}>{name}</Text>
-      <Text style={styles.textstyle}>{address}</Text>
-      <Text
-        style={styles.textstyle}
-        onPress={() => {
-          Linking.openURL(`https://www.instagram.com/${instagram_account}`);
-        }}
-      >
-        @{instagram_account}
-      </Text>
-      <Text style={styles.textstyle}>{sell_beans}</Text>
-      <StarRating
-        disabled={true}
-        maxStars={5}
-        rating={rating_average}
-        fullStarColor={"#FEBF34"}
-      />
+      <View style={styles.cafenamestyle}>
+        <Text style={styles.headtextstyle}>{name}</Text>
+      </View>
+
       <TouchableOpacity
         onPress={() => {
           postBookmarkCall();
         }}
       >
-        <Text style={styles.textstyle}>북마크 테스트 용 입니다</Text>
+        <Text style={styles.bookmarkstyle}>Bookmark</Text>
       </TouchableOpacity>
+      <Text style={styles.boldtextstyle}>
+        {`지역    `}
+        <Text style={styles.textstyle}>{city}</Text>
+      </Text>
+      <Text style={styles.boldtextstyle}>
+        {`주소    `}
+        <Text style={styles.textstyle}>{address}</Text>
+      </Text>
+
+      <Text style={styles.boldtextstyle}>
+        {`instagram   `}
+        <Text
+          style={styles.textstyle}
+          onPress={() => {
+            Linking.openURL(`https://www.instagram.com/${instagram_account}`);
+          }}
+        >
+          @{instagram_account}
+        </Text>
+      </Text>
+
+      <Text style={styles.boldtextstyle}>
+        {`원두판매    `}
+        <Text style={styles.textstyle}>{sell_beans}</Text>
+      </Text>
+      <Text style={styles.boldtextstyle}>리뷰 전체 평점</Text>
+      <View style={styles.starstyle}>
+        <StarRating
+          disabled={true}
+          maxStars={5}
+          rating={rating_average}
+          fullStarColor={"#FEBF34"}
+          starSize={30}
+        />
+      </View>
+      <Text style={styles.boldtextstyle}>상세리뷰</Text>
       <ScrollView>{reviews}</ScrollView>
 
       <TouchableOpacity
@@ -182,7 +209,7 @@ const Cafeinfo = ({ route, navigation }) => {
           });
         }}
       >
-        <Text style={styles.textstyle}>리뷰남기기</Text>
+        <Text style={styles.boldtextstyle}>리뷰남기기</Text>
       </TouchableOpacity>
     </View>
   );
@@ -192,13 +219,41 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "#fff",
-    alignItems: "center",
-    justifyContent: "center",
+    paddingVertical: 60,
+    paddingHorizontal: 30,
   },
   textstyle: {
     justifyContent: "center",
     fontSize: 18,
-    margin: 10,
+    marginBottom: 13,
+    fontWeight: "300",
+  },
+  cafenamestyle: {
+    width: 250,
+    borderBottomColor: "#000000",
+    borderBottomWidth: 3,
+    marginBottom: 15,
+  },
+  headtextstyle: {
+    fontSize: 30,
+    fontWeight: "bold",
+    paddingBottom: 10,
+    color: "#692702",
+  },
+  boldtextstyle: {
+    marginTop: 15,
+    fontWeight: "500",
+    fontSize: 18,
+  },
+  starstyle: {
+    marginTop: 10,
+    width: 80,
+  },
+  bookmarkstyle: {
+    justifyContent: "center",
+    fontSize: 18,
+    marginTop: 10,
+    fontWeight: "300",
   },
 });
 

@@ -13,7 +13,7 @@ const Bookmark = ({ route, navigation }) => {
   //Regionlist에서 선택한 지역의 카페 목록을 가져옵니다.
 
   const [cafe_id, Setcafe_id] = useState(null);
-  const [bookmarks, Setbookmarks] = useState([]);
+  const [bookmarks, Setbookmarks] = useState(null);
   const [name, Setname] = useState(null);
   const [address, Setaddress] = useState(null);
 
@@ -24,14 +24,16 @@ const Bookmark = ({ route, navigation }) => {
       .get("http://13.125.247.226:3001/cafes/bookmark/all", {
         headers: {
           Authorization: `Bearer ${value}`,
-          Bookmark,
         },
       })
       .then((res) => {
-        let dataArr = Object.entries(res.data);
-        for (let i = 0; i < dataArr[1][1].length; i++) {
-          getCafeinfoCall(dataArr[1][1][i]);
+        for (let i = 0; i < res.data.length; i++) {
+          getCafeinfoCall(res.data[i].cafe_id);
         }
+        // let dataArr = Object.entries(res.data);
+        // for (let i = 0; i < dataArr[1][1].length; i++) {
+        //   getCafeinfoCall(dataArr[1][1][i]);
+        // }
       })
       .catch(function (error) {
         console.log(error); //401{result:"token expired"} 수정예정
@@ -47,10 +49,22 @@ const Bookmark = ({ route, navigation }) => {
         },
       })
       .then((res) => {
-        // console.log(res.data);
-        // for (let key in res.data) {
-        //   console.log(res.data[key]);
-        // }
+        let arr = [];
+        arr.push(res.data);
+        // Setbookmarks(
+        //   arr.map((data) => {
+        //     return (
+        //       <View key={data}>
+        //         <Text>{data}</Text>
+        //       </View>
+        //     );
+        //   })
+        // );
+        for (let i = 0; i < arr.length; i++) {
+          // console.log(arr[i].name);
+          Setbookmarks(arr[i].name);
+        }
+        console.log(bookmarks);
       })
       .catch(function (error) {
         console.log(error); //401{result:"token expired"} 수정예정
@@ -79,6 +93,7 @@ const Bookmark = ({ route, navigation }) => {
   return (
     <View style={styles.container}>
       <Text style={styles.textstyle}>북마크 입니다</Text>
+      <Text>{bookmarks}</Text>
     </View>
   );
 };
