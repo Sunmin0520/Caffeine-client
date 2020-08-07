@@ -6,6 +6,7 @@ import {
   Button,
   TouchableOpacity,
   AsyncStorage,
+  ScrollView,
 } from "react-native";
 import Fakedatanotes from "./FakeDatanotes";
 import axios from "axios";
@@ -61,30 +62,32 @@ const Notelist = ({ navigation }) => {
 
       {/* <View style={{ flexDirection: "row", flex: 1 }}>
         <Text style={{ alignItems: "center", flex: 1 }}>원두 {noteListUp}</Text> */}
-      {noteListUp.map((listup) => (
-        <View key={listup.id}>
-          <TouchableOpacity
-            onPress={() => {
-              navigation.navigate("Noteinfo", {
-                note_id: listup.id,
-                user_id: listup.user_id,
-                // name: listup.name,
-                // origin: listup.origin,
-                // flavor: listup.flavor,
-                // mall: listup.mall,
-                // price: listup.price,
-                // feature: listup.feature,
-                // rating: listup.rating,
-              });
-            }}
-          >
-            <Text>정보보기</Text>
-          </TouchableOpacity>
-          <Text>원두 : {listup.name}</Text>
-          <Text>구매처 : {listup.mall}</Text>
-          <Text>평점 : {listup.rating}</Text>
-        </View>
-      ))}
+      <ScrollView>
+        {noteListUp.map((listup) => (
+          <View key={listup.id}>
+            <TouchableOpacity
+              onPress={() => {
+                navigation.navigate("Noteinfo", {
+                  note_id: listup.id,
+                  user_id: listup.user_id,
+                  // name: listup.name,
+                  // origin: listup.origin,
+                  // flavor: listup.flavor,
+                  // mall: listup.mall,
+                  // price: listup.price,
+                  // feature: listup.feature,
+                  // rating: listup.rating,
+                });
+              }}
+            >
+              <Text style={styles.textstyle}>정보보기</Text>
+            </TouchableOpacity>
+            <Text style={styles.textstyle}>원두 : {listup.name}</Text>
+            <Text style={styles.textstyle}>구매처 : {listup.mall}</Text>
+            <Text style={styles.textstyle}>평점 : {listup.rating}</Text>
+          </View>
+        ))}
+      </ScrollView>
       <Button
         title="새 노트 추가하기"
         onPress={() => navigation.navigate("Addnote")}
@@ -121,6 +124,11 @@ const styles = StyleSheet.create({
     padding: 8,
     backgroundColor: "yellow",
     borderRadius: 5,
+  },
+  textstyle: {
+    fontSize: 20,
+    margin: 5,
+    fontWeight: "500",
   },
 });
 

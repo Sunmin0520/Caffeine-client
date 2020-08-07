@@ -27,44 +27,50 @@ const Bookmark = ({ route, navigation }) => {
         },
       })
       .then((res) => {
+        console.log("Bookmark", res.data);
         for (let i = 0; i < res.data.length; i++) {
           getCafeinfoCall(res.data[i].cafe_id);
         }
-        // let dataArr = Object.entries(res.data);
-        // for (let i = 0; i < dataArr[1][1].length; i++) {
-        //   getCafeinfoCall(dataArr[1][1][i]);
-        // }
       })
       .catch(function (error) {
         console.log(error); //401{result:"token expired"} 수정예정
       });
   };
 
-  const getCafeinfoCall = async (id) => {
+  const getCafeinfoCall = async (cafeId) => {
     const value = await AsyncStorage.getItem("userToken");
     axios
-      .get(`http://13.125.247.226:3001/cafes/${id}`, {
+      .get("http://13.125.247.226:3001/cafes/allcafes", {
         headers: {
           Authorization: `Bearer ${value}`,
         },
       })
       .then((res) => {
-        let arr = [];
-        arr.push(res.data);
-        // Setbookmarks(
-        //   arr.map((data) => {
-        //     return (
-        //       <View key={data}>
-        //         <Text>{data}</Text>
-        //       </View>
-        //     );
+        console.log("cafeinfo", res.data);
+        // console.log(cafeId);
+        for (let i = 0; i < res.data.length; i++) {
+          if (res.data[i].id === cafeId) {
+            return Setname(res.data[i].id);
+          }
+        }
+        // Setname(
+        //   res.data.map((result) => {
+        //     return result.id;
         //   })
         // );
-        for (let i = 0; i < arr.length; i++) {
-          // console.log(arr[i].name);
-          Setbookmarks(arr[i].name);
-        }
-        console.log(bookmarks);
+        // name.map((data) => {
+        //   if (data === cafeId) {
+        //     return Setaddress(data);
+        //   }
+        // });
+        // console.log(cafeId);
+        // for (let i = 0; i < res.data.length; i++) {
+        //   if (res.data[i].id === cafeId) {
+        //     console.log(res.data[i].name);
+        //     Setname(res.data[i].name);
+        //   }
+        // }
+        // console.log(name);
       })
       .catch(function (error) {
         console.log(error); //401{result:"token expired"} 수정예정
@@ -93,7 +99,7 @@ const Bookmark = ({ route, navigation }) => {
   return (
     <View style={styles.container}>
       <Text style={styles.textstyle}>북마크 입니다</Text>
-      <Text>{bookmarks}</Text>
+      <Text>{name}</Text>
     </View>
   );
 };

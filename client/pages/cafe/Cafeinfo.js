@@ -105,7 +105,7 @@ const Cafeinfo = ({ route, navigation }) => {
                       starSize={30}
                     />
                   </View>
-                  <Text style={styles.textstyle}>{result.text}</Text>
+                  <Text style={styles.reviewstyle}>{result.text}</Text>
                 </View>
               );
             })
@@ -253,6 +253,12 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     fontSize: 18,
     marginTop: 10,
+    fontWeight: "300",
+  },
+  reviewstyle: {
+    justifyContent: "center",
+    fontSize: 15,
+    marginBottom: 13,
     fontWeight: "300",
   },
 });

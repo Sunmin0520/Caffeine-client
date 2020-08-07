@@ -140,15 +140,20 @@ const Addcafe = ({ route, navigation }) => {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.textstyle}>새로운 카페 등록</Text>
-      <Text style={styles.textstyle}>카페 이름</Text>
+      <View style={styles.headlinestyle}>
+        <Text style={styles.headtextstyle}>새로운 카페 소개</Text>
+      </View>
+      <Text style={styles.textstyle}>카페의 이름을 입력해주세요</Text>
 
       <TextInput
-        style={styles.textstyle}
-        placeholder={"카페 이름을 입력해주세요"}
+        style={styles.textinputstyle}
+        multiline={false}
+        maxLength={20}
+        placeholder={"카페의 이름을 입력해주세요"}
         onChangeText={(text) => Setname(text)}
         value={name}
       />
+      <View style={styles.inputlinestyle}></View>
       <View>
         <TouchableOpacity
           onPress={() => {
@@ -158,33 +163,40 @@ const Addcafe = ({ route, navigation }) => {
             // getapiaddress();
           }}
         >
-          <Text>상세 주소</Text>
+          <Text style={styles.textstyle}>주소를 검색해주세요</Text>
         </TouchableOpacity>
       </View>
       <Text style={styles.textstyle}>{address}</Text>
-      <Text style={styles.textstyle}>지역 선택 카테고리</Text>
-      {select_region}
+      <Text style={styles.textstyle}>지역 카테고리를 선택해주세요</Text>
+      <View style={styles.flexwrapstyle}>{select_region}</View>
+
       <Text style={styles.textstyle}>원두를 판매하나요?</Text>
-      <TouchableOpacity
-        onPress={() => {
-          handleSellYes();
-        }}
-      >
-        <Text style={sell_beans ? styles.active : styles.nonactive}>Yes</Text>
-      </TouchableOpacity>
-      <TouchableOpacity
-        onPress={() => {
-          handleSellNo();
-        }}
-      >
-        <Text style={!sell_beans ? styles.active : styles.nonactive}>No</Text>
-      </TouchableOpacity>
-      <Text style={styles.textstyle}>인스타그램 계정</Text>
+      <View style={styles.flexwrapstyle}>
+        <TouchableOpacity
+          onPress={() => {
+            handleSellYes();
+          }}
+        >
+          <Text style={sell_beans ? styles.active : styles.nonactive}>Yes</Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+          onPress={() => {
+            handleSellNo();
+          }}
+        >
+          <Text style={!sell_beans ? styles.active : styles.nonactive}>No</Text>
+        </TouchableOpacity>
+      </View>
+      <Text style={styles.textstyle}>카페의 인스타그램 계정</Text>
       <TextInput
+        style={styles.textinputstyle}
+        multiline={false}
+        maxLength={25}
         placeholder={"계정 아이디만 적어주세요"}
         onChangeText={(text) => Setinstagram_account(text)}
         value={instagram_account}
       />
+      <View style={styles.inputlinestyle}></View>
       <TouchableOpacity
         onPress={() => {
           navigation.navigate("Region");
@@ -210,25 +222,60 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "#fff",
-    alignItems: "center",
-    justifyContent: "center",
+    paddingLeft: 30,
+    paddingTop: 80,
   },
   textstyle: {
     justifyContent: "center",
-    fontSize: 18,
-    margin: 10,
+    fontSize: 20,
+    fontWeight: "500",
+    marginBottom: 20,
   },
   active: {
     color: "#ffa9a3",
     justifyContent: "center",
     fontSize: 18,
-    margin: 10,
+    marginHorizontal: 10,
+    marginBottom: 20,
+    fontWeight: "bold",
   },
   nonactive: {
     color: "#e0e0e0",
     justifyContent: "center",
     fontSize: 18,
-    margin: 10,
+    marginHorizontal: 10,
+    marginBottom: 20,
+    fontWeight: "bold",
+  },
+  flexwrapstyle: {
+    flexDirection: "row",
+    flexWrap: "wrap",
+    width: 300,
+  },
+  headtextstyle: {
+    fontSize: 30,
+    fontWeight: "bold",
+    paddingBottom: 10,
+    color: "#692702",
+  },
+  headlinestyle: {
+    width: 250,
+    borderBottomColor: "#000000",
+    borderBottomWidth: 3,
+    marginBottom: 35,
+  },
+  textinputstyle: {
+    fontSize: 18,
+    fontWeight: "300",
+    marginBottom: 10,
+    flexWrap: "wrap",
+    width: 200,
+  },
+  inputlinestyle: {
+    width: 250,
+    borderBottomColor: "#000000",
+    borderBottomWidth: 1,
+    marginBottom: 30,
   },
 });
 
