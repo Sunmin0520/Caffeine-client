@@ -5,10 +5,10 @@
 ## Installation 
 Caffeine은 client side([https://github.com/codestates/Caffeine-client/](https://github.com/codestates/Caffeine-client), sever side ([https://github.com/codestates/Caffeine-server](https://github.com/codestates/Caffeine-server)) 로 나누어져 있습니다.
 
- 1. appstore, google play store에서 expo를 다운로드 하십시오.
+ 1. app store, google play store에서 expo를 다운로드 하십시오.
  2. client side repository를 clone 하십시오.
  3. npm install을 통해 필요한 모듈들을 설치하십시오.
- 3. npm start를 입력하여 QR code가 생성되면 expo 앱과 연결되어 사용 가능합니다.
+ 4. npm start를 입력하여 QR code가 생성되면 expo 앱과 연결되어 사용 가능합니다.
 
 ## Usage
 ### 카페 
@@ -47,7 +47,7 @@ Caffeine은 client side([https://github.com/codestates/Caffeine-client/](https:/
     - 로그인시 생성되는 사용자 정보를 바탕으로 그 이후의 모든 요청시 정보를 확인합니다. 비정상적인 방법으로 특정 페이지에 접근시 알림창이 나오고, 로그인 페이지로 이동합니다.
 
  ## Documentation
- 링크예정
+ [Swagger UI.pdf](https://github.com/codestates/Caffeine-server/files/5044757/Swagger.UI.pdf)
  
  ## Author
  - 이지하 https://github.com/ayus91
