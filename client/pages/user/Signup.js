@@ -22,7 +22,6 @@ export default function Signup() {
   const navigation = useNavigation();
 
   const postSignupData = () => {
-    console.log(`이메일: ${email} 패스워드: ${password} 닉네임: ${username}`);
     const data = JSON.stringify({
       email: email,
       password: password,
@@ -40,7 +39,6 @@ export default function Signup() {
 
     axios(config)
       .then((response) => {
-        console.log(response.data);
         alert(`${email}님 회원가입 하셨습니다. 로그인 페이지로 이동합니다.`);
         navigation.navigate("UserInfo");
       })
@@ -103,7 +101,7 @@ export default function Signup() {
 
   return (
     <LinearGradient style={styles.container} colors={["#fff", "#fff"]}>
-      <Image style={styles.locationLogo} source={require("./D.png")} />
+      <Image style={styles.locationLogo} source={require("./Images/D.png")} />
       <TextInput
         label="Text"
         placeholder="   이름"
