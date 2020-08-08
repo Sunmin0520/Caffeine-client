@@ -3,7 +3,12 @@
 - **카페**와 **원두 기록**은 별개의 카테고리에서 독립적으로 작동합니다. 기호에 맞게 각각 혹은 두 카테고리 모두를 활용할 수 있습니다.
 
 ## Installation 
-추가예정
+Caffeine은 client side([https://github.com/codestates/Caffeine-client/](https://github.com/codestates/Caffeine-client), sever side ([https://github.com/codestates/Caffeine-server](https://github.com/codestates/Caffeine-server)) 로 나누어져 있습니다.
+
+ 1. appstore, google play store에서 expo를 다운로드 하십시오.
+ 2. client side repository를 clone 하십시오.
+ 3. npm install을 통해 필요한 모듈들을 설치하십시오.
+ 3. npm start를 입력하여 QR code가 생성되면 expo 앱과 연결되어 사용 가능합니다.
 
 ## Usage
 ### 카페 
