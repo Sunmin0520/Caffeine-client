@@ -71,6 +71,11 @@ const Cafeinfo = ({ route, navigation }) => {
           },
         }
       )
+      .then((res) => {
+        if (res.status === 201) {
+          alert("Bookmark에 등록되었습니다!");
+        }
+      })
       .catch(function (error) {
         console.log(error);
       });
