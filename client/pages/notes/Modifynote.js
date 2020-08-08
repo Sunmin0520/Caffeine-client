@@ -217,6 +217,7 @@ const styles = StyleSheet.create({
     borderBottomWidth: 5,
   },
   headtextstyle: {
+    marginTop: 40,
     fontSize: 30,
     fontWeight: "bold",
     paddingBottom: 10,
@@ -225,7 +226,7 @@ const styles = StyleSheet.create({
   container3: {
     marginTop: 12,
     paddingBottom: 5,
-    width: 300,
+    width: 320,
     borderBottomColor: "#E5E5E5",
     borderBottomWidth: 1,
   },
@@ -268,20 +269,18 @@ const styles = StyleSheet.create({
     backgroundColor: "#E9E2E2",
   },
   footer: {
-    flexDirection: "row",
-    flexWrap: "wrap",
     margin: 3,
     bottom: 0,
-    alignContent: "center",
+    alignSelf: "flex-start",
   },
   addButtonstyle: {
     backgroundColor: "#7B6D64",
     justifyContent: "center",
     borderRadius: 3,
     padding: 10,
-    width: 330,
+    width: 300,
     height: 45,
-    margin: 5,
+    margin: 10,
   },
   addNotestyle: {
     alignSelf: "center",
