@@ -61,7 +61,6 @@ export default function Signin() {
 
   const testFn2 = async () => {
     const value = await AsyncStorage.getItem("userToken");
-    console.log("로그인시 해당 페이지의 토큰 값을 확인합니다 ", value);
   };
 
   return (

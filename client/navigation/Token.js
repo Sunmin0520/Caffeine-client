@@ -28,6 +28,7 @@ export default () => (
       headerStyle: {},
       headerTintColor: "#fff",
       headerBackTitleVisible: false,
+      headerShown: false,
     }}
   >
     {/* <Stack.Screen name="Main" component={Main} /> */}
