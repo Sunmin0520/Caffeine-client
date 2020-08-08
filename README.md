@@ -7,7 +7,7 @@ Caffeine은 client side([https://github.com/codestates/Caffeine-client)](https:/
 
  1. app store, google play store에서 expo를 다운로드 하십시오.
  2. client side repository를 clone 하십시오.
- 3. npm install을 통해 필요한 모듈들을 설치하십시오.
+ 3. npm install을 통해 필요한 모듈들을 설치 하십시오.
  4. npm start를 입력하여 QR code가 생성되면 expo 앱과 연결되어 사용 가능합니다.
 
 ## Usage
