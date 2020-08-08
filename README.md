@@ -54,6 +54,39 @@ Caffeine은 커피를 즐길 수 있는 **카페**라는 공간을 좋아하고,
  ## Documentation
  링크예정
  
+ ## Author
+ - 이지하 https://github.com/ayus91
+   - **Front-end / Cafe**
+   - 전체 지역 목록 보기 / 특정 지역의 카페 목록 / 한 카페의 세부 정보 
+   - 사용자가 새로운 카페 정보 추가
+   - 사용자가 리뷰 기록하기/  리뷰의 평점을 바탕으로 해당 카페의 전체 평점을 표시
+   - 사용자가 즐겨찾기에 추가한 카페 목록 보기 및 삭제
  
- ## Documentation
+ - 강준혁 https://github.com/aiora32
+   - **Front-end / Note, Cafe**
+   - Note
+     - 전체 기록 목록 보기 / 특정 기록의 세부 정보
+     - 새로운 기록 추가, 수정 및 삭제
+   - Cafe
+     - 사용자가 새로운 카페 정보 추가시 'Daum 우편번호 검색 서비스'의 적용으로 Caffeine의 데이터베이스에 이미 저장되어 있는 주소의 경우 중복으로 등록되는 것 방지
     
+  - 김현우 https://github.com/hyun0310woo
+   - **Front-end / User**
+   - 기존 사용자의 로그인, 로그아웃 처리, 새로운 사용자의 회원가입
+   - 토큰을 통한 로그인 상태의 
+   
+  - 조선민 https://github.com/Sunmin0520
+   - **Back-end / Cafe, Note, User**
+   - Cafe
+     - 서울시의 각 지역의 카페 정보 / 특정 카페에 대해 사용자들이 입력한 리뷰와 즐겨찾기 정보를 데이터베이스에 저장 및 불러오기
+     - 새로운 카페 정보 등록, 새로운 리뷰 등록, 특정 카페의 즐겨찾기 추가 및 삭제
+   - Note
+     - 로그인한 사용자의 원두 기록을 데이터베이스에 저장 / 정상적으로 로그인이 이루어졌을 때만 해당 사용자의 정보 불러오기
+     - 특정 기록의 수정 및 삭제
+   - User
+     - 회원가입시 새로운 사용자 정보를 데이터베이스에 저장 / 로그인시 사용자가 입력한 정보와 데이터베이스에 저장된 정보와의 비교
+     - JWT middleware를 통한 인증 및 접근권한 부여와 중복되는 코드 방지
+   
+   ## Stack
+   - Front-end
+   - Back-end: node.js, express, jwt, Sequelize, MySQL,EC2, RDS
