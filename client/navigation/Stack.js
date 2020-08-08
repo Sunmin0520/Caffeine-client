@@ -26,6 +26,7 @@ export default function Stacks() {
         headerStyle: {},
         headerTintColor: "#fff",
         headerBackTitleVisible: false,
+        headerShown: false,
       }}
     >
       <Stack.Screen name="UserInfo" component={UserInfo} />

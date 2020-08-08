@@ -5,7 +5,6 @@ import {
   View,
   TouchableOpacity,
   AsyncStorage,
-  Button,
 } from "react-native";
 import axios from "axios";
 
@@ -13,7 +12,7 @@ const Bookmark = ({ route, navigation }) => {
   //Regionlist에서 선택한 지역의 카페 목록을 가져옵니다.
 
   const [cafe_id, Setcafe_id] = useState(null);
-  const [bookmarks, Setbookmarks] = useState([]);
+  const [bookmarks, Setbookmarks] = useState(null);
   const [name, Setname] = useState(null);
   const [address, Setaddress] = useState(null);
 
@@ -24,13 +23,15 @@ const Bookmark = ({ route, navigation }) => {
       .get("http://13.125.247.226:3001/cafes/bookmark/all", {
         headers: {
           Authorization: `Bearer ${value}`,
-          Bookmark,
         },
       })
       .then((res) => {
-        let dataArr = Object.entries(res.data);
-        for (let i = 0; i < dataArr[1][1].length; i++) {
-          getCafeinfoCall(dataArr[1][1][i]);
+        // console.log("Bookmark", res.data);
+        let dataArr = [];
+
+        for (let i = 0; i < res.data.length; i++) {
+          dataArr.push(res.data[i].cafe_id);
+          getCafeinfoCall(dataArr);
         }
       })
       .catch(function (error) {
@@ -38,19 +39,39 @@ const Bookmark = ({ route, navigation }) => {
       });
   };
 
-  const getCafeinfoCall = async (id) => {
+  const getCafeinfoCall = async (...cafeId) => {
     const value = await AsyncStorage.getItem("userToken");
     axios
-      .get(`http://13.125.247.226:3001/cafes/${id}`, {
+      .get("http://13.125.247.226:3001/cafes/allcafes", {
         headers: {
           Authorization: `Bearer ${value}`,
         },
       })
       .then((res) => {
-        // console.log(res.data);
-        // for (let key in res.data) {
-        //   console.log(res.data[key]);
-        // }
+        // console.log(res.data.length)
+        let arr = [];
+        let nameArr = [];
+        for (let k = 0; k < res.data.length; k++) {
+          arr.push(res.data[k]);
+        }
+        //
+        // console.log(cafeId[0])
+        for (let i = 0; i < cafeId[0].length; i++) {
+          // console.log(cafeId[0][i])
+          for (let j = 0; j < arr.length; j++) {
+            // console.log(arr[j].id)
+            if (cafeId[0][i] === arr[j].id) {
+              // console.log(arr[j].name)
+              nameArr.push(arr[j].name);
+              Setname(
+                nameArr.map((result) => {
+                  return result;
+                })
+              );
+            }
+          }
+        }
+        console.log(name);
       })
       .catch(function (error) {
         console.log(error); //401{result:"token expired"} 수정예정
@@ -73,8 +94,7 @@ const Bookmark = ({ route, navigation }) => {
 
   useEffect(() => {
     getBookmarkcall();
-    getCafeinfoCall();
-  }, []);
+  }, [name]);
 
   return (
     <View style={styles.container}>

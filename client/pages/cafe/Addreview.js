@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import {
   StyleSheet,
   Text,
@@ -31,7 +31,9 @@ const Addreview = ({ route, navigation }) => {
         }
       )
       .then((res) => {
-        alert("리뷰 등록되었습니다!"); // 수정예정
+        if (res.status === 201) {
+          alert("리뷰가 등록되었습니다");
+        }
       })
       .catch(function (error) {
         if (error.response.status === 404) {
@@ -46,20 +48,29 @@ const Addreview = ({ route, navigation }) => {
 
   return (
     <View style={styles.container}>
+      <View style={styles.headlinestyle}>
+        <Text style={styles.headtextstyle}>리뷰 남기기</Text>
+      </View>
       <Text style={styles.textstyle}>이 카페에서의 경험을 공유해주세요</Text>
-      <StarRating
-        disabled={false}
-        maxStars={5}
-        selectedStar={(rating) => onChangeRating(rating)}
-        rating={rating}
-        fullStarColor={"#FEBF34"}
-      />
+
+      <View style={styles.starstyle}>
+        <StarRating
+          disabled={false}
+          maxStars={5}
+          selectedStar={(rating) => onChangeRating(rating)}
+          rating={rating}
+          fullStarColor={"#FEBF34"}
+          starSize={50}
+        />
+      </View>
       <TextInput
-        style={styles.textstyle}
+        style={styles.inputstyle}
+        multiline
         placeholder={"리뷰를 작성해주세요"}
         onChangeText={(text) => onChangereview(text)}
         value={review}
       />
+      <View style={styles.inputlinestyle}></View>
       <TouchableOpacity
         onPress={() => {
           postReviewCall();
@@ -76,13 +87,42 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "#fff",
-    alignItems: "center",
-    justifyContent: "center",
+    paddingLeft: 30,
+    paddingTop: 80,
   },
   textstyle: {
     justifyContent: "center",
-    fontSize: 18,
-    margin: 10,
+    fontWeight: "500",
+    fontSize: 20,
+    marginVertical: 20,
+  },
+  inputlinestyle: {
+    width: 250,
+    borderBottomColor: "#000000",
+    borderBottomWidth: 1,
+    marginBottom: 15,
+  },
+  inputstyle: {
+    width: 240,
+    paddingBottom: 7,
+    marginTop: 15,
+    fontSize: 17,
+  },
+  headtextstyle: {
+    fontSize: 30,
+    fontWeight: "bold",
+    paddingBottom: 10,
+    color: "#692702",
+  },
+  headlinestyle: {
+    width: 250,
+    borderBottomColor: "#000000",
+    borderBottomWidth: 3,
+    marginBottom: 15,
+  },
+  starstyle: {
+    marginTop: 10,
+    width: 100,
   },
 });
 

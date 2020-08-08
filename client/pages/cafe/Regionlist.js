@@ -5,6 +5,7 @@ import {
   View,
   TouchableOpacity,
   AsyncStorage,
+  ScrollView,
 } from "react-native";
 import axios from "axios";
 
@@ -24,17 +25,18 @@ function Regionlist({ route, navigation }) {
         Setcity(
           res.data.map((result) => {
             return (
-              <TouchableOpacity
-                key={result.name}
-                onPress={() => {
-                  navigation.navigate("Region", {
-                    region_id: result.id,
-                    city: result.name,
-                  });
-                }}
-              >
-                <Text style={styles.textstyle}>{result.name}</Text>
-              </TouchableOpacity>
+              <View key={result.name}>
+                <TouchableOpacity
+                  onPress={() => {
+                    navigation.navigate("Region", {
+                      region_id: result.id,
+                      city: result.name,
+                    });
+                  }}
+                >
+                  <Text style={styles.buttonstyle}>{result.name}</Text>
+                </TouchableOpacity>
+              </View>
             );
           })
         );
@@ -56,9 +58,13 @@ function Regionlist({ route, navigation }) {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.textstyle}>어떤 지역의 카페정보가 궁금하신가요?</Text>
-      {city}
+      <Text style={styles.headtextstyle}>
+        어떤 지역의 카페정보가 궁금하신가요?
+      </Text>
+      <ScrollView>{city}</ScrollView>
+
       <TouchableOpacity
+        style={styles.container2}
         onPress={() => {
           navigation.navigate("Bookmark");
         }}
@@ -74,12 +80,35 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: "#fff",
     alignItems: "center",
-    justifyContent: "center",
+    paddingBottom: 10,
   },
-  textstyle: {
-    justifyContent: "center",
+  citystyle: {
+    marginTop: 50,
+    width: 500,
+    height: 200,
+  },
+  buttonstyle: {
+    marginTop: 40,
+    alignSelf: "center",
+    padding: 15,
+    borderColor: "#ffdc8a",
+    borderRadius: 10,
+    borderWidth: 2,
     fontSize: 18,
     margin: 10,
+    fontWeight: "500",
+  },
+
+  headtextstyle: {
+    marginTop: 80,
+    fontSize: 22,
+    margin: 10,
+    fontWeight: "bold",
+  },
+  textstyle: {
+    fontSize: 18,
+    margin: 10,
+    fontWeight: "500",
   },
 });
 

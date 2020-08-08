@@ -20,6 +20,12 @@ function Cafes() {
         },
         indicatorStyle: { backgroundColor: "#DB7093" },
       }}
+      screenOptions={{
+        headerStyle: {},
+        headerTintColor: "#fff",
+        headerBackTitleVisible: false,
+        headerShown: false,
+      }}
     >
       <Stack.Screen name="Regionlist" component={Regionlist} />
       <Stack.Screen name="Region" component={Region} />
