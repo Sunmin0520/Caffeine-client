@@ -7,6 +7,7 @@ import {
   TextInput,
   Button,
   AsyncStorage,
+  ScrollView,
 } from "react-native";
 import StarRating from "react-native-star-rating";
 import axios from "axios";
@@ -20,6 +21,7 @@ const Addnote = ({ navigation, route }) => {
   const [rating, onChangeRating] = useState(0);
   const [flavor, onChangeFlavor] = useState([]);
   const [arrayflavor, setarrayflavor] = useState([]);
+  const [isfocused, setIsfocused] = useState(false);
 
   const handleFlavorColor = (data) => {
     //data는 flavor의 id값
@@ -95,75 +97,139 @@ const Addnote = ({ navigation, route }) => {
   }, []);
 
   return (
-    <View style={{ flex: 1, backgroundColor: "#F8F8F5" }}>
-      <Text>원두이름</Text>
-      <TextInput
-        style={{ height: 30, borderColor: "gray", borderWidth: 1 }}
-        onChangeText={(text) => onChangeName(text)}
-      />
-      <Text>원산지</Text>
-      <TextInput
-        style={{ height: 30, borderColor: "gray", borderWidth: 1 }}
-        onChangeText={(text) => onChangeOrigin(text)}
-      />
-      <Text>flavor</Text>
-      <View style={styles.container}>
-        {arrayflavor.map((result) => (
-          <TouchableOpacity
-            key={result.id}
-            style={
-              handleFlavorColor(result.id)
-                ? styles.flavorbuttonPress
-                : styles.flavorbutton
-            }
-            onPress={() => {
-              onCheckboxBtnClick(result.id);
-            }}
-            flavor={(num) => onChangeFlavor(num)}
-          >
-            <Text>{result.name}</Text>
-          </TouchableOpacity>
-        ))}
+    <View style={styles.container}>
+      <View style={styles.container2}>
+        <Text style={styles.headtextstyle}>새로운 원두 기록하기</Text>
       </View>
+      <ScrollView>
+        <View style={styles.container3}>
+          <Text style={styles.topText}>원두이름</Text>
+          <TextInput
+            placeholder="원두이름을 입력해주세요"
+            style={styles.textInput}
+            onChangeText={(text) => onChangeName(text)}
+          />
+        </View>
+        <View style={styles.container3}>
+          <Text style={styles.topText}>원산지</Text>
+          <TextInput
+            placeholder="원산지를 입력해주세요"
+            style={styles.textInput}
+            onChangeText={(text) => onChangeOrigin(text)}
+          />
+        </View>
+        <View style={styles.container3}>
+          <Text style={styles.topText}>구매처</Text>
+          <TextInput
+            placeholder="구매처를 입력해주세요"
+            style={styles.textInput}
+            onChangeText={(text) => onChangeMall(text)}
+          />
+        </View>
+        <View style={styles.container3}>
+          <Text style={styles.topText}>100g 당 가격</Text>
+          <TextInput
+            placeholder="가격을 입력해주세요"
+            style={styles.textInput}
+            onChangeText={(text) => onChangePrice(text)}
+          />
+        </View>
+        <View style={styles.container3}>
+          <Text style={styles.topText}>특징</Text>
+          <TextInput
+            placeholder="특징을 입력해주세요"
+            style={[styles.textInput, { height: 60 }]}
+            onChangeText={(text) => onChangeFeature(text)}
+            multiline
+            numberOfLines={3}
+          />
+        </View>
 
-      <Text>구매처</Text>
-      <TextInput
-        style={{ height: 30, borderColor: "gray", borderWidth: 1 }}
-        onChangeText={(text) => onChangeMall(text)}
-      />
+        <View style={styles.container3}>
+          <Text style={styles.topText}>플레이버 노트</Text>
+          <View style={styles.container4}>
+            {arrayflavor.map((result) => (
+              <TouchableOpacity
+                key={result.id}
+                style={
+                  handleFlavorColor(result.id)
+                    ? styles.flavorbuttonPress
+                    : styles.flavorbutton
+                }
+                onPress={() => {
+                  onCheckboxBtnClick(result.id);
+                }}
+                flavor={(num) => onChangeFlavor(num)}
+              >
+                <Text>{result.name}</Text>
+              </TouchableOpacity>
+            ))}
+          </View>
+        </View>
+        <View style={styles.container3}>
+          <Text style={styles.topText}>평점</Text>
+          <StarRating
+            disabled={false}
+            maxStars={5}
+            rating={rating}
+            selectedStar={(rating) => onChangeRating(rating)}
+            fullStarColor={"#FEBF34"}
+            starSize={40}
+            starStyle={styles.rating}
+          />
+        </View>
+      </ScrollView>
 
-      <Text>가격</Text>
-      <TextInput
-        style={{ height: 30, borderColor: "gray", borderWidth: 1 }}
-        onChangeText={(number) => onChangePrice(number)}
-      />
-
-      <Text>특징</Text>
-      <TextInput
-        style={{ height: 30, borderColor: "gray", borderWidth: 1 }}
-        onChangeText={(text) => onChangeFeature(text)}
-      />
-
-      <Text>평점</Text>
-      <StarRating
-        disabled={false}
-        maxStars={5}
-        rating={rating}
-        selectedStar={(rating) => onChangeRating(rating)}
-        fullStarColor={"#FEBF34"}
-      />
-
-      <TouchableOpacity style={styles.button} onPress={postAddnote}>
-        <Text>등록하기</Text>
-      </TouchableOpacity>
+      <View style={styles.footer}>
+        <TouchableOpacity style={styles.addButtonstyle} onPress={postAddnote}>
+          <Text style={styles.addNotestyle}>등록하기</Text>
+        </TouchableOpacity>
+      </View>
     </View>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
+    flex: 1,
+    // flexDirection: "row",
+    // flexWrap: "wrap",
+    backgroundColor: "#fff",
+    paddingLeft: 30,
+  },
+  container2: {
+    marginTop: 20,
+    marginBottom: 10,
+    width: 300,
+    borderBottomColor: "#000000",
+    borderBottomWidth: 5,
+  },
+  headtextstyle: {
+    fontSize: 30,
+    fontWeight: "bold",
+    paddingBottom: 10,
+    color: "#692702",
+  },
+  container3: {
+    marginTop: 12,
+    paddingBottom: 5,
+    width: 300,
+    borderBottomColor: "#E5E5E5",
+    borderBottomWidth: 1,
+  },
+  container4: {
+    marginTop: 5,
+    paddingBottom: 5,
+    width: 300,
     flexDirection: "row",
     flexWrap: "wrap",
+  },
+  topText: {
+    fontWeight: "800",
+    fontWeight: "bold",
+    fontSize: 15,
+    marginBottom: 10,
+    marginRight: 7,
   },
   button: {
     alignItems: "center",
@@ -171,18 +237,53 @@ const styles = StyleSheet.create({
     padding: 10,
   },
   flavorbutton: {
-    backgroundColor: "#F8F8F5",
     alignItems: "center",
-    borderWidth: 1,
-    width: 80,
+    width: 70,
     padding: 2,
+    margin: 2,
+    borderRadius: 5,
+    borderColor: "#E9E2E2",
+    borderWidth: 3,
   },
   flavorbuttonPress: {
-    backgroundColor: "yellow",
     alignItems: "center",
-    borderWidth: 1,
-    width: 80,
+    width: 70,
     padding: 2,
+    margin: 2,
+    borderRadius: 5,
+    borderColor: "#E9E2E2",
+    borderWidth: 3,
+    backgroundColor: "#E9E2E2",
+  },
+  footer: {
+    flexDirection: "row",
+    flexWrap: "wrap",
+    margin: 3,
+    bottom: 0,
+    alignContent: "center",
+  },
+  addButtonstyle: {
+    backgroundColor: "#7B6D64",
+    justifyContent: "center",
+    borderRadius: 3,
+    padding: 10,
+    width: 330,
+    height: 45,
+    margin: 5,
+  },
+  addNotestyle: {
+    alignSelf: "center",
+    fontWeight: "400",
+    fontWeight: "bold",
+    color: "white",
+    fontSize: 16,
+  },
+  rating: { marginTop: 4 },
+  textInput: {
+    height: 30,
+    paddingLeft: 6,
+    backgroundColor: "#f7f7f7",
+    borderRadius: 5,
   },
 });
 
