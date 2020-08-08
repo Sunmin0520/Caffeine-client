@@ -60,7 +60,7 @@
    - Cafe
      - 사용자가 새로운 카페 정보 추가시 'Daum 우편번호 검색 서비스'의 적용으로 Caffeine의 데이터베이스에 이미 저장되어 있는 주소의 경우 중복으로 등록되는 것 방지
     
-  - 김현우 https://github.com/hyun0310woo
+ - 김현우 https://github.com/hyun0310woo
    - **Front-end / User**
    - 기존 사용자의 로그인, 로그아웃 처리, 새로운 사용자의 회원가입
    - 토큰을 통한 로그인 상태의 유지
