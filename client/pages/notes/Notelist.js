@@ -3,16 +3,19 @@ import {
   StyleSheet,
   View,
   Text,
-  Button,
   TouchableOpacity,
   AsyncStorage,
+  ScrollView,
 } from "react-native";
-import Fakedatanotes from "./FakeDatanotes";
 import axios from "axios";
-//import { useNavigation } from "@react-navigation/native";
+import StarRating from "react-native-star-rating";
 const Notelist = ({ navigation }) => {
   const [noteListUp, setNoteListUp] = useState([]);
 
+  const createdAtFilter = (data) => {
+    let date = data.slice(0, 10);
+    return date;
+  };
   const getNoteList = async () => {
     const value = await AsyncStorage.getItem("userToken");
 
@@ -23,12 +26,10 @@ const Notelist = ({ navigation }) => {
         },
       })
       .then((res) => {
-        //console.log(res.data);
-
         setNoteListUp(
           res.data.map((result) => {
             return result;
-          })
+          }),
         );
       })
       .catch((err) => {
@@ -44,84 +45,150 @@ const Notelist = ({ navigation }) => {
   }, []);
 
   return (
-    <View style={{ flex: 1, backgroundColor: "#F8F8F5" }}>
-      {/* <Text>Cupping Note</Text>
-      <View style={styles.header}>
-        <Text style={{ flex: 1 }}>원두</Text>
-        <Text style={{ flex: 1 }}>날짜</Text>
-        <Text style={{ flex: 1 }}>평점</Text>
+    <View style={styles.container}>
+      <View style={styles.container2}>
+        <Text style={styles.headtextstyle}>원두 기록 히스토리</Text>
       </View>
-      <View style={styles.content}>
-        <View style={styles.element}>
-          <Text style={styles.profile}>{beenName[0].name}</Text>
-          <Text style={styles.profile}>{beenDate}</Text>
-          <Text style={styles.profile}>{beenRate}</Text>
-        </View>
-      </View> */}
 
-      {/* <View style={{ flexDirection: "row", flex: 1 }}>
-        <Text style={{ alignItems: "center", flex: 1 }}>원두 {noteListUp}</Text> */}
-      {noteListUp.map((listup) => (
-        <View key={listup.id}>
-          <TouchableOpacity
-            onPress={() => {
-              navigation.navigate("Noteinfo", {
-                note_id: listup.id,
-                user_id: listup.user_id,
-                // name: listup.name,
-                // origin: listup.origin,
-                // flavor: listup.flavor,
-                // mall: listup.mall,
-                // price: listup.price,
-                // feature: listup.feature,
-                // rating: listup.rating,
-              });
-            }}
-          >
-            <Text>정보보기</Text>
-          </TouchableOpacity>
-          <Text>원두 : {listup.name}</Text>
-          <Text>구매처 : {listup.mall}</Text>
-          <Text>평점 : {listup.rating}</Text>
-        </View>
-      ))}
-      <Button
-        title="새 노트 추가하기"
-        onPress={() => navigation.navigate("Addnote")}
-      />
+      <ScrollView>
+        {noteListUp.reverse().map((listup) => (
+          <View key={listup.id}>
+            <TouchableOpacity
+              style={styles.noteListStyle}
+              onPress={() => {
+                navigation.navigate("Noteinfo", {
+                  note_id: listup.id,
+                  user_id: listup.user_id,
+                });
+              }}
+            >
+              <View
+                style={{
+                  flexDirection: "row",
+                  flexWrap: "wrap",
+                  paddingBottom: 5,
+                }}
+              >
+                <Text style={styles.topText}>원두</Text>
+                <Text style={styles.bottomText}>{listup.name}</Text>
+                <Text style={styles.topText}>평점</Text>
+                <StarRating
+                  disabled={true}
+                  maxStars={5}
+                  rating={listup.rating}
+                  fullStarColor={"#FEBF34"}
+                  starSize={17}
+                  starStyle={styles.rating}
+                />
+                <View style={styles.container5}>
+                  <Text style={styles.topText}>특징</Text>
+                  <Text style={styles.featureText} numberOfLines={1}>
+                    {listup.feature}
+                  </Text>
+                  <Text style={styles.dateText}>
+                    작성된 날짜 {createdAtFilter(listup.createdAt)}
+                  </Text>
+                </View>
+              </View>
+              {/* <Text style={styles.routeButtonText}>정보보기</Text> */}
+            </TouchableOpacity>
+          </View>
+        ))}
+      </ScrollView>
+      <View style={styles.footer}>
+        <TouchableOpacity
+          style={styles.addButtonstyle}
+          onPress={() => navigation.navigate("Addnote")}
+        >
+          <Text style={styles.addNotestyle}>새 노트 추가하기</Text>
+        </TouchableOpacity>
+      </View>
     </View>
   );
 };
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor: "#fff",
+    paddingLeft: 30,
   },
-  header: {
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "center",
-    height: 40,
-    backgroundColor: "brown",
+  container2: {
+    marginTop: 20,
+    marginBottom: 10,
+    width: 300,
+    borderBottomColor: "#000000",
+    borderBottomWidth: 5,
   },
-  content: {
-    flex: 1,
-    //flexDirection: "row",
+  container5: {
+    marginTop: 5,
+    paddingBottom: 5,
+    width: 300,
+    flexDirection: "column",
+    flexWrap: "wrap",
   },
-  element: {
-    flex: 1,
-    width: "100%",
-    //flexDirection: "column",
-    // alignItems: "center",
-    // justifyContent: "space-between",
+  headtextstyle: {
+    fontSize: 30,
+    fontWeight: "bold",
+    paddingBottom: 10,
+    color: "#692702",
+  },
+  noteListStyle: {
+    marginTop: 10,
+    width: 350,
+    borderBottomColor: "#E9E2E2",
+    borderBottomWidth: 2,
+  },
 
-    borderBottomWidth: 0.5,
-    padding: 5,
+  topText: {
+    fontWeight: "800",
+    fontWeight: "bold",
+    fontSize: 15,
+    marginBottom: 1,
+    marginRight: 7,
   },
-  profile: {
-    padding: 8,
-    backgroundColor: "yellow",
-    borderRadius: 5,
+  dateText: {
+    alignSelf: "flex-end",
+    fontSize: 12,
+    color: "#878787",
+    marginTop: 5,
+    marginRight: 15,
   },
+  bottomText: {
+    fontWeight: "400",
+    fontSize: 15,
+    width: 150,
+    marginRight: 20,
+  },
+  featureText: {
+    fontWeight: "400",
+    fontSize: 15,
+    width: 340,
+    marginRight: 20,
+  },
+  footer: {
+    flexDirection: "row",
+    flexWrap: "wrap",
+    margin: 3,
+    bottom: 0,
+    alignContent: "center",
+  },
+  addButtonstyle: {
+    backgroundColor: "#7B6D64",
+    justifyContent: "center",
+    borderRadius: 3,
+    padding: 10,
+    width: 330,
+    height: 45,
+    margin: 5,
+  },
+  addNotestyle: {
+    alignSelf: "center",
+    fontWeight: "400",
+    fontWeight: "bold",
+    color: "white",
+    fontSize: 16,
+  },
+  rating: { marginTop: 4 },
 });
 
 export default Notelist;
