@@ -73,7 +73,7 @@ Caffeine은 커피를 즐길 수 있는 **카페**라는 공간을 좋아하고,
   - 김현우 https://github.com/hyun0310woo
    - **Front-end / User**
    - 기존 사용자의 로그인, 로그아웃 처리, 새로운 사용자의 회원가입
-   - 토큰을 통한 로그인 상태의 
+   - 토큰을 통한 로그인 상태의 유지
    
   - 조선민 https://github.com/Sunmin0520
    - **Back-end / Cafe, Note, User**
