@@ -80,16 +80,17 @@ const Notelist = ({ navigation }) => {
                   starSize={17}
                   starStyle={styles.rating}
                 />
-                <View style={styles.container5}>
-                  <Text style={styles.topText}>특징</Text>
-                  <Text style={styles.featureText} numberOfLines={1}>
-                    {listup.feature}
-                  </Text>
-                  <Text style={styles.dateText}>
-                    작성된 날짜 {createdAtFilter(listup.createdAt)}
-                  </Text>
-                </View>
               </View>
+              <View style={styles.container5}>
+                <Text style={styles.topText}>특징</Text>
+                <Text style={styles.featureText} numberOfLines={1}>
+                  {listup.feature}
+                </Text>
+                <Text style={styles.dateText}>
+                  작성된 날짜 {createdAtFilter(listup.createdAt)}
+                </Text>
+              </View>
+
               {/* <Text style={styles.routeButtonText}>정보보기</Text> */}
             </TouchableOpacity>
           </View>
@@ -127,6 +128,7 @@ const styles = StyleSheet.create({
     flexWrap: "wrap",
   },
   headtextstyle: {
+    marginTop: 40,
     fontSize: 30,
     fontWeight: "bold",
     paddingBottom: 10,
@@ -134,7 +136,7 @@ const styles = StyleSheet.create({
   },
   noteListStyle: {
     marginTop: 10,
-    width: 350,
+    width: 320,
     borderBottomColor: "#E9E2E2",
     borderBottomWidth: 2,
   },
@@ -143,12 +145,11 @@ const styles = StyleSheet.create({
     fontWeight: "800",
     fontWeight: "bold",
     fontSize: 15,
-    marginBottom: 1,
-    marginRight: 7,
+    marginRight: 5,
   },
   dateText: {
-    alignSelf: "flex-end",
-    fontSize: 12,
+    alignSelf: "flex-start",
+    fontSize: 10,
     color: "#878787",
     marginTop: 5,
     marginRight: 15,
@@ -162,24 +163,23 @@ const styles = StyleSheet.create({
   featureText: {
     fontWeight: "400",
     fontSize: 15,
-    width: 340,
+    width: 320,
     marginRight: 20,
   },
   footer: {
-    flexDirection: "row",
-    flexWrap: "wrap",
     margin: 3,
     bottom: 0,
-    alignContent: "center",
+    // justifyContent: "center",
+    alignSelf: "flex-start",
   },
   addButtonstyle: {
     backgroundColor: "#7B6D64",
     justifyContent: "center",
     borderRadius: 3,
-    padding: 10,
-    width: 330,
+    padding: 1,
+    width: 300,
     height: 45,
-    margin: 5,
+    margin: 10,
   },
   addNotestyle: {
     alignSelf: "center",
@@ -188,7 +188,7 @@ const styles = StyleSheet.create({
     color: "white",
     fontSize: 16,
   },
-  rating: { marginTop: 4 },
+  rating: {},
 });
 
 export default Notelist;

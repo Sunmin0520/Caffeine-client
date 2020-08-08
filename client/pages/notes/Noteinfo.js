@@ -253,7 +253,7 @@ const styles = StyleSheet.create({
   container3: {
     marginTop: 12,
     paddingBottom: 5,
-    width: 300,
+    width: 320,
     borderBottomColor: "#E5E5E5",
     borderBottomWidth: 1,
   },
@@ -265,6 +265,7 @@ const styles = StyleSheet.create({
     flexWrap: "wrap",
   },
   headtextstyle: {
+    marginTop: 40,
     fontSize: 30,
     fontWeight: "bold",
     paddingBottom: 10,
@@ -287,12 +288,12 @@ const styles = StyleSheet.create({
   footer: {
     flexDirection: "row",
     flexWrap: "wrap",
+    alignSelf: "flex-start",
     bottom: 0,
-    alignContent: "center",
   },
 
   button: {
-    alignItems: "center",
+    justifyContent: "center",
     backgroundColor: "#7B6D64",
     borderRadius: 5,
     padding: 10,
@@ -303,6 +304,7 @@ const styles = StyleSheet.create({
   bottonTextWhite: {
     fontWeight: "400",
     fontWeight: "bold",
+    alignSelf: "center",
     color: "white",
     fontSize: 16,
   },
@@ -313,6 +315,8 @@ const styles = StyleSheet.create({
     margin: 2,
     borderRadius: 5,
     backgroundColor: "#E9E2E2",
+    borderColor: "#E9E2E2",
+    borderWidth: 3,
   },
   centeredView: {
     flex: 1,

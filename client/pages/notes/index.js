@@ -10,12 +10,11 @@ const Stack = createStackNavigator();
 function Notes() {
   return (
     <Stack.Navigator
-      style={{ marginTop: 25 }}
-      tabBarOptions={{
-        style: {
-          backgroundColor: "white",
-        },
-        indicatorStyle: { backgroundColor: "#DB7093" },
+      screenOptions={{
+        headerStyle: {},
+        headerTintColor: "#fff",
+        headerBackTitleVisible: false,
+        headerShown: false,
       }}
     >
       <Stack.Screen name="Notelist" component={Notelist} />
