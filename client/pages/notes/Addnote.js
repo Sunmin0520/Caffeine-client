@@ -205,6 +205,7 @@ const styles = StyleSheet.create({
     borderBottomWidth: 5,
   },
   headtextstyle: {
+    marginTop:40,
     fontSize: 30,
     fontWeight: "bold",
     paddingBottom: 10,
@@ -258,7 +259,7 @@ const styles = StyleSheet.create({
   footer: {
     flexDirection: "row",
     flexWrap: "wrap",
-    margin: 3,
+    paddingRight:27,
     bottom: 0,
     alignContent: "center",
   },
@@ -266,10 +267,10 @@ const styles = StyleSheet.create({
     backgroundColor: "#7B6D64",
     justifyContent: "center",
     borderRadius: 3,
-    padding: 10,
-    width: 330,
+    padding: 5,
+    width: 287,
     height: 45,
-    margin: 5,
+    margin: 11,
   },
   addNotestyle: {
     alignSelf: "center",
