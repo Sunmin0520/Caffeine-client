@@ -88,4 +88,4 @@ Caffeine은 client side([https://github.com/codestates/Caffeine-client)](https:/
    
    ## Stack
    - Front-end: React Native, Expo, Axios, Daum post code api
-   - Back-end: node.js, express, jwt, Sequelize, MySQL,EC2, RDS
+   - Back-end: node.js, express, mocha, chai, JWT, Sequelize, MySQL, EC2, RDS
