@@ -51,7 +51,7 @@ Caffeine은 client side([https://github.com/codestates/Caffeine-client)](https:/
     - 로그인시 생성되는 사용자 정보를 바탕으로 그 이후의 모든 요청시 정보를 확인합니다. 비정상적인 방법으로 특정 페이지에 접근시 알림창이 나오고, 로그인 페이지로 이동합니다.
 
  ## Documentation
- [Swagger UI.pdf](https://github.com/codestates/Caffeine-server/files/5044757/Swagger.UI.pdf)
+ [Caffeine API docs.pdf](https://github.com/codestates/Caffeine-client/files/5046771/Caffeine.API.docs.pdf)
  
  ## Author
  - 이지하 https://github.com/ayus91
