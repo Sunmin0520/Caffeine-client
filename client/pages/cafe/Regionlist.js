@@ -12,6 +12,7 @@ import axios from "axios";
 function Regionlist({ route, navigation }) {
   //DB에 있는 지역리스트를 가져옵니다.
   const [city, Setcity] = useState(null);
+  const [button, SetButton] = useState(false);
 
   const getRegionList = async () => {
     const value = await AsyncStorage.getItem("userToken");
@@ -27,6 +28,7 @@ function Regionlist({ route, navigation }) {
             return (
               <View key={result.name}>
                 <TouchableOpacity
+                  style={styles.buttonstyle}
                   onPress={() => {
                     navigation.navigate("Region", {
                       region_id: result.id,
@@ -34,7 +36,7 @@ function Regionlist({ route, navigation }) {
                     });
                   }}
                 >
-                  <Text style={styles.buttonstyle}>{result.name}</Text>
+                  <Text style={styles.textstyle}>{result.name}</Text>
                 </TouchableOpacity>
               </View>
             );
@@ -61,16 +63,17 @@ function Regionlist({ route, navigation }) {
       <Text style={styles.headtextstyle}>
         어떤 지역의 카페정보가 궁금하신가요?
       </Text>
-      <ScrollView>{city}</ScrollView>
-
-      <TouchableOpacity
-        style={styles.container2}
-        onPress={() => {
-          navigation.navigate("Bookmark");
-        }}
-      >
-        <Text style={styles.textstyle}>북마크 바로가기(공사중)</Text>
-      </TouchableOpacity>
+      <View style={styles.bookmarkstyle}>
+        <TouchableOpacity
+          style={styles.container2}
+          onPress={() => {
+            navigation.navigate("Bookmark");
+          }}
+        >
+          <Text style={styles.bookmarktextstyle}>Bookmark 바로가기</Text>
+        </TouchableOpacity>
+      </View>
+      <View style={styles.flexwrapstyle}>{city}</View>
     </View>
   );
 }
@@ -80,29 +83,23 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: "#fff",
     alignItems: "center",
-    paddingBottom: 10,
   },
   citystyle: {
-    marginTop: 50,
     width: 500,
     height: 200,
   },
-  buttonstyle: {
-    marginTop: 40,
+  flexwrapstyle: {
     alignSelf: "center",
-    padding: 15,
-    borderColor: "#ffdc8a",
-    borderRadius: 10,
-    borderWidth: 2,
-    fontSize: 18,
-    margin: 10,
-    fontWeight: "500",
+    flexDirection: "row",
+    flexWrap: "wrap",
+    width: 300,
+    marginTop: 10,
+    marginLeft: 20,
   },
-
   headtextstyle: {
+    alignSelf: "center",
     marginTop: 80,
     fontSize: 22,
-    margin: 10,
     fontWeight: "bold",
   },
   textstyle: {
@@ -110,6 +107,28 @@ const styles = StyleSheet.create({
     margin: 10,
     fontWeight: "500",
   },
+  bookmarktextstyle: {
+    fontSize: 16,
+    margin: 10,
+    fontWeight: "400",
+  },
+  buttonstyle: {
+    padding: 2,
+    marginTop: 10,
+    marginHorizontal: 5,
+    borderRadius: 5,
+    borderColor: "#C7C1C1",
+    borderWidth: 3,
+  },
+  bookmarkstyle: {
+    alignSelf: "flex-end",
+    padding: 2,
+    marginTop: 20,
+    marginRight: 37,
+    marginHorizontal: 5,
+    borderRadius: 5,
+    borderColor: "#E9E2E2",
+    borderWidth: 3,
+  },
 });
-
 export default Regionlist;

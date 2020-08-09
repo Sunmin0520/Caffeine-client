@@ -31,15 +31,18 @@ const Bookmark = ({ route, navigation }) => {
 
         for (let i = 0; i < res.data.length; i++) {
           dataArr.push(res.data[i].cafe_id);
-          getCafeinfoCall(dataArr);
         }
+        return dataArr;
+      })
+      .then((data) => {
+        getCafeinfoCall(data);
       })
       .catch(function (error) {
         console.log(error); //401{result:"token expired"} 수정예정
       });
   };
 
-  const getCafeinfoCall = async (...cafeId) => {
+  const getCafeinfoCall = async (cafeId) => {
     const value = await AsyncStorage.getItem("userToken");
     axios
       .get("http://13.125.247.226:3001/cafes/allcafes", {
@@ -54,24 +57,60 @@ const Bookmark = ({ route, navigation }) => {
         for (let k = 0; k < res.data.length; k++) {
           arr.push(res.data[k]);
         }
-        //
+        // //
         // console.log(cafeId[0])
-        for (let i = 0; i < cafeId[0].length; i++) {
-          // console.log(cafeId[0][i])
+        for (let i = 0; i < cafeId.length; i++) {
+          // console.log(cafeId[i])
           for (let j = 0; j < arr.length; j++) {
             // console.log(arr[j].id)
-            if (cafeId[0][i] === arr[j].id) {
-              // console.log(arr[j].name)
-              nameArr.push(arr[j].name);
-              Setname(
-                nameArr.map((result) => {
-                  return result;
-                })
-              );
+            if (cafeId[i] === arr[j].id) {
+              // console.log(arr[j])
+              nameArr.push({
+                id: arr[j].id,
+                name: arr[j].name,
+                address: arr[j].address,
+                region_id: arr[i].region_id,
+              });
             }
           }
         }
-        console.log(name);
+        console.log(nameArr);
+        return nameArr;
+        // console.log(name);
+      })
+      .then((data) => {
+        Setbookmarks(
+          data.map((result) => {
+            Setaddress(result.id);
+            return (
+              <View key={result.id}>
+                <TouchableOpacity
+                  style={styles.liststyle}
+                  onPress={() => {
+                    navigation.navigate("Cafeinfo", {
+                      cafe_id: result.id,
+                    });
+                  }}
+                >
+                  <Text style={styles.textstyle}>{result.name}</Text>
+                  <Text style={styles.addressstyle} numberOfLines={1}>
+                    {result.address}
+                  </Text>
+                </TouchableOpacity>
+
+                {/* <TouchableOpacity
+                  onPress={() => {
+                    handleDeleteBookmark(address);
+                    console.log(result.id);
+                  }}
+                >
+                  <Text>삭제하기</Text>
+                </TouchableOpacity> */}
+              </View>
+            );
+          })
+        );
+        // console.log("name",name)
       })
       .catch(function (error) {
         console.log(error); //401{result:"token expired"} 수정예정
@@ -94,11 +133,16 @@ const Bookmark = ({ route, navigation }) => {
 
   useEffect(() => {
     getBookmarkcall();
-  }, [name]);
+  }, []);
 
   return (
     <View style={styles.container}>
-      <Text style={styles.textstyle}>북마크 입니다</Text>
+      <View style={styles.container2}>
+        <View style={styles.headlinestyle}>
+          <Text style={styles.headtextstyle}>Bookmark</Text>
+        </View>
+        {bookmarks}
+      </View>
     </View>
   );
 };
@@ -108,12 +152,38 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: "#fff",
     alignItems: "center",
-    justifyContent: "center",
+    paddingLeft: 20,
+  },
+  container2: {
+    alignSelf: "flex-start",
   },
   textstyle: {
-    justifyContent: "center",
-    fontSize: 18,
-    margin: 7,
+    fontWeight: "500",
+    fontSize: 20,
+    marginTop: 20,
+  },
+  addressstyle: {
+    fontSize: 17,
+    fontWeight: "400",
+    marginVertical: 5,
+  },
+  liststyle: {
+    marginTop: 10,
+    width: 330,
+    borderBottomColor: "#E9E2E2",
+    borderBottomWidth: 2,
+  },
+  headlinestyle: {
+    marginTop: 60,
+    width: 200,
+    borderBottomColor: "#000000",
+    borderBottomWidth: 3,
+  },
+  headtextstyle: {
+    fontSize: 30,
+    fontWeight: "bold",
+    paddingBottom: 10,
+    color: "#692702",
   },
 });
 
