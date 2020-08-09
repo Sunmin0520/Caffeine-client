@@ -87,5 +87,5 @@ Caffeine은 client side([https://github.com/codestates/Caffeine-client)](https:/
      - JWT middleware를 통한 인증 및 접근권한 부여와 중복되는 코드 방지
    
    ## Stack
-   - Front-end: 
+   - Front-end: React Native, Expo, Axios, Daum post code api
    - Back-end: node.js, express, jwt, Sequelize, MySQL,EC2, RDS
