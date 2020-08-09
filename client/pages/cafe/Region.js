@@ -66,7 +66,7 @@ const Region = ({ route, navigation }) => {
       <View style={styles.container2}>
         <Text style={styles.headtextstyle}>{city}</Text>
       </View>
-      <View>
+      <View style={styles.plusbutton}>
         <TouchableOpacity
           style={styles.buttonstyle}
           onPress={() => {
@@ -87,13 +87,18 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "#fff",
-    paddingLeft: 30,
+    alignItems: "center",
+    paddingLeft: 20,
   },
   container2: {
-    marginTop: 80,
+    alignSelf: "flex-start",
+    marginTop: 60,
     width: 90,
     borderBottomColor: "#000000",
     borderBottomWidth: 5,
+  },
+  plusbutton: {
+    alignSelf: "flex-end",
   },
   pluscafestyle: {
     fontSize: 18,
@@ -107,17 +112,18 @@ const styles = StyleSheet.create({
     color: "#692702",
   },
   buttonstyle: {
-    alignSelf: "flex-end",
-    marginRight: 30,
-    width: 130,
-    height: 35,
-    backgroundColor: "#ffdc8a",
-    borderRadius: 10,
+    padding: 2,
+    marginTop: 5,
+    marginRight: 25,
+    marginHorizontal: 5,
+    borderRadius: 5,
+    borderColor: "#E9E2E2",
+    borderWidth: 3,
   },
   cafeliststyle: {
     marginTop: 10,
-    width: 350,
-    borderBottomColor: "#000000",
+    width: 330,
+    borderBottomColor: "#E9E2E2",
     borderBottomWidth: 2,
   },
   cafenamestyle: {
@@ -131,7 +137,7 @@ const styles = StyleSheet.create({
   },
   scrollstyle: {
     height: 650,
+    alignSelf: "flex-start",
   },
 });
-
 export default Region;

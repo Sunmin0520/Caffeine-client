@@ -10,20 +10,17 @@ import {
 import axios from "axios";
 import * as Linking from "expo-linking";
 import StarRating from "react-native-star-rating";
-
 const Cafeinfo = ({ route, navigation }) => {
   //Region에서 선택한 카페의 상세 내용을 출력합니다.
   const cafe_id = route.params.cafe_id; //Region에서 선택한 하나의 카페의 ID입니다.
   const city = route.params.city;
   const user_id = route.params.user_id;
-
   const [name, Setname] = useState(null);
   const [address, Setaddress] = useState(null);
   const [sell_beans, Setsell_beans] = useState(null);
   const [instagram_account, Setinstagram_account] = useState(null);
   const [rating_average, Setrating_average] = useState(null);
   const [reviews, Setreviews] = useState(null);
-
   const getCafeinfoCall = async () => {
     const value = await AsyncStorage.getItem("userToken");
     axios
@@ -36,7 +33,6 @@ const Cafeinfo = ({ route, navigation }) => {
         Setname(res.data.name),
           Setaddress(res.data.address),
           Setinstagram_account(res.data.instagram_account);
-
         if (res.data.sell_beans === true) {
           return Setsell_beans("판매");
         } else if (res.data.sell_beans === false) {
@@ -55,7 +51,6 @@ const Cafeinfo = ({ route, navigation }) => {
         }
       });
   };
-
   const postBookmarkCall = async () => {
     const value = await AsyncStorage.getItem("userToken");
     axios
@@ -80,7 +75,6 @@ const Cafeinfo = ({ route, navigation }) => {
         console.log(error);
       });
   };
-
   const getCafeReviewCall = async () => {
     const value = await AsyncStorage.getItem("userToken");
     axios
@@ -154,58 +148,58 @@ const Cafeinfo = ({ route, navigation }) => {
     getCafeReviewCall();
     getRatingCall();
   }, [reviews, rating_average]);
-
   return (
     <View style={styles.container}>
       <View style={styles.cafenamestyle}>
         <Text style={styles.headtextstyle}>{name}</Text>
       </View>
-
-      <TouchableOpacity
-        onPress={() => {
-          postBookmarkCall();
-        }}
-      >
-        <Text style={styles.bookmarkstyle}>Bookmark</Text>
-      </TouchableOpacity>
-      <Text style={styles.boldtextstyle}>
-        {`지역    `}
-        <Text style={styles.textstyle}>{city}</Text>
-      </Text>
-      <Text style={styles.boldtextstyle}>
-        {`주소    `}
-        <Text style={styles.textstyle}>{address}</Text>
-      </Text>
-
-      <Text style={styles.boldtextstyle}>
-        {`instagram   `}
-        <Text
-          style={styles.textstyle}
+      <View style={styles.buttonstyle}>
+        <TouchableOpacity
+          style={styles.bookmarkbutton}
           onPress={() => {
-            Linking.openURL(`https://www.instagram.com/${instagram_account}`);
+            postBookmarkCall();
           }}
         >
-          @{instagram_account}
-        </Text>
-      </Text>
-
-      <Text style={styles.boldtextstyle}>
-        {`원두판매    `}
-        <Text style={styles.textstyle}>{sell_beans}</Text>
-      </Text>
-      <Text style={styles.boldtextstyle}>리뷰 전체 평점</Text>
-      <View style={styles.starstyle}>
-        <StarRating
-          disabled={true}
-          maxStars={5}
-          rating={rating_average}
-          fullStarColor={"#FEBF34"}
-          starSize={30}
-        />
+          <Text style={styles.bookmarkstyle}>Bookmark</Text>
+        </TouchableOpacity>
       </View>
-      <Text style={styles.boldtextstyle}>상세리뷰</Text>
-      <ScrollView>{reviews}</ScrollView>
-
+      <View style={styles.textalign}>
+        <Text style={styles.boldtextstyle}>
+          {`지역    `}
+          <Text style={styles.textstyle}>{city}</Text>
+        </Text>
+        <Text style={styles.boldtextstyle}>
+          {`주소    `}
+          <Text style={styles.textstyle}>{address}</Text>
+        </Text>
+        <Text style={styles.boldtextstyle}>
+          {`instagram   `}
+          <Text
+            style={styles.textstyle}
+            onPress={() => {
+              Linking.openURL(`https://www.instagram.com/${instagram_account}`);
+            }}
+          >
+            @{instagram_account}
+          </Text>
+        </Text>
+        <Text style={styles.boldtextstyle}>
+          {`원두판매    `}
+          <Text style={styles.textstyle}>{sell_beans}</Text>
+        </Text>
+        <Text style={styles.boldtextstyle}>리뷰 전체 평점</Text>
+        <View style={styles.starstyle}>
+          <StarRating
+            disabled={true}
+            maxStars={5}
+            rating={rating_average}
+            fullStarColor={"#FEBF34"}
+            starSize={30}
+          />
+        </View>
+        <Text style={styles.boldtextstyle}>상세리뷰</Text>
+        <ScrollView>{reviews}</ScrollView>
+      </View>
       <TouchableOpacity
         onPress={() => {
           navigation.navigate("Addreview", {
@@ -219,13 +213,12 @@ const Cafeinfo = ({ route, navigation }) => {
     </View>
   );
 };
-
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "#fff",
-    paddingVertical: 60,
-    paddingHorizontal: 30,
+    alignItems: "center",
+    paddingLeft: 20,
   },
   textstyle: {
     justifyContent: "center",
@@ -234,10 +227,12 @@ const styles = StyleSheet.create({
     fontWeight: "300",
   },
   cafenamestyle: {
+    alignSelf: "flex-start",
+    marginTop: 60,
     width: 250,
     borderBottomColor: "#000000",
     borderBottomWidth: 3,
-    marginBottom: 15,
+    marginBottom: 10,
   },
   headtextstyle: {
     fontSize: 30,
@@ -255,17 +250,30 @@ const styles = StyleSheet.create({
     width: 80,
   },
   bookmarkstyle: {
-    justifyContent: "center",
     fontSize: 18,
-    marginTop: 10,
-    fontWeight: "300",
+    margin: 5,
+    fontWeight: "400",
   },
+  bookmarkbutton: {
+    padding: 2,
+    marginTop: 0,
+    marginRight: 25,
+    marginHorizontal: 5,
+    borderRadius: 5,
+    borderColor: "#E9E2E2",
+    borderWidth: 3,
+  },
+  buttonstyle: { alignSelf: "flex-end" },
   reviewstyle: {
+    marginRight: 50,
     justifyContent: "center",
     fontSize: 15,
     marginBottom: 13,
     fontWeight: "300",
   },
+  textalign: {
+    alignSelf: "flex-start",
+    height: 400,
+  },
 });
-
 export default Cafeinfo;

@@ -48,37 +48,39 @@ const Addreview = ({ route, navigation }) => {
 
   return (
     <View style={styles.container}>
-      <View style={styles.headlinestyle}>
-        <Text style={styles.headtextstyle}>리뷰 남기기</Text>
-      </View>
-      <Text style={styles.textstyle}>이 카페에서의 경험을 공유해주세요</Text>
+      <View style={styles.container2}>
+        <View style={styles.headlinestyle}>
+          <Text style={styles.headtextstyle}>리뷰 남기기</Text>
+        </View>
+        <Text style={styles.textstyle}>이 카페에서의 경험을 공유해주세요</Text>
 
-      <View style={styles.starstyle}>
-        <StarRating
-          disabled={false}
-          maxStars={5}
-          selectedStar={(rating) => onChangeRating(rating)}
-          rating={rating}
-          fullStarColor={"#FEBF34"}
-          starSize={50}
+        <View style={styles.starstyle}>
+          <StarRating
+            disabled={false}
+            maxStars={5}
+            selectedStar={(rating) => onChangeRating(rating)}
+            rating={rating}
+            fullStarColor={"#FEBF34"}
+            starSize={50}
+          />
+        </View>
+        <TextInput
+          style={styles.inputstyle}
+          multiline
+          placeholder={"리뷰를 작성해주세요"}
+          onChangeText={(text) => onChangereview(text)}
+          value={review}
         />
+        <View style={styles.inputlinestyle}></View>
+        <TouchableOpacity
+          onPress={() => {
+            postReviewCall();
+            navigation.navigate("Cafeinfo");
+          }}
+        >
+          <Text style={styles.textstyle}>등록하기</Text>
+        </TouchableOpacity>
       </View>
-      <TextInput
-        style={styles.inputstyle}
-        multiline
-        placeholder={"리뷰를 작성해주세요"}
-        onChangeText={(text) => onChangereview(text)}
-        value={review}
-      />
-      <View style={styles.inputlinestyle}></View>
-      <TouchableOpacity
-        onPress={() => {
-          postReviewCall();
-          navigation.navigate("Cafeinfo");
-        }}
-      >
-        <Text style={styles.textstyle}>등록하기</Text>
-      </TouchableOpacity>
     </View>
   );
 };
@@ -87,14 +89,16 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "#fff",
-    paddingLeft: 30,
-    paddingTop: 80,
+    alignItems: "center",
+    paddingLeft: 20,
+  },
+  container2: {
+    alignSelf: "flex-start",
   },
   textstyle: {
-    justifyContent: "center",
     fontWeight: "500",
     fontSize: 20,
-    marginVertical: 20,
+    marginTop: 20,
   },
   inputlinestyle: {
     width: 250,
@@ -115,13 +119,13 @@ const styles = StyleSheet.create({
     color: "#692702",
   },
   headlinestyle: {
-    width: 250,
+    marginTop: 60,
+    width: 200,
     borderBottomColor: "#000000",
     borderBottomWidth: 3,
-    marginBottom: 15,
   },
   starstyle: {
-    marginTop: 10,
+    marginTop: 20,
     width: 100,
   },
 });
