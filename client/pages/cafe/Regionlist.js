@@ -5,14 +5,11 @@ import {
   View,
   TouchableOpacity,
   AsyncStorage,
-  ScrollView,
 } from "react-native";
 import axios from "axios";
 
-function Regionlist({ route, navigation }) {
-  //DB에 있는 지역리스트를 가져옵니다.
+function Regionlist({ navigation }) {
   const [city, Setcity] = useState(null);
-  const [button, SetButton] = useState(false);
 
   const getRegionList = async () => {
     const value = await AsyncStorage.getItem("userToken");
@@ -131,4 +128,5 @@ const styles = StyleSheet.create({
     borderWidth: 3,
   },
 });
+
 export default Regionlist;

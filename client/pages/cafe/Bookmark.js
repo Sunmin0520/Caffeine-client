@@ -26,7 +26,6 @@ const Bookmark = ({ route, navigation }) => {
         },
       })
       .then((res) => {
-        // console.log("Bookmark", res.data);
         let dataArr = [];
 
         for (let i = 0; i < res.data.length; i++) {
@@ -38,7 +37,7 @@ const Bookmark = ({ route, navigation }) => {
         getCafeinfoCall(data);
       })
       .catch(function (error) {
-        console.log(error); //401{result:"token expired"} 수정예정
+        console.log(error);
       });
   };
 
@@ -51,20 +50,14 @@ const Bookmark = ({ route, navigation }) => {
         },
       })
       .then((res) => {
-        // console.log(res.data.length)
         let arr = [];
         let nameArr = [];
         for (let k = 0; k < res.data.length; k++) {
           arr.push(res.data[k]);
         }
-        // //
-        // console.log(cafeId[0])
         for (let i = 0; i < cafeId.length; i++) {
-          // console.log(cafeId[i])
           for (let j = 0; j < arr.length; j++) {
-            // console.log(arr[j].id)
             if (cafeId[i] === arr[j].id) {
-              // console.log(arr[j])
               nameArr.push({
                 id: arr[j].id,
                 name: arr[j].name,
@@ -74,9 +67,7 @@ const Bookmark = ({ route, navigation }) => {
             }
           }
         }
-        console.log(nameArr);
         return nameArr;
-        // console.log(name);
       })
       .then((data) => {
         Setbookmarks(
@@ -97,37 +88,27 @@ const Bookmark = ({ route, navigation }) => {
                     {result.address}
                   </Text>
                 </TouchableOpacity>
-
-                {/* <TouchableOpacity
-                  onPress={() => {
-                    handleDeleteBookmark(address);
-                    console.log(result.id);
-                  }}
-                >
-                  <Text>삭제하기</Text>
-                </TouchableOpacity> */}
               </View>
             );
           })
         );
-        // console.log("name",name)
       })
       .catch(function (error) {
-        console.log(error); //401{result:"token expired"} 수정예정
+        console.log(error);
       });
   };
 
-  const handleDeleteBookmark = async (bookmark_id) => {
+  const handleDeleteBookmark = async () => {
     const value = await AsyncStorage.getItem("userToken");
     axios
-      .delete(`http://13.125.247.226:3001/cafes/bookmark/${bookmark_id}`, {
+      .delete(`http://13.125.247.226:3001/cafes/bookmark/${address}`, {
         withCredentials: true,
         headers: {
           Authorization: `Bearer ${value}`,
         },
       })
       .catch(function (error) {
-        console.log(error); //401{result:"token expired"} 수정예정
+        console.log(error);
       });
   };
 

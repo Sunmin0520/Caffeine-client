@@ -10,17 +10,19 @@ import {
 import axios from "axios";
 import * as Linking from "expo-linking";
 import StarRating from "react-native-star-rating";
+
 const Cafeinfo = ({ route, navigation }) => {
-  //Region에서 선택한 카페의 상세 내용을 출력합니다.
-  const cafe_id = route.params.cafe_id; //Region에서 선택한 하나의 카페의 ID입니다.
+  const cafe_id = route.params.cafe_id;
   const city = route.params.city;
   const user_id = route.params.user_id;
+
   const [name, Setname] = useState(null);
   const [address, Setaddress] = useState(null);
   const [sell_beans, Setsell_beans] = useState(null);
   const [instagram_account, Setinstagram_account] = useState(null);
   const [rating_average, Setrating_average] = useState(null);
   const [reviews, Setreviews] = useState(null);
+
   const getCafeinfoCall = async () => {
     const value = await AsyncStorage.getItem("userToken");
     axios
@@ -51,6 +53,7 @@ const Cafeinfo = ({ route, navigation }) => {
         }
       });
   };
+
   const postBookmarkCall = async () => {
     const value = await AsyncStorage.getItem("userToken");
     axios
@@ -68,13 +71,14 @@ const Cafeinfo = ({ route, navigation }) => {
       )
       .then((res) => {
         if (res.status === 201) {
-          alert("Bookmark에 등록되었습니다!");
+          alert("Bookmark가 등록되었습니다");
         }
       })
       .catch(function (error) {
         console.log(error);
       });
   };
+
   const getCafeReviewCall = async () => {
     const value = await AsyncStorage.getItem("userToken");
     axios
@@ -121,6 +125,7 @@ const Cafeinfo = ({ route, navigation }) => {
         }
       });
   };
+
   const getRatingCall = async () => {
     const value = await AsyncStorage.getItem("userToken");
     axios
@@ -142,12 +147,13 @@ const Cafeinfo = ({ route, navigation }) => {
         }
       });
   };
-  //reviews, rating_average
+
   useEffect(() => {
     getCafeinfoCall();
     getCafeReviewCall();
     getRatingCall();
   }, [reviews, rating_average]);
+
   return (
     <View style={styles.container}>
       <View style={styles.cafenamestyle}>
@@ -198,7 +204,7 @@ const Cafeinfo = ({ route, navigation }) => {
           />
         </View>
         <Text style={styles.boldtextstyle}>상세리뷰</Text>
-        <ScrollView>{reviews}</ScrollView>
+        <ScrollView style={styles.textalign}>{reviews}</ScrollView>
       </View>
       <TouchableOpacity
         onPress={() => {
@@ -213,6 +219,7 @@ const Cafeinfo = ({ route, navigation }) => {
     </View>
   );
 };
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -273,7 +280,8 @@ const styles = StyleSheet.create({
   },
   textalign: {
     alignSelf: "flex-start",
-    height: 400,
+    height: 600,
   },
 });
+
 export default Cafeinfo;
