@@ -34,8 +34,11 @@ Caffeine은 client side([https://github.com/codestates/Caffeine-client)](https:/
 
 <p  align="center">
   <img src="https://user-images.githubusercontent.com/60782131/89779823-264f9000-db4b-11ea-995e-c71a632ecce3.gif" width="250" />
-  <img src="https://user-images.githubusercontent.com/60782131/89779812-23ed3600-db4b-11ea-917e-86973c957272.gif" width="250" /> 
   <img src="https://user-images.githubusercontent.com/60782131/89779829-2a7bad80-db4b-11ea-914a-8c1b0d7b36ca.gif" width="250" />
+</p>
+<p  align="center">
+  <img src="https://user-images.githubusercontent.com/60782131/89779812-23ed3600-db4b-11ea-917e-86973c957272.gif" width="250" /> 
+  <img src="https://user-images.githubusercontent.com/60782131/89784550-d32e0b00-db53-11ea-93fa-5e9adf3b4690.gif" width="250" />
 </p>
 
 ### 원두 기록 
