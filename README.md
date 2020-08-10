@@ -1,6 +1,10 @@
+<p align="center">
+<img width="200" src=https://user-images.githubusercontent.com/60782131/89779103-a543c900-db49-11ea-9588-da2f35b26aae.png>
+</p>
+
 # Caffeine ☕️
-- Caffeine은 커피를 즐길 수 있는 **카페**를 좋아하고, 한 원두에 대해 **기록**을 남기는 커피 애호가를 위한 어플리케이션입니다.<br>
-- **카페**와 **원두 기록**은 별개의 카테고리에서 독립적으로 작동합니다. 기호에 맞게 각각 혹은 두 카테고리 모두를 활용할 수 있습니다.
+- 마음에 드는 **카페**에서 바리스타가 만드는 커피의 즐거움, 취향에 맞는 **원두를 기록**해나가며 직접 만드는 커피의 즐거움을 아는 사람을 위한 어플리케이션입니다.<br>
+- **카페**와 **원두 기록**은 독립적으로 작동하므로 각각 혹은 두 기능을 모두 이용할 수도 있습니다.
 
 ## Installation 
 Caffeine은 client side([https://github.com/codestates/Caffeine-client)](https://github.com/codestates/Caffeine-client), sever side ([https://github.com/codestates/Caffeine-server](https://github.com/codestates/Caffeine-server)) 로 나누어져 있습니다.
@@ -49,6 +53,10 @@ Caffeine은 client side([https://github.com/codestates/Caffeine-client)](https:/
   - **인증 정보 확인**
     - 로그인 정보가 유효하지 않을시 카페, 원두기록으로의 접근이 전면 제한됩니다.
     - 로그인시 생성되는 사용자 정보를 바탕으로 그 이후의 모든 요청시 정보를 확인합니다. 비정상적인 방법으로 특정 페이지에 접근시 알림창이 나오고, 로그인 페이지로 이동합니다.
+<p align="center">
+<img width="250" src=https://user-images.githubusercontent.com/60782131/89779785-159f1a00-db4b-11ea-8583-8f2af7a8bc4f.gif>
+</p>
+
 
  ## Documentation
  [Caffeine API docs.pdf](https://github.com/codestates/Caffeine-client/files/5046771/Caffeine.API.docs.pdf)
@@ -87,5 +95,5 @@ Caffeine은 client side([https://github.com/codestates/Caffeine-client)](https:/
      - JWT middleware를 통한 인증 및 접근권한 부여와 중복되는 코드 방지
    
    ## Stack
-   - Front-end: React Native, Expo, Axios, Daum post code api
-   - Back-end: node.js, express, mocha, chai, JWT, Sequelize, MySQL, EC2, RDS
+   - Front-end: React Native, React Hooks, Expo, Axios, Daum post code api
+   - Back-end: node.js, express, JWT, Sequelize, MySQL, EC2, RDS, swagger, mocha, chai
