@@ -31,7 +31,13 @@ Caffeine은 client side([https://github.com/codestates/Caffeine-client)](https:/
   - **새로운 카페 추가**   
     - 특정 카페에 대한 정보가 아직 제공되지 않고 있다면, 사용자가 직접 새로운 카페 정보를 추가할 수 있습니다.
     정보 추가시 'Daum 우편번호 검색 서비스'가 적용되어 동일한 주소에 대해 카페가 중복 등록되는 사례를 방지합니다.
-    
+
+<p  align="center">
+  <img src="https://user-images.githubusercontent.com/60782131/89779823-264f9000-db4b-11ea-995e-c71a632ecce3.gif" width="250" />
+  <img src="https://user-images.githubusercontent.com/60782131/89779812-23ed3600-db4b-11ea-917e-86973c957272.gif" width="250" /> 
+  <img src="https://user-images.githubusercontent.com/60782131/89779829-2a7bad80-db4b-11ea-914a-8c1b0d7b36ca.gif" width="250" />
+</p>
+
 ### 원두 기록 
   - **접근 권한의 설정**
     - 구매한 원두에 대해 사용자가 기록을 남길 수 있고, 해당 기록은 해당 사용자만이 읽고, 수정 및 삭제할 수 있습니다.
@@ -46,6 +52,11 @@ Caffeine은 client side([https://github.com/codestates/Caffeine-client)](https:/
     - 기존의 기록을 그대로 불러와서 사용자에게 제공합니다. 그 후 사용자가 수정한 부분만 반영되어 기록되므로 많은 항목들을 입력해 놓은 기록이어도 쉽고 빠른 수정이 가능합니다.
   - **기록의 삭제**
     - 해당 기록의 상세 정보에서 '삭제'버튼을 누르면 알림창으로 다시 한 번 삭제여부를 질문해서 소중한 기록을 실수로 삭제하는 사례를 방지합니다.
+
+<p  align="center">
+  <img src="https://user-images.githubusercontent.com/60782131/89780636-cd80f700-db4c-11ea-8be9-3fa2e55fde55.gif" width="250" />
+  <img src="https://user-images.githubusercontent.com/60782131/89780641-cf4aba80-db4c-11ea-9f67-f254a907d72b.gif" width="250" /> 
+</p>
 
 ### 사용자 정보
   - **간단한 회원가입**
