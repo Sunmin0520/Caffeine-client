@@ -203,18 +203,22 @@ const Cafeinfo = ({ route, navigation }) => {
             starSize={30}
           />
         </View>
-        <Text style={styles.boldtextstyle}>리뷰남기기</Text>
+        <View style={styles.buttonstyle}>
+          <TouchableOpacity
+            style={styles.bookmarkbutton}
+            onPress={() => {
+              navigation.navigate("Addreview", {
+                cafe_id: cafe_id,
+                user_id: user_id,
+              });
+            }}
+          >
+            <Text style={styles.bookmarkstyle}>리뷰남기기</Text>
+          </TouchableOpacity>
+        </View>
         <Text style={styles.boldtextstyle}>상세리뷰</Text>
         <ScrollView style={styles.textalign}>{reviews}</ScrollView>
       </View>
-      <TouchableOpacity
-        onPress={() => {
-          navigation.navigate("Addreview", {
-            cafe_id: cafe_id,
-            user_id: user_id,
-          });
-        }}
-      ></TouchableOpacity>
     </View>
   );
 };
