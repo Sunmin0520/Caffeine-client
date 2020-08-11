@@ -203,6 +203,7 @@ const Cafeinfo = ({ route, navigation }) => {
             starSize={30}
           />
         </View>
+        <Text style={styles.boldtextstyle}>리뷰남기기</Text>
         <Text style={styles.boldtextstyle}>상세리뷰</Text>
         <ScrollView style={styles.textalign}>{reviews}</ScrollView>
       </View>
@@ -213,9 +214,7 @@ const Cafeinfo = ({ route, navigation }) => {
             user_id: user_id,
           });
         }}
-      >
-        <Text style={styles.boldtextstyle}>리뷰남기기</Text>
-      </TouchableOpacity>
+      ></TouchableOpacity>
     </View>
   );
 };
@@ -280,7 +279,6 @@ const styles = StyleSheet.create({
   },
   textalign: {
     alignSelf: "flex-start",
-    height: 600,
   },
 });
 
