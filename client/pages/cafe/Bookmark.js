@@ -9,15 +9,9 @@ import {
 import axios from "axios";
 
 const Bookmark = ({ route, navigation }) => {
-  //Regionlist에서 선택한 지역의 카페 목록을 가져옵니다.
-
-  const [cafe_id, Setcafe_id] = useState(null);
   const [bookmarks, Setbookmarks] = useState(null);
-  const [name, Setname] = useState(null);
-  const [address, Setaddress] = useState(null);
 
   const getBookmarkcall = async () => {
-    //get cafes table
     const value = await AsyncStorage.getItem("userToken");
     axios
       .get("http://13.125.247.226:3001/cafes/bookmark/all", {
@@ -26,22 +20,14 @@ const Bookmark = ({ route, navigation }) => {
         },
       })
       .then((res) => {
-        let dataArr = [];
-
-        for (let i = 0; i < res.data.length; i++) {
-          dataArr.push(res.data[i].cafe_id);
-        }
-        return dataArr;
-      })
-      .then((data) => {
-        getCafeinfoCall(data);
+        getCafeinfoCall(res.data);
       })
       .catch(function (error) {
         console.log(error);
       });
   };
 
-  const getCafeinfoCall = async (cafeId) => {
+  const getCafeinfoCall = async (data) => {
     const value = await AsyncStorage.getItem("userToken");
     axios
       .get("http://13.125.247.226:3001/cafes/allcafes", {
@@ -51,43 +37,51 @@ const Bookmark = ({ route, navigation }) => {
       })
       .then((res) => {
         let arr = [];
-        let nameArr = [];
-        for (let k = 0; k < res.data.length; k++) {
-          arr.push(res.data[k]);
-        }
-        for (let i = 0; i < cafeId.length; i++) {
-          for (let j = 0; j < arr.length; j++) {
-            if (cafeId[i] === arr[j].id) {
-              nameArr.push({
-                id: arr[j].id,
-                name: arr[j].name,
-                address: arr[j].address,
-                region_id: arr[i].region_id,
+        arr.push(res.data);
+        let dataArr = [];
+        for (let i = 0; i < arr[0].length; i++) {
+          // console.log(arr[0][i].id);
+          for (let j = 0; j < data.length; j++) {
+            // console.log(data[j].cafe_id);
+            if (data[j].cafe_id === arr[0][i].id) {
+              dataArr.push({
+                id: arr[0][i].id,
+                name: arr[0][i].name,
+                address: arr[0][i].address,
+                bookmark_id: data[j].bookmark_id,
               });
             }
           }
         }
-        return nameArr;
+        return dataArr;
       })
-      .then((data) => {
+      .then((result) => {
+        console.log(result);
         Setbookmarks(
-          data.map((result) => {
-            Setaddress(result.id);
+          result.map((data) => {
             return (
-              <View key={result.id}>
+              <View key={data.id} style={styles.liststyle}>
                 <TouchableOpacity
-                  style={styles.liststyle}
                   onPress={() => {
                     navigation.navigate("Cafeinfo", {
-                      cafe_id: result.id,
+                      cafe_id: data.id,
                     });
                   }}
                 >
-                  <Text style={styles.textstyle}>{result.name}</Text>
+                  <Text style={styles.textstyle}>{data.name}</Text>
                   <Text style={styles.addressstyle} numberOfLines={1}>
-                    {result.address}
+                    {data.address}
                   </Text>
                 </TouchableOpacity>
+                <View style={styles.aligndelete}>
+                  <TouchableOpacity
+                    onPress={() => {
+                      handleDeleteBookmark(data.bookmark_id);
+                    }}
+                  >
+                    <Text style={styles.deletestyle}>삭제하기</Text>
+                  </TouchableOpacity>
+                </View>
               </View>
             );
           })
@@ -98,23 +92,23 @@ const Bookmark = ({ route, navigation }) => {
       });
   };
 
-  const handleDeleteBookmark = async () => {
+  const handleDeleteBookmark = async (bookmark_id) => {
     const value = await AsyncStorage.getItem("userToken");
     axios
-      .delete(`http://13.125.247.226:3001/cafes/bookmark/${address}`, {
+      .delete(`http://13.125.247.226:3001/cafes/bookmark/${bookmark_id}`, {
         withCredentials: true,
         headers: {
           Authorization: `Bearer ${value}`,
         },
       })
-      .catch(function (error) {
-        console.log(error);
+      .catch((err) => {
+        console.log(err);
       });
   };
 
   useEffect(() => {
     getBookmarkcall();
-  }, []);
+  }, [bookmarks]);
 
   return (
     <View style={styles.container}>
@@ -165,6 +159,14 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     paddingBottom: 10,
     color: "#692702",
+  },
+  aligndelete: {
+    alignSelf: "flex-end",
+  },
+  deletestyle: {
+    fontSize: 16,
+    fontWeight: "400",
+    marginBottom: 5,
   },
 });
 
