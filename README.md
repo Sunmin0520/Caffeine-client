@@ -7,7 +7,7 @@
 - **카페**와 **원두 기록**은 독립적으로 작동하므로 각각 혹은 두 기능을 모두 이용할 수도 있습니다.
 
 ## Installation 
-Caffeine은 client side([https://github.com/codestates/Caffeine-client)](https://github.com/codestates/Caffeine-client), sever side ([https://github.com/codestates/Caffeine-server](https://github.com/codestates/Caffeine-server)) 로 나누어져 있습니다.
+Caffeine은 client side([https://github.com/Sunmin0520/Caffeine-client)](https://github.com/codestates/Caffeine-client), sever side ([https://github.com/Sunmin0520/Caffeine-server](https://github.com/codestates/Caffeine-server)) 로 나누어져 있습니다.
 
  1. app store, google play store에서 expo를 다운로드 하십시오.
  2. client side repository를 clone 하십시오.
